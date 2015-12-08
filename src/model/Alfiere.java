@@ -8,7 +8,6 @@ package model;
 */
 public class Alfiere extends Pezzo{
     
-   
     public Alfiere( Colore colore ){
         
         super( colore );

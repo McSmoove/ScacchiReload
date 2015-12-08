@@ -4,8 +4,7 @@ package model;
  * Classe del colore bianco. Tutte le classi dei colori definiscono oggetti che 
  * vengono presi in esame durante i controlli nelle classi del package Contoller
  * @author Viktor, Michael, Gaetano
- */
-
+*/
 public class Bianco extends Colore{
     
     private final int colore;
@@ -18,14 +17,8 @@ public class Bianco extends Colore{
     
     @Override
     public boolean equals( Object o ){
-        
-        if( o instanceof Bianco ){ // If Innutile
             
-            return true;
-        
-        }
-        
-        return false;
+        return o instanceof Bianco;
     
     }
     

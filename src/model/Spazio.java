@@ -6,8 +6,7 @@ import view.InterfacciaGrafica;
  * La classe spazio  essenziale per sapere quale pezzo sta occupando una 
  * casella di gioco o se la casella è libera
  * @author Viktor, Michael, Gaetano
- */
-
+*/
 public class Spazio{ // Cella Della Scacchiera Caratterizzata Dalla Presenza O Non Di Una Pedina E Del Suo Tipo
     
     private boolean occupato;
@@ -15,13 +14,15 @@ public class Spazio{ // Cella Della Scacchiera Caratterizzata Dalla Presenza O N
     private int x, y;
     
     public Spazio(){
-        occupante=null;
+        
         occupato = false;
-        x=-1;
-        y=-1;
+        occupante = null;
+        x = -1;
+        y = -1;
+    
     }
     
-    public Spazio( int x,int y ){
+    public Spazio( int x, int y ){
         
         occupato = false;
         this.x = x;
@@ -32,17 +33,19 @@ public class Spazio{ // Cella Della Scacchiera Caratterizzata Dalla Presenza O N
     public Spazio( int x, int y, Pezzo p ){
         
         occupato = true;
+        occupante = p;
         this.x = x;
         this.y = y;
-        occupante = p;
-    
+        
     }
     
-    public Spazio(Spazio s){
-        occupato=s.eOccupato();
-        occupante=s.getOccupante();
-        x=s.getX();
-        y=s.getY();
+    public Spazio( Spazio s ){
+        
+        occupato = s.eOccupato();
+        occupante = s.getOccupante();
+        x = s.getX();
+        y = s.getY();
+    
     }
     
     
@@ -64,9 +67,10 @@ public class Spazio{ // Cella Della Scacchiera Caratterizzata Dalla Presenza O N
     
     }
     
-
     public void setOccupato( boolean b ){
+        
         occupato = b;
+    
     }
     
     public int getX(){
@@ -93,23 +97,29 @@ public class Spazio{ // Cella Della Scacchiera Caratterizzata Dalla Presenza O N
     
     }
     
-    public void distruggi(InterfacciaGrafica ig){
-        ig.aggiungiPezzoMorto(occupante);
-        occupante=null;
-        occupato=false;
+    public void distruggi( InterfacciaGrafica ig ){
+        
+        occupato = false;
+        occupante = null;
+        ig.aggiungiPezzoMorto( occupante );
+    
     }
     
-    public void inizializzaSpazio(Pezzo p,int x,int y){
-        occupante=p;
-        this.x=x;
-        this.y=y;
-        occupato=true;
+    public void inizializzaSpazio( Pezzo p, int x, int y ){
+        
+        occupato = true;
+        occupante = p;
+        this.x = x;
+        this.y = y;
+    
     }
     
-    public void inizializzaSpazio(int x,int y){
-        this.x=x;
-        this.y=y;
-        occupato=false;
+    public void inizializzaSpazio( int x, int y ){
+        
+        occupato = false;
+        this.x = x;
+        this.y = y;
+    
     }
 
 }

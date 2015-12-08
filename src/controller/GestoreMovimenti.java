@@ -8,12 +8,10 @@ import view.InterfacciaGrafica;
 /**
  * Setta i movimenti possibili dei pezzi sulla m
  * @author Viktor, Michael, Gaetano
- */
-
+*/
 public class GestoreMovimenti{
     
-    private Colore turno;
-    //private MatriceDeiPezzi matrice;
+    private final Colore turno;
     private Spazio[][] m;
     private final int MAXLENGTH = 7;
     private InterfacciaGrafica ig;
@@ -24,79 +22,76 @@ public class GestoreMovimenti{
     
     public GestoreMovimenti(){
         
-        // Throw New Exception ( Modificare Il Costruttore Senza Parametri )
         // Creare Una Matrice Con Le Posizioni Di Default
-        // Semplificare Le Classi Corrispondenti Ai Colori
-        m=new Spazio[8][8];
+        m = new Spazio[ 8 ][ 8 ];
         turno = new Bianco();
         m[ 0 ][ 0 ] = new Spazio( 0, 0, new Torre( new Nero() ) );
         m[ 7 ][ 0 ] = new Spazio( 7, 0, new Torre( new Nero() ) );
-        m[ 1 ][ 0 ]= new Spazio(1, 0, new Cavallo( new Nero())  );
-        m[ 6 ][ 0 ]= new Spazio(6, 0, new Cavallo( new Nero())   );
-        m[ 2 ][ 0 ]= new Spazio(2, 0, new Alfiere( new Nero())  );
-        m[ 5 ][ 0 ]= new Spazio(5, 0, new Alfiere( new Nero())  );
-        m[ 3 ][ 0 ]= new Spazio(3, 0, new Regina( new Nero() ) );
-        m[ 4 ][ 0 ]= new Spazio(4, 0, new Re( new Nero() ) );
+        m[ 1 ][ 0 ] = new Spazio( 1, 0, new Cavallo( new Nero() ) );
+        m[ 6 ][ 0 ] = new Spazio( 6, 0, new Cavallo( new Nero() ) );
+        m[ 2 ][ 0 ] = new Spazio( 2, 0, new Alfiere( new Nero() ) );
+        m[ 5 ][ 0 ] = new Spazio( 5, 0, new Alfiere( new Nero() ) );
+        m[ 3 ][ 0 ] = new Spazio( 3, 0, new Regina( new Nero() ) );
+        m[ 4 ][ 0 ] = new Spazio( 4, 0, new Re( new Nero() ) );
         
         for( int i = 0; i < 8; i++ ){
             
-            m[ i ][ 1 ]= new Spazio(i, 1, new Pedone(new Nero() ) );
+            m[ i ][ 1 ]= new Spazio( i, 1, new Pedone( new Nero() ) );
         
         } // Fine Inizializzazione Pezzi Neri
         
-        m[ 0 ][ 7 ]= new Spazio(0, 7 , new Torre(new Bianco() ) );
-        m[ 7 ][ 7 ]= new Spazio(7, 7, new Torre( new Bianco() ) );
-        m[ 1 ][ 7 ]= new Spazio(1, 7, new Cavallo( new Bianco() ) );
-        m[ 6 ][ 7 ]= new Spazio(6, 7, new Cavallo( new Bianco() ) );
-        m[ 2 ][ 7 ]= new Spazio(2, 7, new Alfiere( new Bianco() ) );
-        m[ 5 ][ 7 ]= new Spazio(5, 7, new Alfiere( new Bianco() ) );
-        m[ 3 ][ 7 ]= new Spazio(3, 7, new Regina( new Bianco() ) );
-        m[ 4 ][ 7 ]= new Spazio(4, 7, new Re( new Bianco() ) );
+        m[ 0 ][ 7 ] = new Spazio( 0, 7 , new Torre( new Bianco() ) );
+        m[ 7 ][ 7 ] = new Spazio( 7, 7, new Torre( new Bianco() ) );
+        m[ 1 ][ 7 ] = new Spazio( 1, 7, new Cavallo( new Bianco() ) );
+        m[ 6 ][ 7 ] = new Spazio( 6, 7, new Cavallo( new Bianco() ) );
+        m[ 2 ][ 7 ] = new Spazio( 2, 7, new Alfiere( new Bianco() ) );
+        m[ 5 ][ 7 ] = new Spazio( 5, 7, new Alfiere( new Bianco() ) );
+        m[ 3 ][ 7 ] = new Spazio( 3, 7, new Regina( new Bianco() ) );
+        m[ 4 ][ 7 ] = new Spazio( 4, 7, new Re( new Bianco() ) );
         
-        for( int i = 0; i < 8; i++){
+        for( int i = 0; i < 8; i++ ){
             
-            m[ i ][ 6 ]= new Spazio(i, 6, new Pedone( new Bianco() ) );
+            m[ i ][ 6 ]= new Spazio( i, 6, new Pedone( new Bianco() ) );
         
         } // Fine Inizializzazione Pezzi Bianchi
         
-        for(int i=2;i<=5;i++){
-            for(int j=0;j<8;j++){
-                m[j][i]=new Spazio(j,i);
+        for( int i = 2; i <= 5; i++ ){
+            
+            for( int j = 0; j < 8; j++ ){
+                
+                m[ j ][ i ] = new Spazio( j, i );
+            
             }
-        }
         
-        //matrice = new MatriceDeiPezzi( m ); // Collegamento Con La Matrice Che Salva Le Posizioni Dei Pezzi
+        }
     
     }
     
     public GestoreMovimenti( Spazio[][] matrice ){
+        
         turno=new Bianco();
-        //this.matrice = matrice;
-        //m = m;
-        // Da Implementare Gli Altri Collegamenti MCV
     
     }
-
     
     public Spazio[][] getMatrice(){
+        
         return m;
+    
     }
     
-    // Ritorna La Matrice Con Le Posizioni Mosse Dove Un Pezzo Puo Spostarsi
     /**
      * Ritorna una matrice con i possibili movimenti del pezzo passato come 
      * parametro. Una volta passato il parametro ricerca il metodo che 
      * determina il movimeto di tale pezzo e lo usa per scrivere la matrice
      * da ritornare come risultato.
-     * @param p
-     * @return 
-     */
-    public int[][] getPossibiliMovimenti( Spazio s ){ 
-        Pezzo p=s.getOccupante();
+    */
+    public int[][] getPossibiliMovimenti( Spazio s ){ // Ritorna La Matrice Con Le Posizioni Mosse Dove Un Pezzo Puo Spostarsi
+    
+        Pezzo p = s.getOccupante();
         
         if( p instanceof Pedone ){
             
-            return movimentiPedone( s);
+            return movimentiPedone( s );
         
         } else if( p instanceof Torre ){
             
@@ -104,7 +99,7 @@ public class GestoreMovimenti{
         
         } else if( p instanceof Alfiere ){
             
-            return movimentiAlfiere( s);
+            return movimentiAlfiere( s );
         
         } else if( p instanceof Cavallo ){
             
@@ -116,28 +111,45 @@ public class GestoreMovimenti{
         
         } else if( p instanceof Re ){
             
-            return movimentiRe( s);
+            return movimentiRe( s );
         
         } else {
             
-            return null; // Da Implementare Il Resto ( Altre Sottoclassi Di Pezzo )
-            // Caso Impossibile ( Da Togliere Alla Fine Della Implementazione )
+            return null;
         
         }
     
     }
     
     public Re getReNero() throws Exception{
-        for(int i=0;i<8;i++){
-            for(int j=0;j<8;j++){
-                if(m[i][j].eOccupato())
-                    if(m[i][j].getOccupante() instanceof Re)
-                       if(m[i][j].getOccupante().getColore() instanceof Nero)
-                           return (Re) m[i][j].getOccupante();
+        
+        for( int i = 0; i < 8; i++ ){
+            
+            for( int j = 0; j < 8; j++ ){
+                
+                if( m[ i ][ j ].eOccupato() ){
+                    
+                    if( m[ i ][ j ].getOccupante() instanceof Re ){
+                        
+                        if( m[ i ][ j ].getOccupante().getColore() instanceof Nero ){
+                            
+                            return ( Re ) m[ i ][ j ].getOccupante();
+                        
+                        }
+                    
+                    }
+                
+                }
+            
             }
+        
         }
-        throw new Exception("Re nero non trovato");
+        
+        throw new Exception( "Re Nero Non Trovato");
+    
     }
+    
+    // RIMASTO QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
     
     public Spazio getSpazioReNero() throws Exception{
         for(int i=0;i<8;i++){

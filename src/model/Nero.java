@@ -4,7 +4,7 @@ package model;
  * Classe del colore nero. Tutte le classi dei colori definiscono oggetti che 
  * vengono presi in esame durante i controlli nelle classi del package Contoller
  * @author Viktor, Michael, Gaetano
- */
+*/
 
 public class Nero extends Colore{
     
@@ -19,15 +19,7 @@ public class Nero extends Colore{
     @Override
     public boolean equals( Object o ){
         
-        if( o instanceof Nero ){ // If Rindondante
-            
-            return true;
-        
-        } else {
-            
-            return false;
-        
-        }
+        return o instanceof Nero;
     
     }
 

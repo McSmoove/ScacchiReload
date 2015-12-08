@@ -3,28 +3,27 @@ package model;
 /**
  * Classe astratta che definisce alcune funzioni comuni a tutti i pezzi della schacchiera
  * @author Viktor, Michael, Gaetano
- */
-
+*/
 public abstract class Pezzo{
     
     private Colore colore;
     private boolean locked;
     
-    public Pezzo(Colore colore1 ){
+    public Pezzo( Colore colore ){
         
-        colore = colore1;
+        this.colore = colore;
     
     }
     
-    public Colore getColore(){ // Da Implementare
+    public Colore getColore(){
         
         return colore;
     
     }
    
-    public void setLock( boolean l ){
+    public void setLock( boolean lock ){
         
-        locked = l;
+        locked = lock;
     
     }
     
