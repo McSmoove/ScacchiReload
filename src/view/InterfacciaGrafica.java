@@ -356,6 +356,10 @@ public class InterfacciaGrafica{
     
     } // Fine iniziaPartita
     
+    public GestoreTB getGestoreTB(){
+        return gestoreTB;
+    }
+    
     /**
      * Inizio del programma
      */

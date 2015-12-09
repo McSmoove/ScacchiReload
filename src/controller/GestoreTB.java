@@ -27,6 +27,9 @@ public class GestoreTB {
     JButton[][] matriceBottoni;
     private int xPedoneTrasformato,yPedoneTrasformato;
     int x,y;
+    Spazio[][] spazioTemporaneo;
+    Spazio[][] matriceSimulata = null;
+    Spazio[][] matriceSimulata2 = null;
     
     public GestoreTB(GestoreMovimenti gm, InterfacciaGrafica ig){
         attivato = false;
@@ -176,10 +179,11 @@ public class GestoreTB {
         return yPedoneTrasformato;
     }
     
-    public void setPedoneTrasformato(Pezzo p,int x,int y){
+    public void setPedoneTrasformato(Spazio s){
+        Pezzo p=s.getOccupante();
         xPedoneTrasformato=x;
         yPedoneTrasformato=y;
-        gestoreMovimenti.getMatrice()[x][y].setOccupante(p);
+        gestoreMovimenti.getMatrice()[s.getX()][s.getY()].setOccupante(p);
         interfacciaGrafica.aggiornaBottoni( gestoreMovimenti.getMatrice() );
     }
     
@@ -190,13 +194,12 @@ public class GestoreTB {
         y = 0;// Identificatore Y Della Matrice Del Bottone Dove Premo
         
         JButton b;
-        Spazio[][] matriceSimulata = null;
-        Spazio[][] matriceSimulata2 = null;
+        
         GestoreMovimenti gestoreTemporaneo;
         Colore turno = getTurno();
         JButton[][] matriceScacchiera = interfacciaGrafica.getMatriceBottoni();
         int indiciBottoni[][] = new int[ 8 ][ 8 ];
-        
+        disegnaMatriceSpaziOccupati();
         b = ( JButton ) e.getSource();
         
         // Ricerca Inversa Della Posizione Del Bottone
@@ -231,6 +234,7 @@ public class GestoreTB {
                         // Abilito Le Posizioni Dove Puo Muoversi Il Pezzo ( Non Implementato )
                         // Metto Il Pezzo Premuto In Gestione Turno E Lo Attivo
                         attivaPosizione( x, y );
+                        //salvaStato();
                     
                     } else if( ( ( turno instanceof Bianco ) && gestoreMovimenti.controlloScacco( gestoreMovimenti.getSpazioReBianco().getX(), gestoreMovimenti.getSpazioReBianco().getY(), new Bianco(), gestoreMovimenti.getMatrice() ) == true ) || ( ( turno instanceof Nero ) && gestoreMovimenti.controlloScacco( gestoreMovimenti.getSpazioReNero().getX(), gestoreMovimenti.getSpazioReNero().getY(), new Nero(), gestoreMovimenti.getMatrice() ) == true ) ){ // Se Il Re E Sotto Scacco
 
@@ -241,12 +245,15 @@ public class GestoreTB {
                             if( gestoreMovimenti.getMatricePezziChePrevengonoScacco( gestoreMovimenti.getSpazioReBianco().getX(), gestoreMovimenti.getSpazioReBianco().getY(), gestoreMovimenti.getMatrice(), new Bianco() )[ x ][ y ] == 1 ){
                                 
                                 attivaPosizione( x, y );
+                                //salvaStato();
                             
                             }
                         
                         } else if( gestoreMovimenti.getMatricePezziChePrevengonoScacco( gestoreMovimenti.getSpazioReBianco().getX(), gestoreMovimenti.getSpazioReBianco().getY(), gestoreMovimenti.getMatrice(), new Nero() )[ x ][ y ] == 1 ){ // Il Pezzo E Nero
                             
                             attivaPosizione( x, y );
+                            //salvaStato();
+                            disegnaMatriceSpaziOccupati();
                         
                         }
                     
@@ -308,7 +315,7 @@ public class GestoreTB {
                             disattivaPosizione(); // Tolgo Il Bordo Del Bottone ???
                             passaTurno(); // Passo Il Turno
                             
-                            
+                            /*
                             if( gestoreMovimenti.getMatrice()[x][y].getOccupante() instanceof Re && ( !( ( Re ) gestoreMovimenti.getMatrice()[x][y].getOccupante()).mosso() ) ){
                                 
                                 System.err.println( "DEBUG: Setto Il Re In " + x + " , " + y + " Come Mosso" );
@@ -332,39 +339,18 @@ public class GestoreTB {
                                 
                                 }
                             
-                            } 
+                            } */
+                            /*
                             if(( gestoreMovimenti.getMatrice()[x][y].getOccupante() instanceof Torre )){
                                 if( !(( Torre ) gestoreMovimenti.getMatrice()[x][y].getOccupante()).mosso() ){
                                     ((Torre)gestoreMovimenti.getMatrice()[x][y].getOccupante()).impostaMosso();
                                 }
-                            }
+                            }*/
                             
                             if( gestoreMovimenti.getMatrice()[x][y].getOccupante() instanceof Pedone ){ // Se Ho Appena Spostato Un Pedone
                             
                                 //Divido In Due Casi, In Base Al Colore
-                                if( gestoreMovimenti.getMatrice()[x][y].getOccupante().getColore() instanceof Bianco ){ // Promozione Pedone Bianco
-                                    
-                                    if( y == 0 ){ // Se Il Pedone E In Fondo Alla Scacchiera
-                                    
-                                        System.err.println( "DEBUG: Promuovo Il Pedone Nell'Pezzo Scelto" );
-                                        PromozionePedone promozione;
-                                        promozione = new PromozionePedone( this, new Bianco() ); // Trasformo Il Pedone In Altro Scelto Dalla Promozione
-                                        promozione.start();
-                                    
-                                    }
                                 
-                                } else { // Promozione Pedone Nero
-                                    
-                                    if( y == 7 ){ // Se Il Pedone E In Fondo Alla Scacchiera
-
-                                        System.err.println( "DEBUG: Promuovo Il Pedone Nel Pezzo Scelto" );
-                                        PromozionePedone promozione;
-                                        promozione = new PromozionePedone( this, new Nero() ); // Trasformo Il Pedone In Altro Scelto Dalla Promozione
-                                        promozione.start();
-                                    
-                                    }
-                                
-                                }
                             
                             }
                             
@@ -392,13 +378,14 @@ public class GestoreTB {
                         
                         System.err.println( "Del Colore Diverso" ); // Se Non Provoca Scacco Del Proprio Colore -> Scacco Matto ( Faccio La Simulazione )
                         //matriceSimulata=coppiaMatrice(gestoreMovimenti.getMatrice());
-                        //matriceSimulata.spostaPezzo(gestoreTurni.getSpazioAttivato().getOccupante(), x, y);
+                        //gestoreMovimenti.spostaPezzo(gestoreMovimenti.getMatrice()[xAttivato][yAttivato], x, y,matriceSimulata);
                         System.err.println( "DEBUG: Non Faccio Il Controllo Scacco QUI" );
-                        
+                        //bisognerà togliere if true
                         if( true ){ // Mangia Il Pezzo In Questa Locazione
                             
                             //non so se è indispensabile x il refresh
-                            gestoreMovimenti.getMatrice()[x][y].distruggi( interfacciaGrafica );
+                            //x ora lo tolgo?
+                            //gestoreMovimenti.getMatrice()[x][y].distruggi( interfacciaGrafica );
                             //la riga sucessiva sostituisce quella dopo commentata
                             gestoreMovimenti.spostaPezzo( gestoreMovimenti.getMatrice()[xAttivato][yAttivato], x, y);
                             //gestoreMovimenti.setMatrice( matriceSimulata ); // Sposto Effettivamente Il Pezzo
@@ -409,7 +396,7 @@ public class GestoreTB {
                             
                             disattivaPosizione(); // Disattiva Il Bordo
                             passaTurno(); // Passo Il Turno
-                            
+                            /*
                             if( gestoreMovimenti.getMatrice()[x][y].getOccupante() instanceof Pedone ){ // Controllo Il Pedone Per La Promozione
 
                                 // Divido In 2 Casi In Base Al Colore
@@ -437,7 +424,7 @@ public class GestoreTB {
                                 
                                 }
                             
-                            }
+                            }*/
                             
                             interfacciaGrafica.aggiornaBottoni( gestoreMovimenti.getMatrice() ); // Aggiorna La Visuale
                             
@@ -486,6 +473,21 @@ public class GestoreTB {
         
         }
     
+    }
+    
+    private void disegnaMatriceSpaziOccupati(){
+        
+        System.err.println("");
+        for(int i=0;i<8;i++){
+            for(int j=0;j<8;j++){
+                if(gestoreMovimenti.getMatrice()[j][i].eOccupato())
+                    System.err.print("x");
+                else
+                    System.err.print("_");
+            }
+            System.err.println("");
+        }
+        System.err.println("");
     }
     
 }

@@ -4,6 +4,7 @@ import static java.lang.Math.abs;
 import java.util.LinkedList;
 import model.*;
 import view.InterfacciaGrafica;
+import view.PromozionePedone;
 
 /**
  * Setta i movimenti possibili dei pezzi sulla m
@@ -2489,11 +2490,38 @@ public class GestoreMovimenti{
         scacchiera[ xp ][ yp ]=new Spazio( xp,yp );
         scacchiera[ x ][ y ]=new Spazio( x,y,s.getOccupante() );  
         if(scacchiera[x][y].getOccupante() instanceof Pedone){
-            ((Pedone)scacchiera[x][y].getOccupante()).impostaMosso();
+            //((Pedone)scacchiera[x][y].getOccupante()).impostaMosso();
             
             if(!((Pedone)scacchiera[x][y].getOccupante()).mosso()){
                 ((Pedone)scacchiera[x][y].getOccupante()).impostaMosso();
             }
+            
+            //se il pedone arriva in fondo alla scacchiera lo trasformo
+            
+            if( scacchiera[x][y].getOccupante().getColore() instanceof Bianco ){ // Promozione Pedone Bianco
+                                    
+                if( y == 0 ){ // Se Il Pedone E In Fondo Alla Scacchiera
+                                    
+                    System.err.println( "DEBUG: Promuovo Il Pedone Nell'Pezzo Scelto" );
+                    PromozionePedone promozione;
+                    promozione = new PromozionePedone( scacchiera[x][y], new Bianco() ); // Trasformo Il Pedone In Altro Scelto Dalla Promozione
+                    promozione.start();
+                    System.err.println("Pedone promosso");                
+                }
+                                
+            } else { // Promozione Pedone Nero
+                                    
+                if( y == 7 ){ // Se Il Pedone E In Fondo Alla Scacchiera
+
+                    System.err.println( "DEBUG: Promuovo Il Pedone Nel Pezzo Scelto" );
+                    PromozionePedone promozione;
+                    promozione = new PromozionePedone( scacchiera[x][y], new Nero() ); // Trasformo Il Pedone In Altro Scelto Dalla Promozione
+                    promozione.start();
+                    System.err.println("Pedone promosso");
+                }
+                                
+            }
+            
         }
         
         if(scacchiera[x][y].getOccupante() instanceof Torre){
@@ -2544,6 +2572,32 @@ public class GestoreMovimenti{
         if(s.getOccupante() instanceof Pedone){
             if(!((Pedone)s.getOccupante()).mosso()){
                 ((Pedone)s.getOccupante()).impostaMosso();
+            }
+            
+            //se il pedone arriva in fondo alla scacchiera lo trasformo
+            
+            if( m[x][y].getOccupante().getColore() instanceof Bianco ){ // Promozione Pedone Bianco
+                                    
+                if( y == 0 ){ // Se Il Pedone E In Fondo Alla Scacchiera
+                                    
+                    System.err.println( "DEBUG: Promuovo Il Pedone Nell'Pezzo Scelto" );
+                    PromozionePedone promozione;
+                    promozione = new PromozionePedone( m[x][y], new Bianco() ); // Trasformo Il Pedone In Altro Scelto Dalla Promozione
+                    promozione.start();
+                    System.err.println("Pedone promosso");               
+                }
+                                
+            } else { // Promozione Pedone Nero
+                                    
+                if( y == 7 ){ // Se Il Pedone E In Fondo Alla Scacchiera
+
+                    System.err.println( "DEBUG: Promuovo Il Pedone Nel Pezzo Scelto" );
+                    PromozionePedone promozione;
+                    promozione = new PromozionePedone( m[x][y], new Nero() ); // Trasformo Il Pedone In Altro Scelto Dalla Promozione
+                    promozione.start();
+                    System.err.println("Pedone promosso");               
+                }
+                                
             }
         }
     }

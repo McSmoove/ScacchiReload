@@ -26,6 +26,7 @@ import model.Colore;
 import model.Nero;
 import model.Pezzo;
 import model.Regina;
+import model.Spazio;
 import model.Torre;
 
 
@@ -66,7 +67,7 @@ public class PromozionePedone{
         p.start();
     }*/
     
-    public PromozionePedone(GestoreTB g,Colore color){ // Inizializza Interfaccia Grafica ( Costruttore )
+    public PromozionePedone(Spazio s,Colore color){ // Inizializza Interfaccia Grafica ( Costruttore )
        
         try{
             
@@ -116,32 +117,32 @@ public class PromozionePedone{
                     
                     if(e.getSource().equals(bottone[0]))
                         if(color instanceof Bianco)
-                            g.setPedoneTrasformato(new Torre(new Bianco()), g.getXPedoneTrasformato(),g.getYPedoneTrasformato());
+                            s.cambiaPezzo(new Torre(new Bianco()));
                             //prescelto=new Torre(new Bianco());
                         else
-                            g.setPedoneTrasformato(new Torre(new Nero()), g.getXPedoneTrasformato(),g.getYPedoneTrasformato());
+                            s.cambiaPezzo(new Torre(new Nero()));
                             //prescelto=new Torre(new Nero());
                     
                     if(e.getSource().equals(bottone[1]))
                         if(color instanceof Bianco)
-                            g.setPedoneTrasformato(new Cavallo(new Bianco()), g.getXPedoneTrasformato(),g.getYPedoneTrasformato());
+                            s.cambiaPezzo(new Cavallo(new Bianco()));
                             //prescelto=new Cavallo(new Bianco());
                         else
-                            g.setPedoneTrasformato(new Cavallo(new Nero()), g.getXPedoneTrasformato(),g.getYPedoneTrasformato());
+                            s.cambiaPezzo(new Cavallo(new Nero()));
                             //prescelto=new Cavallo(new Nero());
                     if(e.getSource().equals(bottone[2]))
                         if(color instanceof Bianco)
-                            g.setPedoneTrasformato(new Alfiere(new Bianco()), g.getXPedoneTrasformato(),g.getYPedoneTrasformato());
+                            s.cambiaPezzo(new Alfiere(new Bianco()));
                             //prescelto=new Alfiere(new Bianco());
                         else
-                            g.setPedoneTrasformato(new Alfiere(new Nero()), g.getXPedoneTrasformato(),g.getYPedoneTrasformato());
+                            s.cambiaPezzo(new Alfiere(new Nero()));
                             //prescelto=new Alfiere(new Nero());
                     if(e.getSource().equals(bottone[3]))
                         if(color instanceof Bianco)
-                            g.setPedoneTrasformato(new Regina(new Bianco()), g.getXPedoneTrasformato(),g.getYPedoneTrasformato());
+                            s.cambiaPezzo(new Regina(new Bianco()));
                             //prescelto=new Regina(new Bianco());
                         else
-                            g.setPedoneTrasformato(new Regina(new Nero()), g.getXPedoneTrasformato(),g.getYPedoneTrasformato());
+                            s.cambiaPezzo(new Regina(new Nero()));
                             //prescelto=new Regina(new Nero());
                     //uscita
                     

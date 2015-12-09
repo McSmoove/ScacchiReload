@@ -48,6 +48,14 @@ public class Spazio{ // Cella Della Scacchiera Caratterizzata Dalla Presenza O N
     
     }
     
+    public void cambiaPezzo(Pezzo p){
+        occupante=p;
+        if(occupante==null)
+            occupato=false;
+        else
+            occupato=true;
+    }
+    
     
     public boolean eOccupato(){
         
