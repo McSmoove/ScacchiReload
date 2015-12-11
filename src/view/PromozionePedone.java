@@ -67,7 +67,7 @@ public class PromozionePedone{
         p.start();
     }*/
     
-    public PromozionePedone(Spazio s,Colore color){ // Inizializza Interfaccia Grafica ( Costruttore )
+    public PromozionePedone(InterfacciaGrafica ig,Spazio[][] matrice,Spazio s,Colore color){ // Inizializza Interfaccia Grafica ( Costruttore )
        
         try{
             
@@ -116,36 +116,46 @@ public class PromozionePedone{
                     //devono essere all'interno di una struttura e non solo dentro la scacchiera altrimenti non si riesce a tornare indietro
                     
                     if(e.getSource().equals(bottone[0]))
-                        if(color instanceof Bianco)
+                        if(color instanceof Bianco){
                             s.cambiaPezzo(new Torre(new Bianco()));
                             //prescelto=new Torre(new Bianco());
-                        else
+                        }
+                        else{
+                            //s.toStringTipo();
                             s.cambiaPezzo(new Torre(new Nero()));
+                            //s.toStringTipo();
                             //prescelto=new Torre(new Nero());
+                        }
                     
                     if(e.getSource().equals(bottone[1]))
-                        if(color instanceof Bianco)
+                        if(color instanceof Bianco){
                             s.cambiaPezzo(new Cavallo(new Bianco()));
                             //prescelto=new Cavallo(new Bianco());
-                        else
+                        }
+                        else{
                             s.cambiaPezzo(new Cavallo(new Nero()));
                             //prescelto=new Cavallo(new Nero());
+                        }
                     if(e.getSource().equals(bottone[2]))
-                        if(color instanceof Bianco)
+                        if(color instanceof Bianco){
                             s.cambiaPezzo(new Alfiere(new Bianco()));
                             //prescelto=new Alfiere(new Bianco());
-                        else
+                        }
+                        else{
                             s.cambiaPezzo(new Alfiere(new Nero()));
                             //prescelto=new Alfiere(new Nero());
+                        }
                     if(e.getSource().equals(bottone[3]))
-                        if(color instanceof Bianco)
+                        if(color instanceof Bianco){
                             s.cambiaPezzo(new Regina(new Bianco()));
                             //prescelto=new Regina(new Bianco());
-                        else
+                        }
+                        else{
                             s.cambiaPezzo(new Regina(new Nero()));
                             //prescelto=new Regina(new Nero());
+                        }
                     //uscita
-                    
+                    ig.aggiornaBottoni(matrice);
                     frame.dispose();
                 }
             } );

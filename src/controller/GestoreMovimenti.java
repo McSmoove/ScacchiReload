@@ -1080,7 +1080,7 @@ public class GestoreMovimenti{
 
         // A Destra In Basso
         if( x + 2 <= MAXLENGTH && y - 1 >= 0 && mat[ x + 2 ][ y - 1 ].eOccupato() ){       
-            if( !mat[ x + 2 ][ y - 1 ].getOccupante().getColore().equals( colore ) && mat[ x + 2 ][ y + 1 ].getOccupante() instanceof Cavallo ){      
+            if( !mat[ x + 2 ][ y - 1 ].getOccupante().getColore().equals( colore ) && mat[ x + 2 ][ y - 1 ].getOccupante() instanceof Cavallo ){      
                 return false;
             }
         }
@@ -2503,10 +2503,12 @@ public class GestoreMovimenti{
                 if( y == 0 ){ // Se Il Pedone E In Fondo Alla Scacchiera
                                     
                     System.err.println( "DEBUG: Promuovo Il Pedone Nell'Pezzo Scelto" );
+                    scacchiera[x][y].toStringTipo();
                     PromozionePedone promozione;
-                    promozione = new PromozionePedone( scacchiera[x][y], new Bianco() ); // Trasformo Il Pedone In Altro Scelto Dalla Promozione
+                    promozione = new PromozionePedone(ig, scacchiera ,scacchiera[x][y], new Bianco() ); // Trasformo Il Pedone In Altro Scelto Dalla Promozione
                     promozione.start();
-                    System.err.println("Pedone promosso");                
+                    System.err.println("Pedone promosso");
+                    scacchiera[x][y].toStringTipo();
                 }
                                 
             } else { // Promozione Pedone Nero
@@ -2515,9 +2517,12 @@ public class GestoreMovimenti{
 
                     System.err.println( "DEBUG: Promuovo Il Pedone Nel Pezzo Scelto" );
                     PromozionePedone promozione;
-                    promozione = new PromozionePedone( scacchiera[x][y], new Nero() ); // Trasformo Il Pedone In Altro Scelto Dalla Promozione
+                    //scacchiera[x][y].toStringTipo();
+                    //scacchiera[x][y].cambiaPezzo(new Torre(new Bianco()));
+                    promozione = new PromozionePedone(ig, scacchiera,scacchiera[x][y], new Nero() ); // Trasformo Il Pedone In Altro Scelto Dalla Promozione
                     promozione.start();
                     System.err.println("Pedone promosso");
+                    //scacchiera[x][y].toStringTipo();
                 }
                                 
             }
@@ -2582,7 +2587,7 @@ public class GestoreMovimenti{
                                     
                     System.err.println( "DEBUG: Promuovo Il Pedone Nell'Pezzo Scelto" );
                     PromozionePedone promozione;
-                    promozione = new PromozionePedone( m[x][y], new Bianco() ); // Trasformo Il Pedone In Altro Scelto Dalla Promozione
+                    promozione = new PromozionePedone(ig, m,m[x][y], new Bianco() ); // Trasformo Il Pedone In Altro Scelto Dalla Promozione
                     promozione.start();
                     System.err.println("Pedone promosso");               
                 }
@@ -2593,7 +2598,7 @@ public class GestoreMovimenti{
 
                     System.err.println( "DEBUG: Promuovo Il Pedone Nel Pezzo Scelto" );
                     PromozionePedone promozione;
-                    promozione = new PromozionePedone( m[x][y], new Nero() ); // Trasformo Il Pedone In Altro Scelto Dalla Promozione
+                    promozione = new PromozionePedone(ig,m, m[x][y], new Nero() ); // Trasformo Il Pedone In Altro Scelto Dalla Promozione
                     promozione.start();
                     System.err.println("Pedone promosso");               
                 }
@@ -2606,7 +2611,10 @@ public class GestoreMovimenti{
         Spazio[][] mat=new Spazio[8][8];
         for(int i=0;i<8;i++){
             for(int j=0;j<8;j++){
-                mat[i][j]=new Spazio(i,j,matrice[i][j].getOccupante());
+                if(matrice[i][j].eOccupato())
+                    mat[i][j]=new Spazio(i,j,matrice[i][j].getOccupante());
+                else
+                    mat[i][j]=new Spazio(i,j);
             }
         }
         return mat;

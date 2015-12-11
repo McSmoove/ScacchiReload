@@ -129,5 +129,19 @@ public class Spazio{ // Cella Della Scacchiera Caratterizzata Dalla Presenza O N
         this.y = y;
     
     }
+    
+    public void toStringTipo(){
+        Pezzo p=this.occupante;
+        if(p instanceof Torre)
+            System.err.println("TORRE");
+        if(p instanceof Pedone)
+            System.err.println("PEDONE");
+        if(p instanceof Regina)
+            System.err.println("REGINA");
+        if(p instanceof Alfiere)
+            System.err.println("ALFIERE");
+        if(p instanceof Cavallo)
+            System.err.println("Cavallo");
+    }
 
 }
