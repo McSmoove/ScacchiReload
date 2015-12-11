@@ -1,29 +1,5 @@
 
 
--da implementare il metodo setBoard() nella classe ThreatBoard ???
--una volta mangiato il re bloccare la partita e mettere un messaggio x il vincitore con la possibilità di iniziare una nuova partita
--in gestore bottoni quando faccio get colore dello spazio attivato mi da null
-    -il motivo è che l'occupante è null
-    -nessun pezzo sa la propria posizione sulla scacchiera
-    -creando la matrice di pezzi ogni pezzo non contiene la propria posizione
-    -getspazioattivato ritorna null perchè contiene l'ultimo spazio schiacciato
-
-Risolto con il reverse:
--non vengono mangiati i pezzi nelle prime due righe o forse tutte le righe
-
-Risolto:
--la torre se ne va a fanculo -1, -1 (da 0,0)
-    precisazione: qualsiasi pezzo che si trova in 0,0 sparisce dopo OGNI VOLTA che il bianco mangia il nero
--regina nera e la torre nera non mangiano niente sotto di loro e nemmeno ai lati
--re quando sotto scacco non viene capito dal programma
-quando mangio con un pezzo bianco quello continua a mangiare senza cambiare il turno
-
-
-
-------------------------------------------------------
-
 nuova partita non viene riinizializzata
-promozione pedone non è completamente collegato col controller
-promozione a volte non promuove
-la torre viene mangiata mettendo in pericolo il re, la mossa dovrebbe essere evitata dal programma
+la torre viene mangiata mettendo in pericolo il re, la mossa dovrebbe essere evitata dal programma (non so se il bug è ancora presente)
 

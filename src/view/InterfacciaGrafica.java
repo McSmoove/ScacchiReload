@@ -451,6 +451,17 @@ public class InterfacciaGrafica{
         }
              
     }
+    
+    public void promozionePedone(Spazio s,Colore colore,Spazio[][] matrice){
+        
+        int scelta = JOptionPane.showOptionDialog(null, "Scegli In Cosa Vuoi Promuovere Il Pedone", "Promozione Pedone", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[]{"Torre","Cavallo","Alfiere","Regina"},"");
+        switch(scelta){
+            case 0: s.cambiaPezzo(new Torre(colore));break;
+            case 1: s.cambiaPezzo(new Cavallo(colore));break;
+            case 2: s.cambiaPezzo(new Alfiere(colore));break;
+            case 3: s.cambiaPezzo(new Regina(colore));break;
+        }
+    }
 
     /**
      * Dato che ogni casella usa una texture bianca/nera ogni volta che si 
@@ -578,6 +589,8 @@ public class InterfacciaGrafica{
                 }
             }
         }
+        
+        
     }
     
 } // Fine Classe InterfacciaGrafica

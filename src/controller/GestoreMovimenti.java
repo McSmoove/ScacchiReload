@@ -4,6 +4,7 @@ import static java.lang.Math.abs;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import model.*;
 import view.InterfacciaGrafica;
 import view.PromozionePedone;
@@ -2530,7 +2531,8 @@ public class GestoreMovimenti{
             if( scacchiera[x][y].getOccupante().getColore() instanceof Bianco ){ // Promozione Pedone Bianco
                                     
                 if( y == 0 ){ // Se Il Pedone E In Fondo Alla Scacchiera
-                                    
+                    ig.promozionePedone(scacchiera[x][y],new Bianco(),scacchiera);     
+                    /*
                     System.err.println( "DEBUG: Promuovo Il Pedone Nell'Pezzo Scelto" );
                     scacchiera[x][y].toStringTipo();
                     PromozionePedone promozione;
@@ -2542,17 +2544,18 @@ public class GestoreMovimenti{
                         System.err.println("Si riparte");
                     }
                     System.err.println("Pedone promosso");
-                    scacchiera[x][y].toStringTipo();
+                    scacchiera[x][y].toStringTipo();*/
                 }
                                 
             } else { // Promozione Pedone Nero
                                     
                 if( y == 7 ){ // Se Il Pedone E In Fondo Alla Scacchiera
-
+                    ig.promozionePedone(scacchiera[x][y],new Nero(),scacchiera);
                     System.err.println( "DEBUG: Promuovo Il Pedone Nel Pezzo Scelto" );
-                    PromozionePedone promozione;
+                    //PromozionePedone promozione;
                     //scacchiera[x][y].toStringTipo();
                     //scacchiera[x][y].cambiaPezzo(new Torre(new Bianco()));
+                    /*
                     promozione = new PromozionePedone(this,ig, scacchiera,scacchiera[x][y], new Nero(),x,y ); // Trasformo Il Pedone In Altro Scelto Dalla Promozione
                     promozione.start();
                     try{
@@ -2561,7 +2564,7 @@ public class GestoreMovimenti{
                         System.err.println("Si riparte");
                     }
                     System.err.println("Pedone promosso");
-                    //scacchiera[x][y].toStringTipo();
+                    //scacchiera[x][y].toStringTipo();*/
                 }
                                 
             }
@@ -2625,6 +2628,8 @@ public class GestoreMovimenti{
                 if( y == 0 ){ // Se Il Pedone E In Fondo Alla Scacchiera
                                     
                     System.err.println( "DEBUG: Promuovo Il Pedone Nell'Pezzo Scelto" );
+                    ig.promozionePedone(m[x][y],new Bianco(),m);
+                    /*
                     PromozionePedone promozione;
                     promozione = new PromozionePedone(this,ig, m,m[x][y], new Bianco(),x,y ); // Trasformo Il Pedone In Altro Scelto Dalla Promozione
                     promozione.start();
@@ -2633,14 +2638,15 @@ public class GestoreMovimenti{
                     }catch(Exception e){
                         System.err.println("Si riparte");
                     }
-                    System.err.println("Pedone promosso");               
+                    System.err.println("Pedone promosso");  */             
                 }
                                 
             } else { // Promozione Pedone Nero
                                     
                 if( y == 7 ){ // Se Il Pedone E In Fondo Alla Scacchiera
-
+                    ig.promozionePedone(m[x][y],new Nero(),m);
                     System.err.println( "DEBUG: Promuovo Il Pedone Nel Pezzo Scelto" );
+                    /*
                     PromozionePedone promozione;
                     promozione = new PromozionePedone(this,ig,m, m[x][y], new Nero(),x,y ); // Trasformo Il Pedone In Altro Scelto Dalla Promozione
                     promozione.start();
@@ -2650,14 +2656,14 @@ public class GestoreMovimenti{
                         } catch (InterruptedException ex) {
                             Logger.getLogger(GestoreMovimenti.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                    }
+                    }*/
                     /*
                     try{
                         this.wait();
                     }catch(Exception e){
                         System.err.println("Si riparte");
                     }*/
-                    System.err.println("Pedone promosso");               
+                    //System.err.println("Pedone promosso");               
                 }
                                 
             }
@@ -2676,7 +2682,6 @@ public class GestoreMovimenti{
         }
         return mat;
     }
-    
     
     
 }
