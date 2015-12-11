@@ -394,8 +394,20 @@ public class InterfacciaGrafica{
     
     }
 
-    public void finePartita() {
-        System.err.print( "DEBUG: Partita Finita" );
+    public void finePartita(){
+        
+        int scelta = JOptionPane.showOptionDialog( interfacciaGrafica, "La Partita E Finita\nIl Vincitore E Il Colore " + gestoreTB.getTurno(), "Fine Partita", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[]{"Inizia Nuova Partita", "Esci Dal Programma"},"");
+        
+        if( scelta == 0 ){
+            
+            iniziaPartita();
+        
+        } else {
+            
+            System.exit( 0 );
+        
+        }
+    
     }
     
     public void setMessaggio(String s){

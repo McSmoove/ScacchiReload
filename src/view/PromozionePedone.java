@@ -1,34 +1,16 @@
 package view;
 
-import controller.GestoreMovimenti;
-import controller.GestoreTB;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.Insets;
+import controller.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.SwingUtilities;
-import javax.swing.border.Border;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
-import model.Alfiere;
-import model.Bianco;
-import model.Cavallo;
-import model.Colore;
-import model.Nero;
-import model.Pezzo;
-import model.Regina;
-import model.Spazio;
-import model.Torre;
+import javax.swing.border.*;
+import model.*;
 
 
 /**
@@ -60,13 +42,6 @@ public class PromozionePedone{
     private MergeIcon[] mergeIco = new MergeIcon[ 4 ];
     private ImageButton []bottone;
     private Pezzo prescelto;
-    
-    //per il debug
-    /*
-    public static void main(String args[]){
-        PromozionePedone p=new PromozionePedone(null,new Bianco());
-        p.start();
-    }*/
     
     public PromozionePedone(GestoreMovimenti gm, InterfacciaGrafica ig,Spazio[][] matrice,Spazio s,Colore color,int x,int y){ // Inizializza Interfaccia Grafica ( Costruttore )
        
