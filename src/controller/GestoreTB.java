@@ -385,7 +385,7 @@ public class GestoreTB {
                                 interfacciaGrafica.finePartita();
                             }
                             //se il re non può essere salvato
-                            if(gestoreMovimenti.controlloScaccoReAvversario(turno)){
+                            if(!gestoreMovimenti.controlloScaccoReAvversario(turno)){
                                 System.err.println("Scacco matto");
                                 interfacciaGrafica.finePartita();
                             }

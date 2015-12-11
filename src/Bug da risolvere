@@ -23,7 +23,7 @@ quando mangio con un pezzo bianco quello continua a mangiare senza cambiare il t
 ------------------------------------------------------
 
 nuova partita non viene riinizializzata
-regina non mangia in avanti (forse)
 promozione pedone non è completamente collegato col controller
-priomozione a volte non promuove
+promozione a volte non promuove
 la torre viene mangiata mettendo in pericolo il re, la mossa dovrebbe essere evitata dal programma
+

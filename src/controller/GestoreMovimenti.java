@@ -851,7 +851,7 @@ public class GestoreMovimenti{
 
         // Verso Destra
         boolean uscita = false;
-        for( int i = x; i <= MAXLENGTH && !uscita; i++ ){
+        for( int i = x+1; i <= MAXLENGTH && !uscita; i++ ){
             if( mat[ i ][ y ].eOccupato() ){  
                 uscita = true; // Uscita Dal Ciclo Dopo Aver Controllato Il Primo Spazio Per Non Fare Controlli Inutili
                 if( !mat[ i ][ y ].getOccupante().getColore().equals( colore )){
@@ -866,7 +866,7 @@ public class GestoreMovimenti{
         // Verso Sinistra
         uscita = false;
         
-        for( int i = x; i >= 0 && !uscita; i-- ){
+        for( int i = x-1; i >= 0 && !uscita; i-- ){
             if( mat[ i ][ y ].eOccupato() ){
                 uscita = true; // Uscita Dal Ciclo Dopo Aver Controllato Il Primo Spazio Per Non Fare Controlli Inutili
                 if( !mat[ i ][ y ].getOccupante().getColore().equals( colore ) ){
@@ -878,10 +878,10 @@ public class GestoreMovimenti{
             }
         }
 
-        // Verso L'Alto
+        // Verso il basso
         uscita = false;
         
-        for( int i = y; i <= MAXLENGTH && !uscita; i++ ){
+        for( int i = y+1; i <= MAXLENGTH && !uscita; i++ ){
             if( mat[ x ][ i ].eOccupato() ){ 
                 uscita = true; // Uscita Dal Ciclo Dopo Aver Controllato Il Primo Spazio Per Non Fare Controlli Inutili
                 if( !mat[ x ][ i ].getOccupante().getColore().equals( colore ) ){  
@@ -893,10 +893,10 @@ public class GestoreMovimenti{
             }
         }
 
-        // Verso Il Basso
+        // Verso l'alto
         uscita = false;
         
-        for( int i = y; i >= 0 && !uscita; i-- ){
+        for( int i = y-1; i >= 0 && !uscita; i-- ){
             
             if( mat[ x ][ i ].eOccupato() ){
                 

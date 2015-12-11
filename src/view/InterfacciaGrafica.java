@@ -365,23 +365,16 @@ public class InterfacciaGrafica{
      */
     public void start() {
         
-        Runnable run = new Runnable(){
+        Runnable run = () -> {
+            JFrame frame = new JFrame( "Scacchi Beta !!!" );
+            frame.add( interfacciaGrafica );
             
-            @Override
-            public void run(){
-
-                JFrame frame = new JFrame( "Scacchi Beta !!!" );
-                frame.add( interfacciaGrafica );
-                
-                frame.setLocationByPlatform( true );
-                System.out.println(""+ pezziNeri.getMinimumSize());
-                frame.setMinimumSize( frame.getMinimumSize() );
-                
-                frame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
-                frame.setVisible( true );
+            frame.setLocationByPlatform( true );
+            System.out.println(""+ pezziNeri.getMinimumSize());
+            frame.setMinimumSize( frame.getMinimumSize() );
             
-            }
-        
+            frame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
+            frame.setVisible( true );
         };
         
         SwingUtilities.invokeLater(run);
@@ -396,7 +389,7 @@ public class InterfacciaGrafica{
 
     public void finePartita(){
         
-        int scelta = JOptionPane.showOptionDialog( interfacciaGrafica, "La Partita E Finita\nIl Vincitore E Il Colore " + gestoreTB.getTurno(), "Fine Partita", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[]{"Inizia Nuova Partita", "Esci Dal Programma"},"");
+        int scelta = JOptionPane.showOptionDialog( interfacciaGrafica, "La Partita è Finita\nIl Vincitore è Il Colore " + gestoreTB.getTurno(), "Fine Partita", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[]{"Inizia Nuova Partita", "Esci Dal Programma"},"");
         
         if( scelta == 0 ){
             
