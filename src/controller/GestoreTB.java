@@ -1,18 +1,14 @@
 package controller;
 
 import java.awt.event.ActionEvent;
-import java.util.Arrays;
 import javax.swing.JButton;
 import model.Bianco;
 import model.Colore;
 import model.Nero;
-import model.Pedone;
 import model.Pezzo;
-import model.Re;
 import model.Spazio;
-import model.Torre;
 import view.InterfacciaGrafica;
-import view.PromozionePedone;
+
 
 /**
  *
@@ -414,7 +410,7 @@ public class GestoreTB {
     
     }
     
-    private void disegnaMatriceSpaziOccupati(){
+    public void disegnaMatriceSpaziOccupati(){
         
         System.err.println("");
         for(int i=0;i<8;i++){

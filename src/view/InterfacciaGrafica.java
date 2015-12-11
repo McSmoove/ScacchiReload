@@ -330,28 +330,28 @@ public class InterfacciaGrafica{
         
         // Da Modificare Il Testo In Base Al Turno
         messaggioInfo.setText( "Fai Una Mossa !!!");
-
+        gestoreTB.disegnaMatriceSpaziOccupati(); 
+        if(gestoreTB.getTurno() instanceof Bianco)
+            System.err.println("Bianco");
+        else
+            System.err.println("Nero");
         // Qui Si Metteranno I Pezzi Collegandoli Alle Immagini
-        
-        
         aggiornaBottoni(gm.getMatrice());
         
+        
         //aggiungo i listener a tutti i bottoni
-        for(int i=0;i<quadratiScacchiera.length;i++){
-            for(int j=0;j<quadratiScacchiera.length;j++){
-                quadratiScacchiera[i][j].addActionListener(new ActionListener() {
- 
-                    @Override
-                    public void actionPerformed(ActionEvent e){
-                        try {
-                            gestoreTB.pressionePulsanteScacchiera( e );
-                        } catch (Exception ex) {
-                            Logger.getLogger(InterfacciaGrafica.class.getName()).log(Level.SEVERE, null, ex);
-                        }
+        for (ImageButton[] quadratiScacchiera1 : quadratiScacchiera) {
+            for (int j = 0; j<quadratiScacchiera.length; j++) {
+                if(quadratiScacchiera1[j].getActionListeners().length<1){
+                quadratiScacchiera1[j].addActionListener((ActionEvent e) -> {
+                    try {
+                        gestoreTB.pressionePulsanteScacchiera( e );
+                    } catch (Exception ex) {
+                        Logger.getLogger(InterfacciaGrafica.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                });      
+                });   
+                }
             }
-            
         }
     
     } // Fine iniziaPartita
