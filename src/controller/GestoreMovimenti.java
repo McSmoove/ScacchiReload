@@ -2,6 +2,8 @@ package controller;
 
 import static java.lang.Math.abs;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.*;
 import view.InterfacciaGrafica;
 import view.PromozionePedone;
@@ -149,10 +151,8 @@ public class GestoreMovimenti{
         throw new Exception( "Re Nero Non Trovato");
     
     }
-    
-    // RIMASTO QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-    
-    public Spazio getSpazioReNero() throws Exception{
+
+    public Spazio getSpazioReNero(){
         for(int i=0;i<8;i++){
             for(int j=0;j<8;j++){
                 if(m[i][j].eOccupato())
@@ -161,10 +161,13 @@ public class GestoreMovimenti{
                            return  m[i][j];
             }
         }
-        throw new Exception("Re nero non trovato");
+        Spazio s=new Spazio();
+        s.setOccupato(false);
+        return s;
+        
     }
     
-    public Spazio getSpazioReBianco() throws Exception{
+    public Spazio getSpazioReBianco(){
         for(int i=0;i<8;i++){
             for(int j=0;j<8;j++){
                 if(m[i][j].eOccupato())
@@ -173,7 +176,10 @@ public class GestoreMovimenti{
                            return  m[i][j];
             }
         }
-        throw new Exception("Re bianco non trovato");
+        Spazio s=new Spazio();
+        s.setOccupato(false);
+        return s;
+        
     }
     
     public Re getReBianco() throws Exception{
@@ -837,7 +843,7 @@ public class GestoreMovimenti{
      * @return 
      */
     public boolean controlloScacco( int x, int y, Colore colore,Spazio[][] matrix){
-        System.err.println("DEBUG: inizia controlloScacco");
+        //System.err.println("DEBUG: inizia controlloScacco");
         Spazio[][] mat=matrix;
         
         int temp1, temp2; 
@@ -850,6 +856,7 @@ public class GestoreMovimenti{
                 uscita = true; // Uscita Dal Ciclo Dopo Aver Controllato Il Primo Spazio Per Non Fare Controlli Inutili
                 if( !mat[ i ][ y ].getOccupante().getColore().equals( colore )){
                     if( mat[ i ][ y ].getOccupante() instanceof Torre || mat[ i ][ y ].getOccupante() instanceof Regina ){
+                        System.err.println("IL RE è SOTTO SCACCO: attacco da destra");
                         return false;
                     }
                 }
@@ -864,6 +871,7 @@ public class GestoreMovimenti{
                 uscita = true; // Uscita Dal Ciclo Dopo Aver Controllato Il Primo Spazio Per Non Fare Controlli Inutili
                 if( !mat[ i ][ y ].getOccupante().getColore().equals( colore ) ){
                     if( mat[ i ][ y ].getOccupante() instanceof Torre || mat[ i ][ y ].getOccupante() instanceof Regina ){
+                        System.err.println("IL RE è SOTTO SCACCO: attacco da sinistra");
                         return false;
                     }
                 }
@@ -878,6 +886,7 @@ public class GestoreMovimenti{
                 uscita = true; // Uscita Dal Ciclo Dopo Aver Controllato Il Primo Spazio Per Non Fare Controlli Inutili
                 if( !mat[ x ][ i ].getOccupante().getColore().equals( colore ) ){  
                     if( mat[ x ][ i ].getOccupante() instanceof Torre || mat[ x ][ i ].getOccupante() instanceof Regina ){
+                        System.err.println("IL RE è SOTTO SCACCO: attacco dall'alto");
                         return false;
                     }
                 }
@@ -896,7 +905,7 @@ public class GestoreMovimenti{
                 if( !mat[ x ][ i ].getOccupante().getColore().equals( colore ) ){
                     
                     if( mat[ x ][ i ].getOccupante() instanceof Torre || mat[ x ][ i ].getOccupante() instanceof Regina ){
-                        
+                        System.err.println("IL RE è SOTTO SCACCO: attacco dal basso");
                         return false;
                     
                     }
@@ -923,7 +932,7 @@ public class GestoreMovimenti{
         if( temp1 <= MAXLENGTH && temp2 <= MAXLENGTH && !mat[ temp1 ][ temp2 ].getOccupante().getColore().equals( colore ) ){
             
             if( mat[ temp1 ][ temp2 ].getOccupante() instanceof Alfiere || mat[ temp1 ][ temp2 ].getOccupante() instanceof Regina ){
-                
+                System.err.println("IL RE è SOTTO SCACCO: attacco in diagonale alto destra");
                 return false;
             
             }
@@ -944,7 +953,7 @@ public class GestoreMovimenti{
         if( temp1 >= 0 && temp2 <= MAXLENGTH && !mat[ temp1 ][ temp2 ].getOccupante().getColore().equals( colore ) ){
             
             if( mat[ temp1 ][ temp2 ].getOccupante() instanceof Alfiere || mat[ temp1 ][ temp2 ].getOccupante() instanceof Regina ){
-                
+                System.err.println("IL RE è SOTTO SCACCO: attacco in diagonale alto sinistra");
                 return false;
             
             }
@@ -965,7 +974,7 @@ public class GestoreMovimenti{
         if( temp1 >= 0 && temp2 >= 0 && !mat[ temp1 ][ temp2 ].getOccupante().getColore().equals( colore ) ){
             
             if( mat[ temp1 ][ temp2 ].getOccupante() instanceof Alfiere || mat[ temp1 ][ temp2 ].getOccupante() instanceof Regina ){
-                
+                System.err.println("IL RE è SOTTO SCACCO: attacco in diagonale basso sinistra");
                 return false;
             
             }
@@ -986,7 +995,7 @@ public class GestoreMovimenti{
         if( temp1 <= MAXLENGTH && temp2 >= 0 && !mat[ temp1 ][ temp2 ].getOccupante().getColore().equals( colore ) ){
             
             if( mat[ temp1 ][ temp2 ].getOccupante() instanceof Alfiere || mat[ temp1 ][ temp2 ].getOccupante() instanceof Regina ){
-                
+                System.err.println("IL RE è SOTTO SCACCO: attacco in diagonale basso destra");
                 return false;
             
             }
@@ -1000,7 +1009,7 @@ public class GestoreMovimenti{
             if( x + 1 <= MAXLENGTH && y + 1 <= MAXLENGTH && mat[ x + 1 ][ y + 1 ].eOccupato() && mat[ x + 1 ][ y + 1 ].getOccupante() instanceof Pedone ){
                 
                 if( !mat[ x + 1 ][ y + 1 ].getOccupante().getColore().equals( colore ) ){
-                    
+                    System.err.println("IL RE è SOTTO SCACCO da un pedone");
                     return false;
                 
                 }
@@ -1011,7 +1020,7 @@ public class GestoreMovimenti{
                     if( mat[ x - 1 ][ y + 1 ].getOccupante() instanceof Pedone ){
                 
                         if( !mat[ x - 1 ][ y + 1 ].getOccupante().getColore().equals( colore ) ){
-                    
+                            System.err.println("IL RE è SOTTO SCACCO da un pedone");
                             return false;
                 
                         }
@@ -1024,7 +1033,7 @@ public class GestoreMovimenti{
             if( x + 1 <= MAXLENGTH && y - 1 >= 0 && mat[ x + 1 ][ y - 1 ].eOccupato() && mat[ x + 1 ][ y - 1 ].getOccupante() instanceof Pedone ){
                 
                 if( !mat[ x + 1 ][ y - 1 ].getOccupante().getColore().equals( colore ) ){
-                    
+                    System.err.println("IL RE è SOTTO SCACCO da un pedone");
                     return false;
                 
                 }
@@ -1034,7 +1043,7 @@ public class GestoreMovimenti{
             if( x - 1 >= 0 && y - 1 >= 0 && mat[ x - 1 ][ y - 1 ].eOccupato() && mat[ x - 1 ][ y - 1 ].getOccupante() instanceof Pedone ){
                 
                 if( !mat[ x - 1 ][ y - 1 ].getOccupante().getColore().equals( colore ) ){
-                    
+                    System.err.println("IL RE è SOTTO SCACCO da un pedone");
                     return false;
                 
                 }
@@ -1049,7 +1058,7 @@ public class GestoreMovimenti{
         if( x + 1 <= MAXLENGTH && y + 2 <= MAXLENGTH && mat[ x + 1 ][ y + 2 ].eOccupato() ){
             
             if( !mat[ x + 1 ][ y + 2 ].getOccupante().getColore().equals( colore ) && mat[ x + 1 ][ y + 2 ].getOccupante() instanceof Cavallo ){
-                
+                System.err.println("IL RE è SOTTO SCACCO cavallo alto destra");
                 return false;
             
             }
@@ -1060,7 +1069,7 @@ public class GestoreMovimenti{
         if( x - 1 >= 0 && y + 2 <= MAXLENGTH && mat[ x - 1 ][ y + 2 ].eOccupato() ){
             
             if( !mat[ x - 1 ][ y + 2 ].getOccupante().getColore().equals( colore ) && mat[ x - 1 ][ y + 2 ].getOccupante() instanceof Cavallo ){
-                
+                System.err.println("IL RE è SOTTO SCACCO cavallo alto sinistra");
                 return false;
             
             }
@@ -1071,7 +1080,7 @@ public class GestoreMovimenti{
         if( x + 2 <= MAXLENGTH && y + 1 <= MAXLENGTH && mat[ x + 2 ][ y + 1 ].eOccupato() ){
             
             if( !mat[ x + 2 ][ y + 1 ].getOccupante().getColore().equals( colore ) && mat[ x + 2 ][ y + 1 ].getOccupante() instanceof Cavallo ){
-                
+                System.err.println("IL RE è SOTTO SCACCO cavallo destra alto");
                 return false;
             
             }
@@ -1081,6 +1090,7 @@ public class GestoreMovimenti{
         // A Destra In Basso
         if( x + 2 <= MAXLENGTH && y - 1 >= 0 && mat[ x + 2 ][ y - 1 ].eOccupato() ){       
             if( !mat[ x + 2 ][ y - 1 ].getOccupante().getColore().equals( colore ) && mat[ x + 2 ][ y - 1 ].getOccupante() instanceof Cavallo ){      
+                System.err.println("IL RE è SOTTO SCACCO cavallo destra basso");
                 return false;
             }
         }
@@ -1088,6 +1098,7 @@ public class GestoreMovimenti{
         // A Sinistra In Alto
         if( x - 2 >= 0 && y + 1 <= MAXLENGTH && mat[ x - 2 ][ y + 1 ].eOccupato() ){    
             if( !mat[ x - 2 ][ y + 1 ].getOccupante().getColore().equals( colore ) && mat[ x - 2 ][ y + 1 ].getOccupante() instanceof Cavallo ){    
+                System.err.println("IL RE è SOTTO SCACCO cavallo sinistra alto");
                 return false;
             }
         }
@@ -1096,7 +1107,7 @@ public class GestoreMovimenti{
         if( x - 2 >= 0 && y - 1 >= 0 && mat[ x - 2 ][ y - 1 ].eOccupato() ){
             
             if( !mat[ x - 2 ][ y - 1 ].getOccupante().getColore().equals( colore ) && mat[ x - 2 ][ y - 1 ].getOccupante() instanceof Cavallo ){
-                
+                System.err.println("IL RE è SOTTO SCACCO cavallo sinistra basso");
                 return false;
             
             }
@@ -1108,7 +1119,7 @@ public class GestoreMovimenti{
             if( mat[ x + 1 ][ y - 2 ].eOccupato() ){
             
                 if( !mat[ x + 1 ][ y - 2 ].getOccupante().getColore().equals( colore ) && mat[ x + 1 ][ y - 2 ].getOccupante() instanceof Cavallo ){
-                
+                    System.err.println("IL RE è SOTTO SCACCO cavallo basso destra");
                     return false;
                 }
             }
@@ -1118,7 +1129,7 @@ public class GestoreMovimenti{
         if( x - 1 >= 0 && y - 2 >= 0 && mat[ x - 1 ][ y - 2 ].eOccupato() ){
             
             if( !mat[ x - 1 ][ y - 2 ].getOccupante().getColore().equals( colore ) && mat[ x - 1 ][ y - 2 ].getOccupante() instanceof Cavallo ){
-                
+                System.err.println("IL RE è SOTTO SCACCO cavallo basso sinistra");
                 return false;
             
             }
@@ -1131,7 +1142,7 @@ public class GestoreMovimenti{
         if( x + 1 <= MAXLENGTH && mat[ x + 1 ][ y ].eOccupato() ){
             
             if( !mat[ x + 1 ][ y ].getOccupante().getColore().equals( colore ) && m[ x + 1 ][ y ].getOccupante() instanceof Re ){
-                
+                System.err.println("IL RE è SOTTO SCACCO re");
                 return false;
             
             }
@@ -1141,6 +1152,7 @@ public class GestoreMovimenti{
         // Sinistra
         if( x - 1 >= 0 && mat[ x - 1 ][ y ].eOccupato() ){          
             if( !mat[ x - 1 ][ y ].getOccupante().getColore().equals( colore ) && mat[ x - 1 ][ y ].getOccupante() instanceof Re ){
+                System.err.println("IL RE è SOTTO SCACCO re");
                 return false;
             }
         }
@@ -1148,6 +1160,7 @@ public class GestoreMovimenti{
         // Alto
         if( y + 1 <= MAXLENGTH && m[ x ][ y + 1 ].eOccupato() ){ 
             if( !mat[ x ][ y + 1 ].getOccupante().getColore().equals( colore ) && mat[ x ][ y + 1 ].getOccupante() instanceof Re ){             
+                System.err.println("IL RE è SOTTO SCACCO re");
                 return false;
             }
         }
@@ -1155,6 +1168,7 @@ public class GestoreMovimenti{
         // Basso
         if( y - 1 >= 0 && mat[ x ][ y - 1 ].eOccupato() ){
             if( !mat[ x ][ y - 1 ].getOccupante().getColore().equals( colore ) && mat[ x ][ y - 1 ].getOccupante() instanceof Re ){
+                System.err.println("IL RE è SOTTO SCACCO re");
                 return false;
             }
         }
@@ -1162,6 +1176,7 @@ public class GestoreMovimenti{
         // In Alto A Destra
         if( x + 1 <= MAXLENGTH && y + 1 <= MAXLENGTH && mat[ x + 1 ][ y + 1 ].eOccupato() ){
             if( !mat[ x + 1 ][ y + 1 ].getOccupante().getColore().equals( colore ) && mat[ x + 1 ][ y + 1 ].getOccupante() instanceof Re ){ 
+                System.err.println("IL RE è SOTTO SCACCO re");
                 return false;
             }
         }
@@ -1169,6 +1184,7 @@ public class GestoreMovimenti{
         // In Alto A Sinistra
         if( x - 1 >= 0 && y + 1 <= MAXLENGTH && mat[ x - 1 ][ y + 1 ].eOccupato() ){
             if( !mat[ x - 1 ][ y + 1 ].getOccupante().getColore().equals( colore ) && mat[ x - 1 ][ y + 1 ].getOccupante() instanceof Re ){ 
+                System.err.println("IL RE è SOTTO SCACCO re");
                 return false;
             }
         }
@@ -1176,6 +1192,7 @@ public class GestoreMovimenti{
         // In Basso A Destra
         if( x + 1 <= MAXLENGTH && y - 1 >= 0 && mat[ x + 1 ][ y - 1 ].eOccupato() ){
             if( !mat[ x + 1 ][ y - 1 ].getOccupante().getColore().equals( colore ) && mat[ x + 1 ][ y - 1 ].getOccupante() instanceof Re ){      
+                System.err.println("IL RE è SOTTO SCACCO re");
                 return false;
             }
         }
@@ -1183,7 +1200,9 @@ public class GestoreMovimenti{
         // In Basso A Sinistra
         if( x - 1 >= 0 && y - 1 >= 0 && mat[ x - 1 ][ y - 1 ].eOccupato() ){         
             if( !mat[ x - 1 ][ y - 1 ].getOccupante().getColore().equals( colore ) && mat[ x - 1 ][ y - 1 ].getOccupante() instanceof Re ){   
+                System.err.println("IL RE è SOTTO SCACCO re");
                 return false;
+                
             }
         }
         System.err.println("IL RE NON è SOTTO SCACCO");
@@ -1213,12 +1232,12 @@ public class GestoreMovimenti{
         return controlloScacco( s.getX(), s.getY(), s.getOccupante().getColore(),matrice ); 
     }
     
-    public boolean controlloScacco(Colore colore) throws Exception{
+    public boolean controlloScaccoReAvversario(Colore colore) throws Exception{
         Spazio s;
         if(colore instanceof Bianco)
-            s=this.getSpazioReBianco(); 
+            s=this.getSpazioReNero(); 
         else
-           s=this.getSpazioReNero();  
+           s=this.getSpazioReBianco();  
         
         return controlloScacco( s.getX(), s.getY(), s.getOccupante().getColore(),m ); 
     }
@@ -2401,10 +2420,13 @@ public class GestoreMovimenti{
     }
     
 
-    public boolean scaccoMatto() {
-        System.err.println("DEBUG: scaccoMatto non implementato");
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        return false;
+    public boolean scaccoMatto(Colore turnoCorrente) {
+        if(turnoCorrente instanceof Bianco){
+            return !(getSpazioReNero().eOccupato());      
+        }
+        else{
+            return !getSpazioReBianco().eOccupato();
+        }
     }
     
     private int[][] getPercorsoAttaccante(Spazio att,Spazio r){
@@ -2479,6 +2501,13 @@ public class GestoreMovimenti{
         
     }
     
+    /**
+     *
+     * @param s
+     * @param x
+     * @param y
+     * @param scacchiera
+     */
     public void spostaPezzo( Spazio s, int x, int y ,Spazio[][] scacchiera){
         Pezzo p;
         int xp = s.getX();
@@ -2505,8 +2534,13 @@ public class GestoreMovimenti{
                     System.err.println( "DEBUG: Promuovo Il Pedone Nell'Pezzo Scelto" );
                     scacchiera[x][y].toStringTipo();
                     PromozionePedone promozione;
-                    promozione = new PromozionePedone(ig, scacchiera ,scacchiera[x][y], new Bianco() ); // Trasformo Il Pedone In Altro Scelto Dalla Promozione
+                    promozione = new PromozionePedone(this,ig, scacchiera ,scacchiera[x][y], new Bianco() ,x,y); // Trasformo Il Pedone In Altro Scelto Dalla Promozione
                     promozione.start();
+                    try{
+                        this.wait();
+                    }catch(Exception e){
+                        System.err.println("Si riparte");
+                    }
                     System.err.println("Pedone promosso");
                     scacchiera[x][y].toStringTipo();
                 }
@@ -2519,8 +2553,13 @@ public class GestoreMovimenti{
                     PromozionePedone promozione;
                     //scacchiera[x][y].toStringTipo();
                     //scacchiera[x][y].cambiaPezzo(new Torre(new Bianco()));
-                    promozione = new PromozionePedone(ig, scacchiera,scacchiera[x][y], new Nero() ); // Trasformo Il Pedone In Altro Scelto Dalla Promozione
+                    promozione = new PromozionePedone(this,ig, scacchiera,scacchiera[x][y], new Nero(),x,y ); // Trasformo Il Pedone In Altro Scelto Dalla Promozione
                     promozione.start();
+                    try{
+                        this.wait();
+                    }catch(Exception e){
+                        System.err.println("Si riparte");
+                    }
                     System.err.println("Pedone promosso");
                     //scacchiera[x][y].toStringTipo();
                 }
@@ -2587,8 +2626,13 @@ public class GestoreMovimenti{
                                     
                     System.err.println( "DEBUG: Promuovo Il Pedone Nell'Pezzo Scelto" );
                     PromozionePedone promozione;
-                    promozione = new PromozionePedone(ig, m,m[x][y], new Bianco() ); // Trasformo Il Pedone In Altro Scelto Dalla Promozione
+                    promozione = new PromozionePedone(this,ig, m,m[x][y], new Bianco(),x,y ); // Trasformo Il Pedone In Altro Scelto Dalla Promozione
                     promozione.start();
+                    try{
+                        this.wait();
+                    }catch(Exception e){
+                        System.err.println("Si riparte");
+                    }
                     System.err.println("Pedone promosso");               
                 }
                                 
@@ -2598,8 +2642,21 @@ public class GestoreMovimenti{
 
                     System.err.println( "DEBUG: Promuovo Il Pedone Nel Pezzo Scelto" );
                     PromozionePedone promozione;
-                    promozione = new PromozionePedone(ig,m, m[x][y], new Nero() ); // Trasformo Il Pedone In Altro Scelto Dalla Promozione
+                    promozione = new PromozionePedone(this,ig,m, m[x][y], new Nero(),x,y ); // Trasformo Il Pedone In Altro Scelto Dalla Promozione
                     promozione.start();
+                    while(!promozione.equals(null)){
+                        try {
+                            this.wait(50);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(GestoreMovimenti.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    /*
+                    try{
+                        this.wait();
+                    }catch(Exception e){
+                        System.err.println("Si riparte");
+                    }*/
                     System.err.println("Pedone promosso");               
                 }
                                 

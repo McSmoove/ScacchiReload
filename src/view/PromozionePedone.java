@@ -1,5 +1,6 @@
 package view;
 
+import controller.GestoreMovimenti;
 import controller.GestoreTB;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -53,7 +54,7 @@ public class PromozionePedone{
     private JPanel scacchiera = new JPanel( new GridLayout( 1, 4 ) );
     
     private final Image immagine[] = new Image[ 12 ];
-    private final Image colore[] = new Image[ 3 ];
+    private Image colore[] = new Image[ 3 ];
     private Border bordo = new CompoundBorder( new EmptyBorder( 5, 5, 5, 5 ), new LineBorder( Color.RED ) );
     private Border bordo2 = new CompoundBorder( new EmptyBorder( 5, 5, 5, 5 ), new LineBorder( Color.BLUE ) );
     private MergeIcon[] mergeIco = new MergeIcon[ 4 ];
@@ -67,7 +68,7 @@ public class PromozionePedone{
         p.start();
     }*/
     
-    public PromozionePedone(InterfacciaGrafica ig,Spazio[][] matrice,Spazio s,Colore color){ // Inizializza Interfaccia Grafica ( Costruttore )
+    public PromozionePedone(GestoreMovimenti gm, InterfacciaGrafica ig,Spazio[][] matrice,Spazio s,Colore color,int x,int y){ // Inizializza Interfaccia Grafica ( Costruttore )
        
         try{
             
@@ -108,57 +109,68 @@ public class PromozionePedone{
             
             scacchiera.add(bottone[i]);
             
-            bottone[i].addActionListener( new ActionListener() {
-
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    //come faccio a distinguere i vari ImageButton e dove sono salvati se all'interno del ciclo modifichi sempre "bottone"
-                    //devono essere all'interno di una struttura e non solo dentro la scacchiera altrimenti non si riesce a tornare indietro
-                    
-                    if(e.getSource().equals(bottone[0]))
-                        if(color instanceof Bianco){
-                            s.cambiaPezzo(new Torre(new Bianco()));
-                            //prescelto=new Torre(new Bianco());
-                        }
-                        else{
-                            //s.toStringTipo();
-                            s.cambiaPezzo(new Torre(new Nero()));
-                            //s.toStringTipo();
-                            //prescelto=new Torre(new Nero());
-                        }
-                    
-                    if(e.getSource().equals(bottone[1]))
-                        if(color instanceof Bianco){
-                            s.cambiaPezzo(new Cavallo(new Bianco()));
-                            //prescelto=new Cavallo(new Bianco());
-                        }
-                        else{
-                            s.cambiaPezzo(new Cavallo(new Nero()));
-                            //prescelto=new Cavallo(new Nero());
-                        }
-                    if(e.getSource().equals(bottone[2]))
-                        if(color instanceof Bianco){
-                            s.cambiaPezzo(new Alfiere(new Bianco()));
-                            //prescelto=new Alfiere(new Bianco());
-                        }
-                        else{
-                            s.cambiaPezzo(new Alfiere(new Nero()));
-                            //prescelto=new Alfiere(new Nero());
-                        }
-                    if(e.getSource().equals(bottone[3]))
-                        if(color instanceof Bianco){
-                            s.cambiaPezzo(new Regina(new Bianco()));
-                            //prescelto=new Regina(new Bianco());
-                        }
-                        else{
-                            s.cambiaPezzo(new Regina(new Nero()));
-                            //prescelto=new Regina(new Nero());
-                        }
-                    //uscita
-                    ig.aggiornaBottoni(matrice);
-                    frame.dispose();
-                }
-            } );
+            bottone[i].addActionListener((ActionEvent e) -> {
+                //come faccio a distinguere i vari ImageButton e dove sono salvati se all'interno del ciclo modifichi sempre "bottone"
+                //devono essere all'interno di una struttura e non solo dentro la scacchiera altrimenti non si riesce a tornare indietro
+                
+                if(e.getSource().equals(bottone[0]))
+                    if(color instanceof Bianco){
+                        s.cambiaPezzo(new Torre(new Bianco()));
+                        //prescelto=new Torre(new Bianco());
+                    }
+                    else{
+                        s.toStringTipo();
+                        s.cambiaPezzo(new Torre(new Nero()));
+                        s.toStringTipo();
+                        //prescelto=new Torre(new Nero());
+                    }
+                
+                if(e.getSource().equals(bottone[1]))
+                    if(color instanceof Bianco){
+                        s.toStringTipo();
+                        s.cambiaPezzo(new Cavallo(new Bianco()));
+                        s.toStringTipo();
+                        //prescelto=new Cavallo(new Bianco());
+                    }
+                    else{
+                        s.toStringTipo();
+                        s.cambiaPezzo(new Cavallo(new Nero()));
+                        s.toStringTipo();
+                        //prescelto=new Cavallo(new Nero());
+                    }
+                if(e.getSource().equals(bottone[2]))
+                    if(color instanceof Bianco){
+                        s.toStringTipo();
+                        s.cambiaPezzo(new Alfiere(new Bianco()));
+                        s.toStringTipo();
+                        //prescelto=new Alfiere(new Bianco());
+                    }
+                    else{
+                        s.toStringTipo();
+                        s.cambiaPezzo(new Alfiere(new Nero()));
+                        s.toStringTipo();
+                        //prescelto=new Alfiere(new Nero());
+                    }
+                if(e.getSource().equals(bottone[3]))
+                    if(color instanceof Bianco){
+                        s.toStringTipo();
+                        s.cambiaPezzo(new Regina(new Bianco()));
+                        s.toStringTipo();
+                        //prescelto=new Regina(new Bianco());
+                    }
+                    else{
+                        s.toStringTipo();
+                        s.cambiaPezzo(new Regina(new Nero()));
+                        s.toStringTipo();
+                        //prescelto=new Regina(new Nero());
+                    }
+                //uscita
+                matrice[x][y].toStringTipo();
+                ig.aggiornaBottoni(matrice);
+                frame.dispose();
+                gm.notify();
+                //this.notifyAll();
+            });
         
         } // Fine For Colonne
         
@@ -168,23 +180,15 @@ public class PromozionePedone{
      
      public void start() {
         
-        Runnable run = new Runnable(){
+        Runnable run = () -> {
+            frame.add( panMain );
             
-            @Override
-            public void run(){
-
-                
-                frame.add( panMain );
-                
-                frame.setLocationByPlatform( true );
-                frame.setResizable( false );
-                frame.pack();
-                
-                frame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
-                frame.setVisible( true );
+            frame.setLocationByPlatform( true );
+            frame.setResizable( false );
+            frame.pack();
             
-            }
-        
+            frame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
+            frame.setVisible( true );
         };
         
         SwingUtilities.invokeLater(run);

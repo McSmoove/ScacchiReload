@@ -15,6 +15,8 @@ Risolto:
 -la torre se ne va a fanculo -1, -1 (da 0,0)
     precisazione: qualsiasi pezzo che si trova in 0,0 sparisce dopo OGNI VOLTA che il bianco mangia il nero
 -regina nera e la torre nera non mangiano niente sotto di loro e nemmeno ai lati
+-re quando sotto scacco non viene capito dal programma
+quando mangio con un pezzo bianco quello continua a mangiare senza cambiare il turno
 
 
 
@@ -24,3 +26,4 @@ nuova partita non viene riinizializzata
 regina non mangia in avanti (forse)
 promozione pedone non è completamente collegato col controller
 priomozione a volte non promuove
+la torre viene mangiata mettendo in pericolo il re, la mossa dovrebbe essere evitata dal programma

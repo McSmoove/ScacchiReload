@@ -68,12 +68,7 @@ public class Spazio{ // Cella Della Scacchiera Caratterizzata Dalla Presenza O N
         return occupante;
     
     }
-    
-    public void setOccupante( Pezzo p ){
-        
-        occupante = p;
-    
-    }
+   
     
     public void setOccupato( boolean b ){
         
@@ -104,14 +99,14 @@ public class Spazio{ // Cella Della Scacchiera Caratterizzata Dalla Presenza O N
         this.y = y;
     
     }
-    
+    /*
     public void distruggi( InterfacciaGrafica ig ){
         
         occupato = false;
         occupante = null;
         ig.aggiungiPezzoMorto( occupante );
     
-    }
+    }*/
     
     public void inizializzaSpazio( Pezzo p, int x, int y ){
         
@@ -141,7 +136,7 @@ public class Spazio{ // Cella Della Scacchiera Caratterizzata Dalla Presenza O N
         if(p instanceof Alfiere)
             System.err.println("ALFIERE");
         if(p instanceof Cavallo)
-            System.err.println("Cavallo");
+            System.err.println("CAVALLO");
     }
 
 }

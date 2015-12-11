@@ -184,7 +184,7 @@ public class GestoreTB {
         Pezzo p=s.getOccupante();
         xPedoneTrasformato=x;
         yPedoneTrasformato=y;
-        gestoreMovimenti.getMatrice()[s.getX()][s.getY()].setOccupante(p);
+        gestoreMovimenti.getMatrice()[s.getX()][s.getY()].cambiaPezzo(p);
         interfacciaGrafica.aggiornaBottoni( gestoreMovimenti.getMatrice() );
     }
     
@@ -290,11 +290,11 @@ public class GestoreTB {
                         //matriceSimulata=gestoreMovimenti.getMatriceCoppia(); 
                         matriceSimulata=gestoreMovimenti.getMatrice().clone();
                         System.err.println("Matrice simulata 1 :");
-                        disegnaMatriceSpaziOccupati(matriceSimulata);
+                        //disegnaMatriceSpaziOccupati(matriceSimulata);
                         //matriceSimulata2=new Spazio[8][8];
                         matriceSimulata2=gestoreMovimenti.coppiaMatrice(matriceSimulata);
                         System.err.println("Matrice simulata 2 :");
-                        disegnaMatriceSpaziOccupati(matriceSimulata2);
+                        //disegnaMatriceSpaziOccupati(matriceSimulata2);
                         //con la prossima riga spostando il pezzo nella matrice simulata si perde
                         //il legame con lo spazioa ttivato e il pezzo attivato
                         gestoreMovimenti.spostaPezzo( gestoreMovimenti.getMatrice()[xAttivato][yAttivato], x, y,matriceSimulata );
@@ -320,7 +320,7 @@ public class GestoreTB {
                             gestoreMovimenti.setMatrice(matriceSimulata);
                             disattivaPosizione(); // Tolgo Il Bordo Del Bottone ???
                             passaTurno(); // Passo Il Turno
-                            disegnaMatriceSpaziOccupati();
+                            //disegnaMatriceSpaziOccupati();
                             
                             
                             interfacciaGrafica.aggiornaBottoni( gestoreMovimenti.getMatrice() ); // Aggiorna La Visuale
@@ -328,13 +328,13 @@ public class GestoreTB {
                         } else { // Se Provoca Lo Scacco Matto
                             //gestoreMovimenti.setMatrice(matriceSimulata2);
                             System.err.println("Prima del roll back:");
-                            disegnaMatriceSpaziOccupati();
+                            //disegnaMatriceSpaziOccupati();
                             //matriceSimulata=gestoreMovimenti.coppiaMatrice(matriceSimulata2);
                             gestoreMovimenti.setMatrice(gestoreMovimenti.coppiaMatrice(matriceSimulata2));
                             //gestoreMovimenti.setMatrice(gestoreMovimenti.coppiaMatrice(matriceSimulata2));
                             disattivaPosizione(); // Imposto Come Se Niente Fosse Stato Premuto
                             System.err.println("Dopo il roll back originale:");
-                            disegnaMatriceSpaziOccupati();
+                            //disegnaMatriceSpaziOccupati();
                             //System.err.println("Dopo il roll back matrice simulata 1:");
                             //disegnaMatriceSpaziOccupati(matriceSimulata);
                             
@@ -354,38 +354,49 @@ public class GestoreTB {
                         
                         System.err.println( "Del Colore Diverso" ); // Se Non Provoca Scacco Del Proprio Colore -> Scacco Matto ( Faccio La Simulazione )
                         //matriceSimulata=coppiaMatrice(gestoreMovimenti.getMatrice());
+                        matriceSimulata=gestoreMovimenti.getMatrice().clone();
+                        gestoreMovimenti.spostaPezzo( gestoreMovimenti.getMatrice()[xAttivato][yAttivato], x, y);
                         //gestoreMovimenti.spostaPezzo(gestoreMovimenti.getMatrice()[xAttivato][yAttivato], x, y,matriceSimulata);
                         System.err.println( "DEBUG: Non Faccio Il Controllo Scacco QUI" );
-                        //bisognerà togliere if true
-                        if( true ){ // Mangia Il Pezzo In Questa Locazione
+                        
+                        if( (getTurno() instanceof Bianco && gestoreMovimenti.controlloScacco(new Bianco(),matriceSimulata)) 
+                        
+                        || (getTurno() instanceof Nero && gestoreMovimenti.controlloScacco(new Nero(),matriceSimulata))){
                             
                             //non so se è indispensabile x il refresh
                             //x ora lo tolgo?
                             //gestoreMovimenti.getMatrice()[x][y].distruggi( interfacciaGrafica );
                             //la riga sucessiva sostituisce quella dopo commentata
-                            gestoreMovimenti.spostaPezzo( gestoreMovimenti.getMatrice()[xAttivato][yAttivato], x, y);
-                            //gestoreMovimenti.setMatrice( matriceSimulata ); // Sposto Effettivamente Il Pezzo
                             
+                            //gestoreMovimenti.setMatrice( matriceSimulata ); // Sposto Effettivamente Il Pezzo
+                            gestoreMovimenti.setMatrice(matriceSimulata);
+                            //disegnaMatriceSpaziOccupati();
                             // Contrassegno Lo Spazio Occupato Prima Come Non Occupato
                             //matriceSimulata.getSpazio( gestoreTurni.getSpazioAttivato().getX(), gestoreTurni.getSpazioAttivato().getY() ).setOccupato( false ); // Prova Per Debug
                             //matriceSimulata.getSpazio( gestoreTurni.getSpazioAttivato().getX(), gestoreTurni.getSpazioAttivato().getY() ).setOccupante( null );
-                            disegnaMatriceSpaziOccupati();
+                            //disegnaMatriceSpaziOccupati();
                             disattivaPosizione(); // Disattiva Il Bordo
-                            System.err.println("Truno correnti: "+turno);
-                            passaTurno(); // Passo Il Turno
+                           
                             System.err.println("Truno correnti: "+turno);
                             interfacciaGrafica.aggiornaBottoni( gestoreMovimenti.getMatrice() ); // Aggiorna La Visuale
-                            
-                            if( gestoreMovimenti.scaccoMatto() ){ // Verifico Scacco Matto
-                                
+                            //se il re è stato mangiato
+                            if( gestoreMovimenti.scaccoMatto(turno) ){ // Verifico Scacco Matto
+                                System.err.println("Scacco matto");
                                 interfacciaGrafica.finePartita();
-                            
                             }
+                            //se il re non può essere salvato
+                            if(gestoreMovimenti.controlloScaccoReAvversario(turno)){
+                                System.err.println("Scacco matto");
+                                interfacciaGrafica.finePartita();
+                            }
+                            passaTurno();
 
                         
                         } else { // Se Provoco Lo Scacco Matto
-                            
+                            gestoreMovimenti.setMatrice(gestoreMovimenti.coppiaMatrice(matriceSimulata2));
+                            //gestoreMovimenti.setMatrice(gestoreMovimenti.coppiaMatrice(matriceSimulata2));
                             disattivaPosizione(); // Imposto Come Se Niente Fosse Stato Premuto
+                            
                         
                         }
                     
