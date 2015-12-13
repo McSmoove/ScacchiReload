@@ -2,12 +2,9 @@ package controller;
 
 import static java.lang.Math.abs;
 import java.util.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import model.*;
 import view.InterfacciaGrafica;
-import view.PromozionePedone;
+
 
 /**
  * Setta i movimenti possibili dei pezzi sulla m
@@ -125,6 +122,13 @@ public class GestoreMovimenti{
     
     }
     
+    public Re getRe(Colore c) throws Exception{
+        if(c instanceof Bianco)
+            return getReBianco();
+        else
+            return getReNero();
+    }
+    
     public Re getReNero() throws Exception{
         
         for( int i = 0; i < 8; i++ ){
@@ -151,6 +155,13 @@ public class GestoreMovimenti{
         
         throw new Exception( "Re Nero Non Trovato");
     
+    }
+    
+    public Spazio getSpazioRe(Colore c){
+        if(c instanceof Bianco)
+            return getSpazioReBianco();
+        else 
+            return getSpazioReNero();
     }
 
     public Spazio getSpazioReNero(){
@@ -195,21 +206,6 @@ public class GestoreMovimenti{
         throw new Exception("Re bianco non trovato");
     }
     
-    /**
-     * Cerca il re sulla m e lo ritorna (controlla casella per casella)
-     * @param c
-     * @return 
-     */
-    private Re getRe(Colore c){
-        for(int i=0;i<8;i++){
-            for(int j=0;j<8;j++){
-                if(m[i][j].getOccupante() instanceof Re)
-                    if(m[i][j].getOccupante().getColore().equals(c))
-                        return (Re)m[i][j].getOccupante();
-            }
-        }
-        return null;
-    }
 
     // Metodo Per Controllare Il Pedone
     // Manca Il Controllo Di Quando Supero Una Pedina Con Un'Altra
@@ -1754,7 +1750,9 @@ public class GestoreMovimenti{
      * @return 
      */
     public boolean spostabileIn(Spazio s,int x, int y){
-        System.err.println("entro in spostabileIn() spazio posizionato in "+s.getX()+" "+s.getY()+" in "+x+" "+y);
+        
+        System.err.println("entro in spostabileIn() spazio posizionato da "+s.getX()+" "+s.getY()+" in "+x+" "+y);
+        disegnaMatriceSpaziOccupati();
         int xp=s.getX();
         int yp=s.getY();
         int temp;//vriabile temporale per torre
@@ -1773,9 +1771,9 @@ public class GestoreMovimenti{
         
         //controllo se la posizione finale è vuota o contiene un pezzo del colore opposto
         //(non posso spostarmi in un locazione con un pezzo dello stesso colore)
-        System.err.println(" occupato in 6,5:"+m[6][5].eOccupato());
+        //System.err.println(" occupato in 6,5:"+m[6][5].eOccupato());
         if(m[x][y].eOccupato() ){
-            System.err.println("Occupato in 6,5 da: "+m[6][5].getOccupante()+" occupato:"+m[6][5].eOccupato());
+            //System.err.println("Occupato in 6,5 da: "+m[6][5].getOccupante()+" occupato:"+m[6][5].eOccupato());
             if(!m[x][y].getOccupante().getColore().equals(s.getOccupante().getColore())){
                 //divido i controlli in base al pezzo
                 if (p instanceof Torre) {
@@ -2168,11 +2166,12 @@ public class GestoreMovimenti{
      */
     public LinkedList<Spazio> getListaPezziChePrevengonoScacco(int xRe,int yRe,Spazio[][] matrice,Colore turno){
         //MatriceDeiPezzi originale=matrice;
-        Spazio[][] originale=matrice;
+        Spazio[][] originale=coppiaMatrice(matrice);
         LinkedList<Spazio> listaAttaccanti=new LinkedList<>();
         LinkedList<Spazio> listaSalvatori=new LinkedList<>();
         Spazio re= originale[xRe][yRe];
-        
+        System.err.println("Sono in getListaPezziChePrevengonoScacco");
+        //disegnaMatriceSpaziOccupati();
         int[][] matricePosizioni=new int[8][8];
         int[][] percorsoAttaccante;
         boolean next;
@@ -2182,7 +2181,8 @@ public class GestoreMovimenti{
                 matricePosizioni[i][j]=0;
             }
         }
-        
+        System.err.println("GetLista... inizio");
+        disegnaMatriceSpaziOccupati(originale);
         //scorro la m
         for(int i=0;i<8;i++){
             for(int j=0;j<8;j++){         
@@ -2219,7 +2219,8 @@ public class GestoreMovimenti{
         //1)
         if(reSiSalvaDaScacco(re,originale))
             listaSalvatori.add(re);
-        
+        System.err.println("GetLista... dopo resisalvadascacco");
+        disegnaMatriceSpaziOccupati(originale);
         //i casi 2 e 3 hanno senso solo se c'è un solo attaccante
         //eper mettere questa condizione controllo se la lista contiene un solo oggetto
         //confrontando il primo oggetto della lista con l'ultimo
@@ -2263,7 +2264,8 @@ public class GestoreMovimenti{
         //il numero nelle celle da usare deve essere uguale al numero di attaccanti
         //nel caso contrario il metodo 2 non può funzionare
         //mi ricavo le posizioni intermedie
-        
+        System.err.println("GetLista... dopo step 2");
+        disegnaMatriceSpaziOccupati(originale);
         
             //3)
             for(int i=0;i<8;i++){
@@ -2281,9 +2283,9 @@ public class GestoreMovimenti{
             }*/
         
         }
-        
+        System.err.println("GetLista... fine");
+        disegnaMatriceSpaziOccupati(originale);
         return listaSalvatori;
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     
     }
     
@@ -2303,7 +2305,7 @@ public class GestoreMovimenti{
     
     private boolean reSiSalvaDaScacco(Spazio s,Spazio[][] matrice){
         Re re=(Re) s.getOccupante();
-        Spazio[][] originale=matrice;
+        Spazio[][] originale=coppiaMatrice(matrice);
         Spazio[][] matSimulata;
         int x=s.getX();
         int y=s.getY();
@@ -2311,10 +2313,11 @@ public class GestoreMovimenti{
         boolean scacco=true;
         //vedo se l'attaccante è adiacente al re? (non posso farlo senza avere la lista degli attaccanti[elaborioso])
         //sposto il re nelle locazioni nelle quali può andare e controllo se rimane la situazione di scacco
-        
+        System.err.println("ReSiSalva... inizio");
+        disegnaMatriceSpaziOccupati(originale);
         //provo in alto a sinistra
         if(x>0 && y>0){
-            matSimulata=matrice;
+            matSimulata=coppiaMatrice(matrice);
             matSimulata[x-1][y-1].inizializzaSpazio(new Re(re.getColore()),x-1,y-1);
             matSimulata[x][y]= new Spazio(x,y);
             matSimulata[x][y].setOccupato(false);
@@ -2325,7 +2328,7 @@ public class GestoreMovimenti{
         }
         //provo in alto
         if(y>0){ 
-            matSimulata=matrice;
+            matSimulata=coppiaMatrice(matrice);
             matSimulata[x][y-1].inizializzaSpazio(new Re(re.getColore()),x,y-1);
             matSimulata[x][y]= new Spazio(x,y);
             if(controlloScacco(x,y-1,re.getColore(),matSimulata)==false)
@@ -2335,7 +2338,7 @@ public class GestoreMovimenti{
         }
         //provo in alto a destra
         if(x<8 && y>0){ 
-            matSimulata=matrice;
+            matSimulata=coppiaMatrice(matrice);
             matSimulata[x][y-1].inizializzaSpazio(new Re(re.getColore()),x+1,y-1);
             matSimulata[x][y]= new Spazio(x,y);
             if(controlloScacco(x,y-1,re.getColore(),matSimulata)==false)
@@ -2346,7 +2349,7 @@ public class GestoreMovimenti{
         
         //provo a sinistra
         if(x>0){ 
-            matSimulata=matrice;
+            matSimulata=coppiaMatrice(matrice);
             matSimulata[x-1][y].inizializzaSpazio(new Re(re.getColore()),x-1,y);
             matSimulata[x][y]= new Spazio(x,y);
             if(controlloScacco(x-1,y,re.getColore(),matSimulata)==false)
@@ -2357,7 +2360,7 @@ public class GestoreMovimenti{
         
         //provo a destra
         if(x<8){ 
-            matSimulata=matrice;
+            matSimulata=coppiaMatrice(matrice);
             matSimulata[x+1][y].inizializzaSpazio(new Re(re.getColore()),x+1,y);
             matSimulata[x][y]= new Spazio(x,y);
             if(controlloScacco(x+1,y,re.getColore(),matSimulata)==false)
@@ -2368,7 +2371,7 @@ public class GestoreMovimenti{
         
         //provo in basso a sinistra
         if(y<8 && x>0){ 
-            matSimulata=matrice;
+            matSimulata=coppiaMatrice(matrice);
             matSimulata[x-1][y+1].inizializzaSpazio(new Re(re.getColore()),x-1,y+1);
             matSimulata[x][y]= new Spazio(x,y);
             if(controlloScacco(x-1,y+1,re.getColore(),matSimulata)==false)
@@ -2379,7 +2382,7 @@ public class GestoreMovimenti{
         
         //provo in basso
         if(y<8){ 
-            matSimulata=matrice;
+            matSimulata=coppiaMatrice(matrice);
             matSimulata[x][y+1].inizializzaSpazio(new Re(re.getColore()),x,y+1);
             matSimulata[x][y]= new Spazio(x,y);
             if(controlloScacco(x,y+1,re.getColore(),matSimulata)==false)
@@ -2390,7 +2393,7 @@ public class GestoreMovimenti{
         
         //provo in basso a destra
         if(y<8 && x<8){ 
-            matSimulata=matrice;
+            matSimulata=coppiaMatrice(matrice);
             matSimulata[x+1][y+1].inizializzaSpazio(new Re(re.getColore()),x+1,y+1);
             matSimulata[x][y]= new Spazio(x,y);
             if(controlloScacco(x+1,y+1,re.getColore(),matSimulata)==false)
@@ -2398,6 +2401,8 @@ public class GestoreMovimenti{
             else
                 return true;
         }
+        System.err.println("ReSiSalva... prima di return false");
+        disegnaMatriceSpaziOccupati(originale);
         return false; 
     }
     
@@ -2510,6 +2515,7 @@ public class GestoreMovimenti{
      * @param scacchiera
      */
     public void spostaPezzo( Spazio s, int x, int y ,Spazio[][] scacchiera){
+        System.err.println("Sposta pezzo");
         Pezzo p;
         int xp = s.getX();
         int yp = s.getY();
@@ -2605,9 +2611,11 @@ public class GestoreMovimenti{
                 }
             }
         }
+        //disegnaMatriceSpaziOccupati();
     }
     
     public void spostaPezzo( Spazio s, int x, int y ){
+        System.err.println("Sposta pezzo");
         int xp = s.getX();
         int yp = s.getY();
 
@@ -2668,6 +2676,7 @@ public class GestoreMovimenti{
                                 
             }
         }
+        //disegnaMatriceSpaziOccupati();
     }
     
     public Spazio[][] coppiaMatrice(Spazio[][] matrice){
@@ -2683,5 +2692,35 @@ public class GestoreMovimenti{
         return mat;
     }
     
+    
+    public void disegnaMatriceSpaziOccupati(){
+        
+        System.err.println("");
+        for(int i=0;i<8;i++){
+            for(int j=0;j<8;j++){
+                if(m[j][i].eOccupato())
+                    System.err.print("x");
+                else
+                    System.err.print("_");
+            }
+            System.err.println("");
+        }
+        System.err.println("");
+    }
+    
+    public void disegnaMatriceSpaziOccupati(Spazio[][] matrice){
+        
+        System.err.println("");
+        for(int i=0;i<8;i++){
+            for(int j=0;j<8;j++){
+                if(matrice[j][i].eOccupato())
+                    System.err.print("x");
+                else
+                    System.err.print("_");
+            }
+            System.err.println("");
+        }
+        System.err.println("");
+    }
     
 }
