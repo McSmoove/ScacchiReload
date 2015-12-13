@@ -1,3 +1,1 @@
-
-la torre viene mangiata mettendo in pericolo il re, la mossa dovrebbe essere evitata dal programma (non so se il bug è ancora presente)
-
+-quando il re è sotto scacco ma può essere salvato non viene salvato
