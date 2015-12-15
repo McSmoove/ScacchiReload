@@ -7,7 +7,8 @@ import view.InterfacciaGrafica;
 
 
 /**
- * Setta i movimenti possibili dei pezzi sulla m
+ * La classe contiene i metodi che calcolano le posizioni e i movimenti delle 
+ * varie pedine sulla scacchiera. Contiene anche il calcolo dello scacco matto.
  * @author Viktor, Michael, Gaetano
 */
 public class GestoreMovimenti{
