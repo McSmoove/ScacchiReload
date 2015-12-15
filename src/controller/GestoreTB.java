@@ -13,7 +13,7 @@ import view.InterfacciaGrafica;
 /**
  * Questa classe cambia i turni quando richiesto e blocca i pulsanti che non possono
  * essere premuti (per esempio, se non è il turno del bianco blocca tutti i pulsanti
- * con una pedina bianca sopra
+ * con una pedina bianca sopra)
  * @author Tyrande
  */
 public class GestoreTB {
@@ -75,12 +75,19 @@ public class GestoreTB {
     
     }
     
+    /**
+     * Viktor
+     * Metodo di support per attivaPosizione
+     */
     public void attiva(){
         
         attivato = true;
     
     }
     
+    /**
+     * Metodo di supporto per disattivaPosizione
+     */
     public void disattiva(){
         
         attivato = false;
@@ -144,18 +151,32 @@ public class GestoreTB {
     
     }
     
+    /**
+     * Attiva la casella alla data coordinata 
+     * @param x ascissa della coordinata
+     * @param y rdinata della coordinata
+     */
     private void attivaPosizione(int x,int y){
         setXAttivato(x);
         setYAttivato(y);
         attiva();
     }
     
+    /**
+     * Disattiva la casella alla data coordinata
+     * @param x ascissa della coordinata
+     * @param y ordinata della coordinata
+     */
         private void disattivaPosizione( int x, int y ){
         
         disattiva();
         
     }
-        
+     
+        /**
+         * Viktor (ridondante)
+         * Metodo che chiama disattivaPosizione
+         */
     private void disattivaPosizione(){
         
         disattivaPosizione( getXAttivato(), getYAttivato() );
@@ -428,6 +449,9 @@ public class GestoreTB {
     
     }
     
+    /**
+     * Ricompila la matrice segnando quali spazi sono occupati da un pezzo
+     */
     public void disegnaMatriceSpaziOccupati(){
         
         System.err.println("");
@@ -443,6 +467,12 @@ public class GestoreTB {
         System.err.println("");
     }
     
+    /**
+     * Viktor (ridondante)
+     * Segna sulla matrice passata come parametro quali spazi sono occupati da 
+     * un pezzo
+     * @param matrice la matrice da segnare
+     */
      private void disegnaMatriceSpaziOccupati(Spazio[][] matrice){
         
         System.err.println("");
