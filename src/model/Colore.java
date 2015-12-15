@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Classe astratta del colore. Contiene alcuni metodi di base comunni in entrambi i colori
+ * Classe astratta del colore. Contiene alcuni metodi di base comuni in entrambi i colori
  * @author Viktor, Michael, Gaetano
 */
 public abstract class Colore{

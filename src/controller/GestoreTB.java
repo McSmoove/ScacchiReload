@@ -11,7 +11,9 @@ import view.InterfacciaGrafica;
 
 
 /**
- *
+ * Questa classe cambia i turni quando richiesto e blocca i pulsanti che non possono
+ * essere premuti (per esempio, se non è il turno del bianco blocca tutti i pulsanti
+ * con una pedina bianca sopra
  * @author Tyrande
  */
 public class GestoreTB {
