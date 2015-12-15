@@ -39,12 +39,21 @@ public class GestoreTB {
         
     }
     
+    /**
+     * 
+     * @return ritorna il colore del giocatore di cui è il turno 
+     */
     public Colore getTurno(){
         
         return turno;
     
     }
     
+    /**
+     * Inizializza il turno e aggiorna l'interfaccia segnado a quale colore corrisponde il
+     * turno
+     * @param t colore del turno corrente
+     */
     public void setTurno(Colore t){
         
         turno = t;
@@ -53,10 +62,18 @@ public class GestoreTB {
     
     }
     
+    /**
+     * Ritorna il parametro interfacciaGrafica (serve per aggiornare la posizione dei pezzi
+     * visualizzata dall'utente)
+     * @return 
+     */
     private InterfacciaGrafica getInterfacciaGrafica(){
         return interfacciaGrafica;
     }
     
+    /**
+     * Cambia il colore del turno corrente
+     */
     public void passaTurno(){
         
         if( turno instanceof Bianco ){
@@ -94,22 +111,42 @@ public class GestoreTB {
     
     }
     
+    /**
+     * Ritorna l'ascissa della coordinata della casella attiva
+     * @return 
+     */
     private int getXAttivato(){
         return xAttivato;
     }
     
+    /**
+     * Ritorna l'ordinata della coordinata della casella attiva
+     * @return 
+     */
     private int getYAttivato(){
         return yAttivato;
     }
     
+    /**
+     * memorizza l'ascissa della casella attivata
+     * @param x 
+     */
     private void setXAttivato(int x){
         xAttivato=x;
     }
     
+    /**
+     * memorizza l'ordinata della casella attivata
+     * @param x 
+     */
     private void setYAttivato(int y){
         yAttivato=y;
     }
     
+    /**
+     * 
+     * @return ritorna se la casella è attivata oppure no 
+     */
     public boolean isAttivato(){
         
         return attivato;
@@ -183,22 +220,42 @@ public class GestoreTB {
     
     }
     
+    /**
+     * memorizza l'ascissa della casella sulla quale si trova il pedone promosso
+     * @param y 
+     */
     public void setXPedoneTrasformato(int x){
         xPedoneTrasformato=x;
     }
     
+    /**
+     * memorizza l'ordinata della casella sulla quale si trova il pedone promosso
+     * @param y 
+     */
     public void setYPedoneTrasformato(int y){
         yPedoneTrasformato=y;
     }
     
+    /**
+     * Ritorna l'ascissa di dove è stato promosso  il pedone
+     * @return 
+     */
     public int getXPedoneTrasformato(){
         return xPedoneTrasformato;
     }
     
+    /**
+     * Ritorna l'ordinata di dove è stato promosso  il pedone
+     * @return 
+     */
     public int getYPedoneTrasformato(){
         return yPedoneTrasformato;
     }
     
+    /**
+     * segna sulla scacchiera dove si trova il pedone promosso
+     * @param s lo spazio dove si trova il pedone promosso
+     */
     public void setPedoneTrasformato(Spazio s){
         Pezzo p=s.getOccupante();
         xPedoneTrasformato=x;
@@ -207,7 +264,11 @@ public class GestoreTB {
         interfacciaGrafica.aggiornaBottoni( gestoreMovimenti.getMatrice() );
     }
     
-    
+    /**
+     * segna le coordinate di dove è stata premuta la scacchiera
+     * @param e pressione di un pulsante sulla schacchiera
+     * @throws Exception 
+     */
     public void pressionePulsanteScacchiera(ActionEvent e) throws Exception{
         
         x = 0; // Identificatore X Della Matrice Del Bottone Dove Premo
