@@ -304,21 +304,15 @@ public class GestoreTB {
         
         System.out.println( "DEBUG:\n x : " + x + " \n y: " + y );
         
-        if( !isAttivato() ){ // Guardo Se Nello Stesso Turno Non E Abilitato Un Bottone
+        if( !isAttivato() ){ // Guardo Se Nello Stesso Turno Non è stato Abilitato Un Bottone
             
             if( gestoreMovimenti.getMatrice()[ x ][ y ].eOccupato() ){ // Guardo Se Lo Spazio Contiene Qualcosa
                 
                 if( turno.equals( gestoreMovimenti.getMatrice()[ x ][ y ].getOccupante().getColore() ) ){ //Se Cio Che Contiene Ha Lo Stesso Colore Del Turno Corrente
 
-                    // Se Il Re Del Turno Corrente Non è Sotto Scacco
-                    if( true ){
-
-                        // Abilito Le Posizioni Dove Puo Muoversi Il Pezzo ( Non Implementato )
-                        // Metto Il Pezzo Premuto In Gestione Turno E Lo Attivo
                         attivaPosizione( x, y );
-                        //salvaStato();
                     
-                    } else if( ( ( turno instanceof Bianco ) && gestoreMovimenti.controlloScacco( gestoreMovimenti.getSpazioReBianco().getX(), gestoreMovimenti.getSpazioReBianco().getY(), new Bianco(), gestoreMovimenti.getMatrice() ) == true ) || ( ( turno instanceof Nero ) && gestoreMovimenti.controlloScacco( gestoreMovimenti.getSpazioReNero().getX(), gestoreMovimenti.getSpazioReNero().getY(), new Nero(), gestoreMovimenti.getMatrice() ) == true ) ){ // Se Il Re E Sotto Scacco
+                    if( ( ( turno instanceof Bianco ) && gestoreMovimenti.controlloScacco( gestoreMovimenti.getSpazioReBianco().getX(), gestoreMovimenti.getSpazioReBianco().getY(), gestoreMovimenti.getMatrice() ) == true ) || ( ( turno instanceof Nero ) && gestoreMovimenti.controlloScacco( gestoreMovimenti.getSpazioReNero().getX(), gestoreMovimenti.getSpazioReNero().getY(), gestoreMovimenti.getMatrice() ) == true ) ){ // Se Il Re E Sotto Scacco
 
                         // Se Il Pezzo Può Salvare Il Re Devo Controllare La Matrice Simulata, Ma Prima Devo Crearla In Base Al Turno
                       
@@ -327,14 +321,14 @@ public class GestoreTB {
                             if( gestoreMovimenti.getMatricePezziChePrevengonoScacco( gestoreMovimenti.getSpazioReBianco().getX(), gestoreMovimenti.getSpazioReBianco().getY(), gestoreMovimenti.getMatrice(), new Bianco() )[ x ][ y ] == 1 ){
                                 
                                 attivaPosizione( x, y );
-                                //salvaStato();
+                               
                             
                             }
                         
                         } else if( gestoreMovimenti.getMatricePezziChePrevengonoScacco( gestoreMovimenti.getSpazioReBianco().getX(), gestoreMovimenti.getSpazioReBianco().getY(), gestoreMovimenti.getMatrice(), new Nero() )[ x ][ y ] == 1 ){ // Il Pezzo E Nero
                             
                             attivaPosizione( x, y );
-                            //salvaStato();
+                         
                             //disegnaMatriceSpaziOccupati();
                         
                         }
@@ -358,32 +352,25 @@ public class GestoreTB {
                     
                     System.err.println( "DEBUG: Premuto Su Una Locazione Vuota" );
                     System.err.println("Prima di chiamare spostabileIn");
-                    //disegnaMatriceSpaziOccupati();
-                    if( gestoreMovimenti.spostabileIn( gestoreMovimenti.getMatrice()[xAttivato][yAttivato], x, y ) ){ // Se E Una Locazione Consentita Dal Pezzo
-                        
-                        System.err.println( "DEBUG: Premuto In Una Posizione Valida" );
-                        //disegnaMatriceSpaziOccupati();
-                        //TRASCURO QUESTA PARTE, CALCOLI TROPPO PESANTI
-                        // Se Spostando Il Pezzo In Questa Locazione Non Ho Scacco / Scacco Matto, Devo Simulare La Scachiera Dopo La Mossa
-                        //matriceSimulata = coppiaMatrice( gestoreMovimenti.getMatrice() );
-                        //matriceSimulata.spostaPezzo( gestoreTurni.getSpazioAttivato().getOccupante(), x, y );
+                    // Se E Una Locazione Consentita Dal Pezzo
+                    if( gestoreMovimenti.spostabileIn( gestoreMovimenti.getMatrice()[xAttivato][yAttivato], x, y ) ){ 
                         
                         
                         //se non provoco scacco matto (da implementare)
                         //matriceSimulata=gestoreMovimenti.getMatriceCoppia(); 
                         matriceSimulata=gestoreMovimenti.getMatrice().clone();
-                        System.err.println("Matrice simulata 1 :");
+                        //System.err.println("Matrice simulata 1 :");
                         //disegnaMatriceSpaziOccupati(matriceSimulata);
                         //matriceSimulata2=new Spazio[8][8];
                         matriceSimulata2=gestoreMovimenti.coppiaMatrice(matriceSimulata);
-                        System.err.println("Matrice simulata 2 :");
+                        //System.err.println("Matrice simulata 2 :");
                         //disegnaMatriceSpaziOccupati(matriceSimulata2);
                         //con la prossima riga spostando il pezzo nella matrice simulata si perde
-                        //il legame con lo spazioa ttivato e il pezzo attivato
-                        System.err.println("Prima di chiamare sposta pezzo");
+                        //il legame con lo spazioa attivato e il pezzo attivato
+                        //System.err.println("Prima di chiamare sposta pezzo");
                         //disegnaMatriceSpaziOccupati();
                         gestoreMovimenti.spostaPezzo( gestoreMovimenti.getMatrice()[xAttivato][yAttivato], x, y,matriceSimulata );
-                        System.err.println("Dopo aver chiamato sposta pezzo");
+                        //System.err.println("Dopo aver chiamato sposta pezzo");
                         //disegnaMatriceSpaziOccupati();
                         //gestoreMovimenti.spostaPezzo( gestoreMovimenti.getMatrice()[xAttivato][yAttivato], x, y );
                         //System.err.println(((Pedone)gestoreMovimenti.getMatrice()[xAttivato][yAttivato].getOccupante()).mosso()); //debug
@@ -393,35 +380,32 @@ public class GestoreTB {
                         //gestoreMovimenti.controlloScacco(gestoreMovimenti.getReNero()); //debug
                         //gestoreTurni.getSpazioAttivato().getOccupante();//debug
                         //gestoreTurni.getSpazioAttivato().getOccupante().getColore(); //debug
-                        //if(true){ //debug
-                        
-                        
-                        //se il re non è sotto scacco
+
+                        //se il re non è sotto scacco (dentro la matrice simulata)
                         if( (getTurno() instanceof Bianco && gestoreMovimenti.controlloScacco(new Bianco(),matriceSimulata)) 
                         
                         || (getTurno() instanceof Nero && gestoreMovimenti.controlloScacco(new Nero(),matriceSimulata))){
-                            
-                            //gestoreMovimenti.setMatrice( matriceSimulata ); // Contrassegno Lo Spazio Occupato Prima Come Non Occupato
-                            //versione senza matrice simulata:
-                            //gestoreMovimenti.spostaPezzo( gestoreMovimenti.getMatrice()[xAttivato][yAttivato], x, y );//DEBUG:getSpazioAttivato è null!!!
+                            //sposto definitivamente il pezzo
                             gestoreMovimenti.setMatrice(matriceSimulata);
-                            disattivaPosizione(); // Tolgo Il Bordo Del Bottone ???
-                            passaTurno(); // Passo Il Turno
+                            
+                            
+                            //se il re non può essere salvato
+                            //if(gestoreMovimenti.getListaPezziChePrevengonoScacco(gestoreMovimenti.getSpazioRe(turno).getX(), gestoreMovimenti.getSpazioRe(turno).getY(), gestoreMovimenti.getMatrice(), turno).isEmpty()){
+                            if(!gestoreMovimenti.controlloScaccoReAvversario(turno)){
+                                System.err.println("Scacco matto");
+                                interfacciaGrafica.finePartita();
+                            }
+                            //e passo il turno
+                            disattivaPosizione(); 
+                            passaTurno();
                             interfacciaGrafica.aggiornaBottoni( gestoreMovimenti.getMatrice() ); // Aggiorna La Visuale
                         
                         } else { // Se Provoca Lo Scacco Matto
-                            //gestoreMovimenti.setMatrice(matriceSimulata2);
-                            //System.err.println("Prima del roll back:");
-                            //disegnaMatriceSpaziOccupati();
-                            //matriceSimulata=gestoreMovimenti.coppiaMatrice(matriceSimulata2);
+                            
+                            //torno indietro
                             gestoreMovimenti.setMatrice(gestoreMovimenti.coppiaMatrice(matriceSimulata2));
                             //gestoreMovimenti.setMatrice(gestoreMovimenti.coppiaMatrice(matriceSimulata2));
-                            disattivaPosizione(); // Imposto Come Se Niente Fosse Stato Premuto
-                            //System.err.println("Dopo il roll back originale:");
-                            //disegnaMatriceSpaziOccupati();
-                            //System.err.println("Dopo il roll back matrice simulata 1:");
-                            //disegnaMatriceSpaziOccupati(matriceSimulata);
-                            
+                            disattivaPosizione(); // Imposto Come Se Niente Fosse Stato Premuto    
                         }
                     
                     } else { // Se Non è Una Locazione Consentita Dal Pezzo
@@ -434,16 +418,17 @@ public class GestoreTB {
                     
                     System.err.println( "DEBUG: Schiaccio Su Una Locazione Non Vuota" );
                     System.err.println("Prima di chiamare spostabile in");
-                    disegnaMatriceSpaziOccupati();
+                    //disegnaMatriceSpaziOccupati();
                     if( gestoreMovimenti.spostabileIn( gestoreMovimenti.getMatrice()[xAttivato][yAttivato], x, y ) ){ // Se E Una Locazione Consentita Dal Pezzo E Contiene Un Pezzo Di Colore Diverso
                         
                         System.err.println( "Del Colore Diverso" ); // Se Non Provoca Scacco Del Proprio Colore -> Scacco Matto ( Faccio La Simulazione )
-                        disegnaMatriceSpaziOccupati();
+                        //disegnaMatriceSpaziOccupati();
                         //matriceSimulata=coppiaMatrice(gestoreMovimenti.getMatrice());
                         matriceSimulata=gestoreMovimenti.getMatrice().clone();
-                        gestoreMovimenti.spostaPezzo( gestoreMovimenti.getMatrice()[xAttivato][yAttivato], x, y);
-                        //gestoreMovimenti.spostaPezzo(gestoreMovimenti.getMatrice()[xAttivato][yAttivato], x, y,matriceSimulata);
-                        //System.err.println( "DEBUG: Non Faccio Il Controllo Scacco QUI" );
+                        matriceSimulata2=gestoreMovimenti.coppiaMatrice(matriceSimulata);
+                        //gestoreMovimenti.spostaPezzo( gestoreMovimenti.getMatrice()[xAttivato][yAttivato], x, y);
+                        gestoreMovimenti.spostaPezzo(gestoreMovimenti.getMatrice()[xAttivato][yAttivato], x, y,matriceSimulata);
+                        
                         
                         if( (getTurno() instanceof Bianco && gestoreMovimenti.controlloScacco(new Bianco(),matriceSimulata)) 
                         
@@ -463,12 +448,12 @@ public class GestoreTB {
                             //matriceSimulata.getSpazio( gestoreTurni.getSpazioAttivato().getX(), gestoreTurni.getSpazioAttivato().getY() ).setOccupato( false ); // Prova Per Debug
                             //matriceSimulata.getSpazio( gestoreTurni.getSpazioAttivato().getX(), gestoreTurni.getSpazioAttivato().getY() ).setOccupante( null );
                             //disegnaMatriceSpaziOccupati();
-                            disattivaPosizione(); // Disattiva Il Bordo
+                            
                            
-                            System.err.println("Truno correnti: "+turno);
-                            interfacciaGrafica.aggiornaBottoni( gestoreMovimenti.getMatrice() ); // Aggiorna La Visuale
+                            //System.err.println("Truno correnti: "+turno);
+                            
                             //se il re è stato mangiato
-                            disegnaMatriceSpaziOccupati();
+                            //disegnaMatriceSpaziOccupati();
                             if( gestoreMovimenti.scaccoMatto(turno) ){ // Verifico Scacco Matto
                                 System.err.println("Scacco matto");
                                 disegnaMatriceSpaziOccupati();
@@ -476,19 +461,21 @@ public class GestoreTB {
                                 
                             }
                             System.err.println("Prima del controllo se il re può essere salvato");
-                            disegnaMatriceSpaziOccupati();
+                            //disegnaMatriceSpaziOccupati();
                             //se il re non può essere salvato
                             if(gestoreMovimenti.getListaPezziChePrevengonoScacco(gestoreMovimenti.getSpazioRe(turno).getX(), gestoreMovimenti.getSpazioRe(turno).getY(), gestoreMovimenti.getMatrice(), turno).isEmpty()){
                             //if(!gestoreMovimenti.controlloScaccoReAvversario(turno)){
                                 System.err.println("Scacco matto");
                                 interfacciaGrafica.finePartita();
                             }
-                            System.err.println("Dopo il controllo se il re può essere salvato");
-                            disegnaMatriceSpaziOccupati();
+                            //System.err.println("Dopo il controllo se il re può essere salvato");
+                            //disegnaMatriceSpaziOccupati();
+                            interfacciaGrafica.aggiornaBottoni( gestoreMovimenti.getMatrice() ); // Aggiorna La Visuale
+                            disattivaPosizione();
                             passaTurno();
 
                         
-                        } else { // Se Provoco Lo Scacco Matto
+                        } else { // Se Provoco Lo Scacco
                             gestoreMovimenti.setMatrice(gestoreMovimenti.coppiaMatrice(matriceSimulata2));
                             //gestoreMovimenti.setMatrice(gestoreMovimenti.coppiaMatrice(matriceSimulata2));
                             disattivaPosizione(); // Imposto Come Se Niente Fosse Stato Premuto

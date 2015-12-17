@@ -1,0 +1,4 @@
+-scacco matto non riconosciuto se il re non sa dove muoversi
+-scacco matto riconoscito anche se il re può salvarsi
+-null pointer exception muovendo il re
+-il pedone col il primo movimento può spostarsi di 2 caselle ma se in mezzo c'è un altro pezzo, può saltarlo? nel nostro caso si e non so se è giusto
