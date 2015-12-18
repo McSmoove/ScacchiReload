@@ -75,7 +75,7 @@ public class GestoreTB {
      * Cambia il colore del turno corrente
      */
     public void passaTurno(){
-        
+        System.out.println("Cambio del turno");
         if( turno instanceof Bianco ){
             
             turno = new Nero();
@@ -388,13 +388,21 @@ public class GestoreTB {
                             //sposto definitivamente il pezzo
                             gestoreMovimenti.setMatrice(matriceSimulata);
                             
-                            
-                            //se il re non può essere salvato
-                            //if(gestoreMovimenti.getListaPezziChePrevengonoScacco(gestoreMovimenti.getSpazioRe(turno).getX(), gestoreMovimenti.getSpazioRe(turno).getY(), gestoreMovimenti.getMatrice(), turno).isEmpty()){
-                            if(!gestoreMovimenti.controlloScaccoReAvversario(turno)){
-                                System.err.println("Scacco matto");
-                                interfacciaGrafica.finePartita();
+                            System.err.println("Prima del controllo se l'avversario è sotto scacco");
+                            if(!gestoreMovimenti.controlloScaccoReAvversario(turno,matriceSimulata)){
+                                System.err.println("Il re avversario adesso è sotto SCACCO");
+                                System.out.println("Prima di re avversario non può essere salvato");
+                                //se il re avversario non può essere salvato
+                                if(gestoreMovimenti.getListaPezziChePrevengonoScacco(gestoreMovimenti.getSpazioReAvversario(turno).getX(), gestoreMovimenti.getSpazioReAvversario(turno).getY(), gestoreMovimenti.getMatrice(), turno).isEmpty()){
+                                //if(!gestoreMovimenti.controlloScaccoReAvversario(turno,matriceSimulata)){
+                                    System.err.println("Scacco matto");
+                                    interfacciaGrafica.finePartita();
+                                }
                             }
+                            
+                            
+                            
+                            
                             //e passo il turno
                             disattivaPosizione(); 
                             passaTurno();
@@ -460,14 +468,19 @@ public class GestoreTB {
                                 interfacciaGrafica.finePartita();
                                 
                             }
-                            System.err.println("Prima del controllo se il re può essere salvato");
-                            //disegnaMatriceSpaziOccupati();
-                            //se il re non può essere salvato
-                            if(gestoreMovimenti.getListaPezziChePrevengonoScacco(gestoreMovimenti.getSpazioRe(turno).getX(), gestoreMovimenti.getSpazioRe(turno).getY(), gestoreMovimenti.getMatrice(), turno).isEmpty()){
-                            //if(!gestoreMovimenti.controlloScaccoReAvversario(turno)){
-                                System.err.println("Scacco matto");
-                                interfacciaGrafica.finePartita();
+                            if(!gestoreMovimenti.controlloScaccoReAvversario(turno,matriceSimulata)){
+                                System.err.println("Il re avversario adesso è sotto SCACCO");
+                                System.err.println("Prima del controllo se il re avversario può essere salvato");
+                                //disegnaMatriceSpaziOccupati();
+                                //se il re avversario non può essere salvato
+                                if(gestoreMovimenti.getListaPezziChePrevengonoScacco(gestoreMovimenti.getSpazioReAvversario(turno).getX(), gestoreMovimenti.getSpazioReAvversario(turno).getY(), gestoreMovimenti.getMatrice(), turno).isEmpty()){
+                                //if(!gestoreMovimenti.controlloScaccoReAvversario(turno,matriceSimulata)){
+                                    System.err.println("Scacco matto");
+                                    interfacciaGrafica.finePartita();
+                                }
                             }
+                            
+                            
                             //System.err.println("Dopo il controllo se il re può essere salvato");
                             //disegnaMatriceSpaziOccupati();
                             interfacciaGrafica.aggiornaBottoni( gestoreMovimenti.getMatrice() ); // Aggiorna La Visuale

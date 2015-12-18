@@ -69,6 +69,31 @@ public class Spazio{ // Cella Della Scacchiera Caratterizzata Dalla Presenza O N
     
     }
    
+    @Override
+    public String toString(){
+        String s = "";
+        s+="Spazio ";
+        if(this.eOccupato()){
+            s+="occupato";
+            s+=" da ";
+            if(occupante instanceof Torre)
+                s+="Torre";
+            if(occupante instanceof Pedone)
+                s+="Pedone";
+            if(occupante instanceof Regina)
+                s+="Regina";
+            if(occupante instanceof Re)
+                s+="Re";
+            if(occupante instanceof Alfiere)
+                s+="Alfiere";
+            if(occupante instanceof Cavallo)
+                s+="Cavallo";
+            s+=" in: "+x+" "+y;
+        }
+        else
+            s+="non occupato";
+        return s;
+    }
     
     public void setOccupato( boolean b ){
         
