@@ -22,6 +22,9 @@ public class GestoreMovimenti{
     Spazio reBianco,reNero;
     //int xReBianco,xReNero,yReBianco,yReNero;
     
+    /**
+     * costruttore di base che inizializza la scacchiera
+     */
     public GestoreMovimenti(){
         
         // Creare Una Matrice Con Le Posizioni Di Default
@@ -69,12 +72,20 @@ public class GestoreMovimenti{
     
     }
     
+    /**
+     * costruttore che inizializza il primo turno
+     * @param matrice matrice della scacchiera
+     */
     public GestoreMovimenti( Spazio[][] matrice ){
         
         turno=new Bianco();
     
     }
     
+    /**
+     * ritorna il parametro di classe m che contiene la matrice rappresentante la scacchiera
+     * @return il parametro di questa classe (m)
+     */
     public Spazio[][] getMatrice(){
         
         return m;
@@ -124,6 +135,12 @@ public class GestoreMovimenti{
     
     }
     */
+    /**
+     * cerca dove si trova il re e lo ritorna (non ritorna le coordinate ma un oggetto di classe Re)
+     * @param c turno corrente (colore)
+     * @return oggetto di classe Re di colore c
+     * @throws Exception 
+     */
     public Re getRe(Colore c) throws Exception{
         if(c instanceof Bianco)
             return getReBianco();
@@ -131,6 +148,11 @@ public class GestoreMovimenti{
             return getReNero();
     }
     
+    /**
+     * cerca dove si trova il re nero e lo ritorna
+     * @return oggetto di classe Re nero
+     * @throws Exception 
+     */
     public Re getReNero() throws Exception{
         
         for( int i = 0; i < 8; i++ ){
@@ -159,6 +181,11 @@ public class GestoreMovimenti{
     
     }
     
+    /**
+     * cerca la casella dove si trova il re
+     * @param c turno corrente 
+     * @return un oggetto Spazio rappresentate la casella dove si trova il re
+     */
     public Spazio getSpazioRe(Colore c){
         if(c instanceof Bianco)
             return getSpazioReBianco();
@@ -166,6 +193,11 @@ public class GestoreMovimenti{
             return getSpazioReNero();
     }
     
+    /**
+     * cerca la casella dove si trova il re (avversario)
+     * @param c turno corrente
+     * @return un oggetto Spazio rappresentate la casella dove si trova il re
+     */
     public Spazio getSpazioReAvversario(Colore c){
         if(c instanceof Bianco)
             return getSpazioReNero();
@@ -173,6 +205,11 @@ public class GestoreMovimenti{
             return getSpazioReBianco();
     }
 
+    /**
+     * cerca la casella dove si trova il re (nero)
+     * usato in getSpazioRe e getSpazioReAvversario
+     * @return un oggetto Spazio rappresentate la casella dove si trova il re
+     */
     public Spazio getSpazioReNero(){
         for(int i=0;i<8;i++){
             for(int j=0;j<8;j++){
@@ -188,6 +225,11 @@ public class GestoreMovimenti{
         
     }
     
+    /**
+     * cerca la casella dove si trova il re (bianco)
+     * usato in getSpazioRe e getSpazioReAvversario
+     * @return un oggetto Spazio rappresentate la casella dove si trova il re
+     */
     public Spazio getSpazioReBianco(){
         for(int i=0;i<8;i++){
             for(int j=0;j<8;j++){
@@ -203,6 +245,11 @@ public class GestoreMovimenti{
         
     }
     
+    /**
+     * cerca dove si trova il re bianco e lo ritorna
+     * @return oggetto di classe Re bianco
+     * @throws Exception 
+     */
     public Re getReBianco() throws Exception{
         for(int i=0;i<8;i++){
             for(int j=0;j<8;j++){
@@ -222,6 +269,11 @@ public class GestoreMovimenti{
     // Manca Il Controllo Della Ultima Riga -> Trasformazione In Un Altro Pezzo Solo Dopo Il Movimento
     // Non Controllo L'Ultima Riga Perche Il Pezzo Si Trasforma
     // Aggiungere Il Controllo Se Il Pedone Non Si E Mai Mosso Puo Moversi Di 2 Quadratini
+    /**
+     * ritorna in quali posizioni della scacchiera può muoversi il pedone
+     * @param s casella dove si trova il pedone
+     * @return una matrice di interi che rappresenta i movimenti del pedone
+     */
     public int[][] movimentiPedone( Spazio s ){
         Pedone p;
         int[][] scacchiera = new int[ 8 ][ 8 ];
@@ -409,6 +461,11 @@ public class GestoreMovimenti{
     
     } // Fine movimentiTorre
     
+    /**
+     * 
+     * @param s 
+     * @return 
+     */
     private int[][] movimentiAlfiere( Spazio s  ){
         Alfiere alfiere;
         int[][] scacchiera = new int[ 8 ][ 8 ];
@@ -841,12 +898,12 @@ public class GestoreMovimenti{
     //false=c'è scacco
     //true=non c'è scacco
     /**
+     * Questo metodo è diviso in più parti
      * Determina se c'è scacco matto
-     * @param x
-     * @param y
-     * @param colore
-     * @param matrix
-     * @return 
+     * @param x ascissa dove si trova il re
+     * @param y ordinata dove si trova il re
+     * @param matrix maticce che simula la scacchiera
+     * @return ritorna true se c'è scacco
      */
     public boolean controlloScacco( int x, int y,Spazio[][] matrix){
         System.err.println("DEBUG: inizia controlloScacco");
@@ -1226,15 +1283,25 @@ public class GestoreMovimenti{
     }
     
     /**
+     * Questo metodo è diviso in più parti
      * Funzione di supporto per facilitare l'uso di controlloScacco
-     * @param r
-     * @return 
+     * @param s casella dove si trova il re
+     * @return true se c'è scacco
      */
     public boolean controlloScacco(Spazio s) {  
         //Re r=(Re) s.getOccupante();
         return controlloScacco( s.getX(), s.getY(),m );
     }
     
+    /**
+     * Questo metodo è diviso in più parti
+     * Facilita l'utilizzo degli altri controlloScacco ritornando la casella sulla 
+     * quale si trova il re del turno corrente
+     * @param colore turno corrente
+     * @param matrice matrice che rappresenta la scacchiera
+     * @return true se c'è scacco
+     * @throws Exception 
+     */
     public boolean controlloScacco(Colore colore,Spazio[][] matrice) throws Exception{
         Spazio s;
         if(colore instanceof Bianco)
@@ -1245,6 +1312,13 @@ public class GestoreMovimenti{
         return controlloScacco( s.getX(), s.getY(),matrice ); 
     }
     
+    /**
+     * questo metodo è diviso in più parti
+     * semplifica il controlloScaccoReAvversario ritornando la posizione del re avversario
+     * @param colore turno corrente
+     * @return true se c'è scacco
+     * @throws Exception 
+     */
     public boolean controlloScaccoReAvversario(Colore colore) throws Exception{
         Spazio s;
         if(colore instanceof Bianco)
@@ -1255,6 +1329,14 @@ public class GestoreMovimenti{
         return controlloScacco( s.getX(), s.getY(),m ); 
     }
     
+    /**
+     * questo metodo è diviso in più parti
+     * serve nel per controllare in anticipo se, dopo un movimento, il re nero è sotto scacco
+     * @param colore turno corrente
+     * @param matrice matrice raffigurante la scacchiera
+     * @return true se c'è scacco
+     * @throws Exception 
+     */
     public boolean controlloScaccoReAvversario(Colore colore,Spazio[][] matrice) throws Exception{
         Spazio s;
         if(colore instanceof Bianco)
@@ -1267,9 +1349,9 @@ public class GestoreMovimenti{
     
     /**
      * Controlla se il re è messo in pericolo da eventuali pezzi nemici
-     * @param r
-     * @param matrix
-     * @return 
+     * @param s casella dove si trova il re
+     * @param matrix matrice della scacchiera
+     * @return una lista con i pezzi che attaccan il re
      */
     public LinkedList<Pezzo> getPezziAttaccantiIlRe(Spazio s,Spazio[][] matrix){
         LinkedList<Pezzo> lista; 
@@ -1703,7 +1785,13 @@ public class GestoreMovimenti{
         return false;
     }
     
-    
+    /**
+     * percorso dell'alfiere
+     * @param s posizione alfiere
+     * @param x 
+     * @param y
+     * @return 
+     */
     private boolean percorsoAlfiere(Spazio s,int x,int y){
         Pezzo p;
         int temp1,temp2;
@@ -1769,11 +1857,11 @@ public class GestoreMovimenti{
     }
     
     /**
-     * Determina on quale posizione può essere spostato il pezzo
-     * @param p
-     * @param x
-     * @param y
-     * @return 
+     * Determina in quale posizione può essere spostato il pezzo
+     * @param s oggetto Spazio sappresentante l'attuale casella del pezzo preso in esame
+     * @param x ascissa della casella da controllare
+     * @param y ordinata della casella da controllare
+     * @return true se può essere spostato in quella casella
      */
     public boolean spostabileIn(Spazio s,int x, int y){
         
@@ -1966,6 +2054,14 @@ public class GestoreMovimenti{
         return false;
     }
     
+    /**
+     * Determina in quale posizione può essere spostato il pezzo
+     * @param s oggetto Spazio sappresentante l'attuale casella del pezzo preso in esame
+     * @param x ascissa della casella da controllare
+     * @param y ordinata della casella da controllare
+     * @param matrix matrice della scacchiera
+     * @return true se può essere spostato in quella casella
+     */
     public boolean spostabileIn(Spazio s,int x, int y,Spazio[][] matrix){
         //System.err.println("entro in spostabileIn() p,x,y");
         Pezzo p=s.getOccupante();
@@ -2137,12 +2233,13 @@ public class GestoreMovimenti{
     
     //passa come parametro il colore considerato != colore Re
     /**
+     * Questo metodo è diviso in più parti
      * Controlla ogni casella sulla m e definisce quali pezzi possono
      * essere spostati in quella posizione
-     * @param mat
-     * @param s
-     * @param c
-     * @return 
+     * @param mat matrice della scacchiera
+     * @param s casella da esaminare
+     * @param c turno corrente
+     * @return lista dei pezzi spostabili in quella posizione
      */
     public LinkedList<Spazio> getPezziSpostabiliQui(Spazio[][] mat,Spazio s,Colore c){
         LinkedList<Spazio> lista;
@@ -2163,6 +2260,13 @@ public class GestoreMovimenti{
         return lista;
     }
     
+    /**
+     * Questo metodo è diviso in più parti
+     * Controlla ogni casella sulla m e definisce quali pezzi possono
+     * @param s spazio da esaminare
+     * @param c turno corrente
+     * @return lista dei pezzi spostabili in quella posizione
+     */
     public LinkedList<Spazio> getPezziSpostabiliQui(Spazio s,Colore c){
         LinkedList<Spazio> lista;
         lista=new LinkedList<>();
@@ -2184,11 +2288,11 @@ public class GestoreMovimenti{
     
     /**
      * Controlla quali pezzi della matrice impediscono lo scacco matto
-     * @param xRe
-     * @param yRe
-     * @param matrice
-     * @param turno
-     * @return 
+     * @param xRe ascissa della casella contenente il re
+     * @param yRe ordinata della casella contenente il re
+     * @param matrice matrice della scacchiera
+     * @param turno turno corrente
+     * @return una lista con gli scacchi che salvano il re
      */
     public LinkedList<Spazio> getListaPezziChePrevengonoScacco(int xRe,int yRe,Spazio[][] matrice,Colore turno){
         //MatriceDeiPezzi originale=matrice;
@@ -2313,7 +2417,14 @@ public class GestoreMovimenti{
         return listaSalvatori;
     
     }
-    
+    /**
+     * Ritorna una matrice con segnate le posizioni di dove si trovano i pezzi in grado di salvare il re
+     * @param xRe ascissa del re
+     * @param yRe ordinata del re
+     * @param matrice matrice della scacchiera
+     * @param turno turno corrente (colore)
+     * @return 
+     */
     public int[][] getMatricePezziChePrevengonoScacco(int xRe,int yRe,Spazio[][] matrice,Colore turno){
         int matriceRisultato[][]=new int[8][8];
         LinkedList<Spazio> lista=getListaPezziChePrevengonoScacco(xRe,yRe,matrice,turno);
@@ -2328,6 +2439,12 @@ public class GestoreMovimenti{
         return matriceRisultato;
     }
     
+    /**
+     * legge la scacchiera e valuta se il re è in grado di salvarsi dallo scacco
+     * @param s dove si trova il re
+     * @param matrice scacchiera
+     * @return true se si salva
+     */
     private boolean reSiSalvaDaScacco(Spazio s,Spazio[][] matrice){
         Re re=(Re) s.getOccupante();
         Spazio[][] originale=coppiaMatrice(matrice);
@@ -2557,12 +2674,21 @@ public class GestoreMovimenti{
         return false; 
     }
     
+    /**
+     * aggiorna l'interfaccia grafica
+     * @param i l'interfaccia da sostituire
+     */
     public void setInterfacciaGrafica( InterfacciaGrafica i ){
         
         ig = i;
     
     }
     
+    /**
+     * aggiorna il parametro di calsse m (matrice che rappresenta la scacchiera)
+     * usando la matrice passata come parametro
+     * @param matrice matrice della scacchiera
+     */
     public void setMatrice(Spazio[][] matrice){
         for(int i=0;i<8;i++){
             for(int j=0;j<8;j++){
@@ -2571,7 +2697,11 @@ public class GestoreMovimenti{
         }
     }
     
-
+/**
+ * metodo che lacia lo scacco matto se il re è stato mangiato (usato per il debug)
+ * @param turnoCorrente turno corrente (di tipo colore)
+ * @return 
+ */
     public boolean scaccoMatto(Colore turnoCorrente) {
         if(turnoCorrente instanceof Bianco){
             return !(getSpazioReNero().eOccupato());      
@@ -2581,6 +2711,12 @@ public class GestoreMovimenti{
         }
     }
     
+    /**
+     * cerca il percorso dei pezzi che minacciano il re
+     * @param att casella dove si trova l'attaccante
+     * @param r caselle dove si può muovere l'attaccante
+     * @return una matrice d interi che rappresenta il percorso dell'attaccante
+     */
     private int[][] getPercorsoAttaccante(Spazio att,Spazio r){
         Pezzo attaccante=att.getOccupante();
         Pezzo re=r.getOccupante();
@@ -2654,11 +2790,12 @@ public class GestoreMovimenti{
     }
     
     /**
-     *
-     * @param s
-     * @param x
-     * @param y
-     * @param scacchiera
+     * questo metodo è diviso in più parti
+     * cambia le cordinate di un pezzo sulla scacchiera e aggiorna la scacchiera
+     * @param s oggetto di calsse Spazio contenente il pezzo
+     * @param x nuova ascissa del pezzo
+     * @param y nuova ordinata del pezzo
+     * @param scacchiera matrice della scacchiera
      */
     public void spostaPezzo( Spazio s, int x, int y ,Spazio[][] scacchiera){
         System.err.println("Sposta pezzo");
@@ -2760,6 +2897,13 @@ public class GestoreMovimenti{
         //disegnaMatriceSpaziOccupati();
     }
     
+    /**
+     * questo metodo è diviso in più parti
+     * cambia le cordinate di un pezzo sulla scacchiera e aggiorna la scacchiera
+     * @param s oggetto di calsse Spazio contenente il pezzo
+     * @param x nuova ascissa del pezzo
+     * @param y nuova ordinata del pezzo
+     */
     public void spostaPezzo( Spazio s, int x, int y ){
         System.err.println("Sposta pezzo");
         int xp = s.getX();
@@ -2825,6 +2969,11 @@ public class GestoreMovimenti{
         //disegnaMatriceSpaziOccupati();
     }
     
+    /**
+     * duplica la matrice che rappresenta la scacchiera
+     * @param matrice la matrice da duplicare
+     * @return il duplicato della matrice della scacchiera
+     */
     public Spazio[][] coppiaMatrice(Spazio[][] matrice){
         Spazio[][] mat=new Spazio[8][8];
         for(int i=0;i<8;i++){
@@ -2838,7 +2987,10 @@ public class GestoreMovimenti{
         return mat;
     }
     
-    
+    /**
+     * questo metodo è diviso in più parti
+     * segna sullo schermo quali spazi sono occupati
+     */
     public void disegnaMatriceSpaziOccupati(){
         
         System.err.println("");
@@ -2854,6 +3006,12 @@ public class GestoreMovimenti{
         System.err.println("");
     }
     
+    /**
+     * questo metodo è diviso in più parti
+     * funzione di supporto che viene chiamata per disegnare sullo schermo gli spazi 
+     * occupati dalle pedine sulla scacchiera
+     * @param matrice 
+     */
     public void disegnaMatriceSpaziOccupati(Spazio[][] matrice){
         
         System.err.println("");

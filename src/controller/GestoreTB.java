@@ -30,6 +30,11 @@ public class GestoreTB {
     Spazio[][] matriceSimulata = null;
     Spazio[][] matriceSimulata2 = null;
     
+    /**
+     * costruttore di base della classe
+     * @param gm gestoreMovimenti
+     * @param ig interfacciaGrafica
+     */
     public GestoreTB(GestoreMovimenti gm, InterfacciaGrafica ig){
         attivato = false;
         turno = new Bianco();
