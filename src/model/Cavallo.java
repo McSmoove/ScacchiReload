@@ -7,7 +7,7 @@ package model;
 */
 public class Cavallo extends Pezzo{
     
-    public Cavallo(Colore colore ){
+    public Cavallo( Colore colore ){
         
         super( colore );
     

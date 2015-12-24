@@ -6,7 +6,7 @@ package model;
 */
 public abstract class Pezzo{
     
-    private Colore colore;
+    private final Colore colore;
     private boolean locked;
     
     public Pezzo( Colore colore ){

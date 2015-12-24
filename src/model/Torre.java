@@ -7,7 +7,7 @@ package model;
 */
 public class Torre extends Pezzo{
     
-    private boolean mosso = false; // Controllo Per Il Primo Movimento ( A Che Serve )
+    private boolean mosso = false;
     
     public Torre( Colore colore ){
         

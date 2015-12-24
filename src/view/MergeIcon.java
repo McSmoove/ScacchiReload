@@ -1,124 +1,120 @@
-
 package view;
 
-import java.awt.Component;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
+import java.awt.*;
+import javax.swing.*;
 import java.awt.image.BufferedImage;
 
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-
 /**
- * Il merge icon è quella classe che permette di stampare il pezzo sopra la 
- * texture della casella. Il metodo più importante è IconToBuffredImage. In 
- * pratica elabora un'immagine usando i componenti del package immagini e 
- * sovrapponendoli tra loro. E' il caso analogo, ad esempio, ai Layer di 
- * Photoshop. Inoltre prima fa anche un resize dell'imagine.
- * @author λ - s(h)ound
- */
+ * Ridefinizione della classe Icon affinche sia possibile di sovraporre 
+ * due immagini creando un'icona per i bottoni della scacchiera
+ * contenente le due immagini sovrapposte.
+ * @author Viktor, Michael, Gaetano
+*/
 public class MergeIcon implements Icon{
 
-    private int larghezza;
-    private int altezza;
-    private BufferedImage buffer;
-    
-    public MergeIcon( Icon sfondo, Icon icona ){
-        
-        this( sfondo, icona, 0, 0 );
-    
-    }
+    private final int larghezza; // La larghezza della immagine unita
+    private final int altezza; // L'altezza dell'immagine unita
+    private final BufferedImage buffer; // Qui verra collocata l'immagine unita
 
+    /**
+     * Unisce due immagini in una sola
+     * @param sfondo - L'immagine in backgroud
+     * @param icona - L'immagine in foreground
+    */
     public MergeIcon( Image sfondo, Image icona ){
         
-        this( sfondo, icona, 0, 0 );
-    
-    }
-    
-    public MergeIcon( Icon sfondo, Icon icona, int offsetX, int offsetY ){
-        
-        this( iconToImage( sfondo ), iconToImage( icona ), offsetX, offsetY );
-    
-    }
-    
-    /**
-     * Costruttore principale.
-     * @param sfondo
-     * @param icona
-     * @param offsetX
-     * @param offsetY 
-     */
-    public MergeIcon( Image sfondo, Image icona, int offsetX, int offsetY ){
-        
-        larghezza = sfondo.getWidth( null );
-        altezza = sfondo.getHeight( null );
+        larghezza = sfondo.getWidth( null ); // Prendo la larghezza dell'immagine in background
+        altezza = sfondo.getHeight( null ); // Prendo l'altezza dell'immagine in background
         buffer = new BufferedImage( larghezza, altezza, BufferedImage.TYPE_INT_ARGB );
         
-        Graphics2D g = ( Graphics2D ) buffer.getGraphics();
+        Graphics2D g = ( Graphics2D ) buffer.getGraphics(); // Creo il backgroud
         
-        g.drawImage( sfondo, 0, 0, null );
+        g.drawImage( sfondo, 0, 0, null ); // Disegno il backgroud
         
-        if (icona != null) {
+        if (icona != null) { // Se E Stata Fornita Anche Un'Icona
             
-            g.drawImage( icona, offsetX, offsetY, null );
+            g.drawImage( icona, 0, 0, null ); // Disegno l'icona sopra il buffer che ha gia il backgroud disegnato
         
         }
     
-    }
+    } // Fine MergeIcon
     
+    /**
+     * Metodo che ritorna la larghezza in pixel dell'icona unita
+     * @return larghezza - La Larghezza In Pixel Dell'Icona Unita
+    */
     @Override
-    public int getIconWidth(){ return larghezza; }
+    public int getIconWidth(){
+        
+        return larghezza; // Ritorna la larghezza in pixel dell'icona unita
+    
+    } // Fine getIconWidth
 
+    /**
+     * Metodo che ritorna l'altezza in pixel dell'icona unita
+     * @return altezza - L'Altezza In Pixel Dell'Icona Unita
+    */
     @Override
-    public int getIconHeight(){ return altezza; }
+    public int getIconHeight(){ 
+        
+        return altezza; // Ritorna l'altezza in pixel dell'icona unita
+    
+    } // Fine getIconHeigh
     
     /**
-     * Stampa l'immagine in posizione x,y usando la funzione iconToImage che a
-     * sua volta usa iconToBufferedImage.
-     * @param c
-     * @param g
-     * @param x
-     * @param y 
-     */
+     * Metodo che stampa l'icona unita del buffer
+     * @param c - Il componente da usare se l'icona non ha un'image observer
+     * @param g - Il buffer grafico dell'icona
+     * @param x - La coordinana X dall'alto sinistra dell'icona
+     * @param y - La Coordinata Y dall'alto sinistra dall'icona
+    */
     @Override
-    public void paintIcon( Component c, Graphics g, int x, int y ) { g.drawImage( buffer, x, y, null ); }
+    public void paintIcon( Component c, Graphics g, int x, int y ){ 
+       
+        g.drawImage( buffer, x, y, null ); // Disegno il buffer contenente l'icona unita
+        
+    } // Fine paintIcon
     
     /**
-     * 
-     * @param icon
-     * @return 
-     */
+     * Metodo che prende una icona e la bufferizza
+     * @param icon - L'icona da Bufferizzare
+     * @return L'icona bufferizzata
+    */
     public static BufferedImage iconToBufferedImage( Icon icon ){
         
-        if ( icon == null ){
+        if ( icon == null ){ // Se non e stata fornita nessuna icona
             
             return null;
         
         }
         
-        BufferedImage image = new BufferedImage( icon.getIconWidth(), icon.getIconHeight(), BufferedImage.TYPE_INT_ARGB );
-        icon.paintIcon( null, image.getGraphics(), 0, 0 );
-        return image;
+        BufferedImage image = new BufferedImage( icon.getIconWidth(), icon.getIconHeight(), BufferedImage.TYPE_INT_ARGB ); // Bufferizzo l'icona fornita
+        icon.paintIcon( null, image.getGraphics(), 0, 0 ); // Stampo l'icona fornita
+        return image; // Ritorno l'icona buferizzata
     
-    }
-    
+    } // Fine iconToBufferedImage
+
+    /**
+     * Fornita un'icona ritorno l'immagine di essa
+     * @param icon - L'Icona Fornita
+     * @return L'Immagine Dell'Icona Fornita
+    */
     public static Image iconToImage( Icon icon ) {
         
-        if( icon == null ){
+        if( icon == null ){ // Se non e stata fornita nessuna icona
             
             return null;
         
         }
         
-        if( icon instanceof ImageIcon ){
+        if( icon instanceof ImageIcon ){ // Se e una istanza di ImageIcon
             
-            return ( (ImageIcon) icon ).getImage();
+            return ( (ImageIcon) icon ).getImage(); // Forzo A ImageIcon l'icona
         
         }
         
-        return iconToBufferedImage( icon );
+        return iconToBufferedImage( icon ); // Buferizzo l'icona estraendo l'immagine
     
-    }
+    } // Fine iconToImage
 
-}
+} // Fine Classe MergeIcon

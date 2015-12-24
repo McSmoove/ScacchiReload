@@ -5,7 +5,6 @@ package model;
  * vengono presi in esame durante i controlli nelle classi del package Contoller
  * @author Viktor, Michael, Gaetano
 */
-
 public class Nero extends Colore{
     
     private final int colore;

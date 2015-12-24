@@ -2,15 +2,13 @@ package view;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
+import java.awt.image.*;
+import java.io.*;
 import javax.swing.*;
 import javax.swing.border.*;
-import javax.imageio.ImageIO;
+import javax.imageio.*;
 import model.*;
 import controller.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * La classe InterfacciaGrafica gestisce tutti i pannelli e i bottoni che 
@@ -28,8 +26,8 @@ import java.util.logging.Logger;
  */
 public class InterfacciaGrafica{
     
-    private final int BIANCO=0;
-    private final int NERO=1;
+    private final int BIANCO = 0;
+    private final int NERO = 1;
     
     private final int PEDONE_BIANCO = 0;
     private final int TORRE_BIANCA = 1;
@@ -52,7 +50,7 @@ public class InterfacciaGrafica{
     private ImageButton[][] quadratiScacchiera = new ImageButton[ 8 ][ 8 ];
     
     private final Image immagine[] = new Image[ 12 ];
-    private final Image colore[] = new Image[ 3 ]; // Una In Piu Se Vogliamo Implementare La Scacchiera, Altrimenti Vale 2
+    private final Image colore[] = new Image[ 2 ];
     private MergeIcon[] mergeIco = new MergeIcon[ 24 ];
     
     private final JLabel messaggioInfo = new JLabel( "Tocca Al Bianco / Nero" );
@@ -103,7 +101,6 @@ public class InterfacciaGrafica{
             
             colore[0] = ImageIO.read( getClass().getResource( "../immagini/bianco.png" ) );
             colore[1] = ImageIO.read( getClass().getResource( "../immagini/nero.png" ) );
-            colore[2] = ImageIO.read( getClass().getResource( "../immagini/scacchiera.png" ) ); // Semmai Decidiamo Di Implementare La Sccacchiera Come Immaagine
         
         } catch( IOException e ){}
         
@@ -168,20 +165,6 @@ public class InterfacciaGrafica{
                 return new Dimension( scelta, scelta );
             
             } // Fine getPrefferedSize
-            
-            /**
-            // Semmai Decidiamo Di Implementare La Scacchiera Come Immagine Statica
-            // Sembra MOLTO PESANTE, Ridisegna Il Componente In Runtime Tante Volte
-            @Override
-            protected void paintComponent( Graphics g ){
-                
-                super.paintComponent( g );
-                back = extra[ 2 ].getScaledInstance( pref.height, pref.width, Image.SCALE_FAST );
-                g.drawImage( back, 0, 0, null ); // Disegno L'Immagine
-            
-            }
-        
-            */
         
         };
         
@@ -317,7 +300,6 @@ public class InterfacciaGrafica{
     
     } // Fine InterfacciaGrafica
 
-    // Qui Si Inizializzano Le Immagini Eccetera
     /**
      * Metodo privato che inizializza le immagini quando si inizia un nuova 
      * parita. Si aggiunge un ActionListener per ogni casella della scacchiera.
@@ -346,9 +328,7 @@ public class InterfacciaGrafica{
                 quadratiScacchiera1[j].addActionListener((ActionEvent e) -> {
                     try {
                         gestoreTB.pressionePulsanteScacchiera( e );
-                    } catch (Exception ex) {
-                        Logger.getLogger(InterfacciaGrafica.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    } catch (Exception ex) {}
                 });   
                 }
             }
@@ -428,10 +408,11 @@ public class InterfacciaGrafica{
      * aggiunge al box.
      * @param p 
      */
-    //Nota per Michele, uno switch non era più comodo?
-    public void aggiungiPezzoMorto(Pezzo p){
-        int valore=0;
-        if(p.getColore() instanceof Bianco){
+    public void aggiungiPezzoMorto( Pezzo p ){
+        
+        int valore = 0;
+        
+        if( p.getColore() instanceof Bianco ){
             if(p instanceof Pedone)
                 valore=PEDONE_BIANCO;
             else if(p instanceof Torre)

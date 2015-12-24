@@ -1,90 +1,45 @@
 package view;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import javax.swing.*;
+
 /**
- * Classe delle immagini degli scacchi
- * @author Gaetano
- */
+ * Ridefinizione della classe Button affinche i bottoni abbiano
+ * delle icone personalizzate create dalla Classe MergeIcon.
+ * @author Viktor, Michael, Gaetano
+*/
 public class ImageButton extends JButton{
     
-    private Image immagine;
-    private Image icona;
-    private final Rectangle area = new Rectangle();
-    
-    public ImageButton(){}
+    private Image immagine; // Immagine O Icona Tipicamente Dalla Classe MergeIcon
+    private final Rectangle area = new Rectangle(); // Rettangolo dove verra messa la dimensione del bottone da disegnare
     
     /**
-     * Costruttore di base
-     * Setta l'immagine dello scacco
-     * @param immagine 
-     */
+     * Stampa l'icona specificata sul bottone e lo disegna in runtime
+     * @param immagine - Il background da stampare
+    */
     public void setImage( Image immagine ){
         
-        this.immagine = immagine;
-        repaint();
+        this.immagine = immagine; // L'icona specificata
+        repaint(); // Repaint in runtime
     
     }
     
     /**
-     * Ritorna l'immagine dell'oggetto
-     * @return il parametro immagine (tipo image) della classe
-     */
-    public Image getImage(){ return immagine; }
-    
-    /**
-     * Modifica il parametro icona con la nuova icona passata
-     * @param icona (tipo image) l'icona da impostare
-     */
-    public void setIcona( Image icona ){
-        
-        this.icona = icona;
-        repaint();
-    
-    }
-    
-    /**
-     * Ritorna l'icona della classe
-     * @return il parametro icona (tipo image) della classe) 
-     */
-    public Image getIcona(){ return icona; }
-    
-    /**
-     * Disegna la casella (dove verrà impostat il bottone) sulla scacchiera
-     * @param g la grafica passata
-     */
+     * Metodo che disegna la grafica passata sull'bottone
+     * @param g - La Grafica Da Disegnare
+    */
     @Override
     protected void paintComponent( Graphics g ){
         
-        super.paintComponent( g );
+        super.paintComponent( g ); // Se non e stata fornita nessuna icona unita dalla classe MergeIcon uso il paintComponent della superclasse
         
-        if( immagine != null ){
+        if( immagine != null ){ // Se e stata specificata una icona dalla classe MergeIcon
             
-            SwingUtilities.calculateInnerArea( this, area );
-            g.drawImage( immagine, area.x, area.y, area.width, area.height, this );
+            SwingUtilities.calculateInnerArea( this, area ); // Ogni volta che ristampo calcolo l'area della finestra attiva
+            g.drawImage( immagine, area.x, area.y, area.width, area.height, this ); // Disegno sul bottone l'icona della classe MergeIcon sull'area calcolata
         
         }
     
-    }
+    } // Fine paintComponent
     
-    /**
-     * disegna uno scacco disegnato sopra la texture del legno
-     * @return la grafica da usare in paintComponent
-     */
-    public Graphics2D drawIcon(){
-        
-        int larghezza = immagine.getWidth(this);
-        int altezza = immagine.getHeight(this);
-        
-        final BufferedImage combinedImage = new BufferedImage( larghezza, altezza, BufferedImage.TYPE_INT_ARGB );
-        Graphics2D g = combinedImage.createGraphics();
-        g.drawImage( immagine, 0, 0, null );
-        g.drawImage( icona, 0, 0, null );
-        g.dispose();
-        
-        return g;
-        
-    }
-    
-}
+} // Fine Classe ImageButton
