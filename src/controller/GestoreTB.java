@@ -392,7 +392,7 @@ public class GestoreTB {
                         || (getTurno() instanceof Nero && gestoreMovimenti.controlloScacco(new Nero(),matriceSimulata))){
                             //sposto definitivamente il pezzo
                             gestoreMovimenti.setMatrice(matriceSimulata);
-                            
+                            interfacciaGrafica.aggiornaBottoni( gestoreMovimenti.getMatrice() ); // Aggiorna La Visuale
                             System.err.println("Prima del controllo se l'avversario è sotto scacco");
                             if(!gestoreMovimenti.controlloScaccoReAvversario(turno,matriceSimulata)){
                                 System.err.println("Il re avversario adesso è sotto SCACCO");
@@ -404,14 +404,10 @@ public class GestoreTB {
                                     interfacciaGrafica.finePartita();
                                 }
                             }
-                            
-                            
-                            
-                            
                             //e passo il turno
                             disattivaPosizione(); 
                             passaTurno();
-                            interfacciaGrafica.aggiornaBottoni( gestoreMovimenti.getMatrice() ); // Aggiorna La Visuale
+                            
                         
                         } else { // Se Provoca Lo Scacco Matto
                             
@@ -464,9 +460,11 @@ public class GestoreTB {
                             
                            
                             //System.err.println("Truno correnti: "+turno);
+                            interfacciaGrafica.aggiornaBottoni( gestoreMovimenti.getMatrice() ); // Aggiorna La Visuale
                             
                             //se il re è stato mangiato
                             //disegnaMatriceSpaziOccupati();
+                            
                             if( gestoreMovimenti.scaccoMatto(turno) ){ // Verifico Scacco Matto
                                 System.err.println("Scacco matto");
                                 disegnaMatriceSpaziOccupati();
@@ -488,7 +486,7 @@ public class GestoreTB {
                             
                             //System.err.println("Dopo il controllo se il re può essere salvato");
                             //disegnaMatriceSpaziOccupati();
-                            interfacciaGrafica.aggiornaBottoni( gestoreMovimenti.getMatrice() ); // Aggiorna La Visuale
+                            
                             disattivaPosizione();
                             passaTurno();
 
