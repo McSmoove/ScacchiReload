@@ -356,6 +356,10 @@ public class InterfacciaGrafica{
     
     } // Fine iniziaPartita
     
+    /**
+     * ritorna l'oggetto di classe gestoreTB contenuta in questa classe
+     * @return Un oggetto di classe gestoreTB
+     */
     public GestoreTB getGestoreTB(){
         return gestoreTB;
     }
@@ -381,12 +385,19 @@ public class InterfacciaGrafica{
     
     } // Fine main
     
+    /**
+     * Ritorna i bottoni della scacchiera organizzati su una matrice
+     * @return Una matrice quadrata di classe JButton
+     */
     public JButton[][] getMatriceBottoni(){
         
         return quadratiScacchiera;
     
     }
 
+    /**
+     * aggiorna l'interfaccia quando finisce la partita, segnando che è finita
+     */
     public void finePartita(){
         
         int scelta = JOptionPane.showOptionDialog( interfacciaGrafica, "La Partita è Finita\nIl Vincitore è Il Colore " + gestoreTB.getTurno(), "Fine Partita", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[]{"Inizia Nuova Partita", "Esci Dal Programma"},"");
@@ -403,6 +414,10 @@ public class InterfacciaGrafica{
     
     }
     
+    /**
+     * aggiorna il messaggio contenuto sulla barra in alto (vicino al pulsante nuovaPartita)
+     * @param s il messaggio da scrivere
+     */
     public void setMessaggio(String s){
         messaggioInfo.setText(s);
     }
@@ -452,6 +467,13 @@ public class InterfacciaGrafica{
              
     }
     
+    /**
+     * ridisegna il pedone (permete di scegliere quale scacco) quando viene promosso
+     * per facilitare 
+     * @param s lo spazio dove il pedone è stato promosso
+     * @param colore il colore del pedone promosso
+     * @param matrice la matrice della scacchiera
+     */
     public void promozionePedone(Spazio s,Colore colore,Spazio[][] matrice){
         
         int scelta = JOptionPane.showOptionDialog(null, "Scegli In Cosa Vuoi Promuovere Il Pedone", "Promozione Pedone", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[]{"Torre","Cavallo","Alfiere","Regina"},"");

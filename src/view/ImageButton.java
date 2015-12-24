@@ -3,7 +3,10 @@ package view;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import javax.swing.*;
-
+/**
+ * Classe delle immagini degli scacchi
+ * @author Gaetano
+ */
 public class ImageButton extends JButton{
     
     private Image immagine;
@@ -12,6 +15,11 @@ public class ImageButton extends JButton{
     
     public ImageButton(){}
     
+    /**
+     * Costruttore di base
+     * Setta l'immagine dello scacco
+     * @param immagine 
+     */
     public void setImage( Image immagine ){
         
         this.immagine = immagine;
@@ -19,8 +27,16 @@ public class ImageButton extends JButton{
     
     }
     
+    /**
+     * Ritorna l'immagine dell'oggetto
+     * @return il parametro immagine (tipo image) della classe
+     */
     public Image getImage(){ return immagine; }
     
+    /**
+     * Modifica il parametro icona con la nuova icona passata
+     * @param icona (tipo image) l'icona da impostare
+     */
     public void setIcona( Image icona ){
         
         this.icona = icona;
@@ -28,8 +44,16 @@ public class ImageButton extends JButton{
     
     }
     
+    /**
+     * Ritorna l'icona della classe
+     * @return il parametro icona (tipo image) della classe) 
+     */
     public Image getIcona(){ return icona; }
     
+    /**
+     * Disegna la casella (dove verrà impostat il bottone) sulla scacchiera
+     * @param g la grafica passata
+     */
     @Override
     protected void paintComponent( Graphics g ){
         
@@ -44,6 +68,10 @@ public class ImageButton extends JButton{
     
     }
     
+    /**
+     * disegna uno scacco disegnato sopra la texture del legno
+     * @return la grafica da usare in paintComponent
+     */
     public Graphics2D drawIcon(){
         
         int larghezza = immagine.getWidth(this);

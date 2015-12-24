@@ -13,7 +13,7 @@ import model.*;
 
 
 /**
- *
+ * Classe inizialmente pensata per semplificare la promozione del pedone, poi non più usata
  * @author Tyrande
  */
 public class PromozionePedone{
