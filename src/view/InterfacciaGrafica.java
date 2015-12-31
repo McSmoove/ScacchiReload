@@ -312,11 +312,8 @@ public class InterfacciaGrafica{
         
         // Da Modificare Il Testo In Base Al Turno
         messaggioInfo.setText( "Fai Una Mossa !!!");
-        gestoreTB.disegnaMatriceSpaziOccupati(); 
-        if(gestoreTB.getTurno() instanceof Bianco)
-            System.err.println("Bianco");
-        else
-            System.err.println("Nero");
+
+ 
         // Qui Si Metteranno I Pezzi Collegandoli Alle Immagini
         aggiornaBottoni(gm.getMatrice());
         

@@ -76,7 +76,7 @@ public class GestoreTB{
     */
     public void passaTurno(){
         
-        System.out.println("Cambio del turno");
+
         if( turno instanceof Bianco ){
             
             turno = new Nero();
@@ -89,7 +89,7 @@ public class GestoreTB{
         
         }
         
-        System.err.println( "DEBUG: Non Chiamo Il Blocco Bottoni" );
+      
         attivato = false;
     
     }
@@ -169,7 +169,7 @@ public class GestoreTB{
     */
     public void bloccoPezziIniziale(){
         
-        System.err.println( "DEBUG: blocco bottoni iniziale" );
+
         
         for( int j = 0; j < 8; j++ ){
             
@@ -301,7 +301,7 @@ public class GestoreTB{
         
         b = ( JButton ) e.getSource();
         
-        System.err.println("Alla pressione del pulsante:");
+       
         
         // Ricerca Inversa Della Posizione Del Bottone
         for( int i = 0; i < 8; i++ ){
@@ -320,7 +320,7 @@ public class GestoreTB{
         
         }
         
-        System.out.println( "DEBUG:\n x : " + x + " \n y: " + y );
+        
         
         if( !isAttivato() ){ // Guardo Se Nello Stesso Turno Non è stato Abilitato Un Bottone
             
@@ -358,16 +358,13 @@ public class GestoreTB{
         } else { // Se Sono Qui significa Che è Stato Premuto Precedentemente Un Pezzo Valido
             
             if( x == xAttivato && y == yAttivato ){ // Se La Posizione Dove Premo E Quella Dove Ho Premuto Prima
-                
-                System.err.println( "DEBUG: Premuto Sulla Posizione Precedente" );
+            
                 disattiva(); // Imposto Come Se Niente Fosse Stato Premuto
             
             } else { // Se Sono Qua Ho Premuto In Una Posizione Diversa
                 
                 if( !gestoreMovimenti.getMatrice()[ x ][ y ].eOccupato() ){ // Se E Una Locazione Vuota
-                    
-                    System.err.println( "DEBUG: Premuto Su Una Locazione Vuota" );
-                    System.err.println("Prima di chiamare spostabileIn");
+    
                     // Se E Una Locazione Consentita Dal Pezzo
                     if( gestoreMovimenti.spostabileIn( gestoreMovimenti.getMatrice()[ xAttivato ][ yAttivato ], x, y ) ){ 
                         
@@ -381,14 +378,13 @@ public class GestoreTB{
                             // Sposto definitivamente il pezzo
                             gestoreMovimenti.setMatrice(matriceSimulata);
                             interfacciaGrafica.aggiornaBottoni( gestoreMovimenti.getMatrice() ); // Aggiorna La Visuale
-                            System.err.println("Prima del controllo se l'avversario è sotto scacco");
+                   
                             
                             if( !gestoreMovimenti.controlloScaccoReAvversario( turno, matriceSimulata ) ){
-                                System.err.println("Il re avversario adesso è sotto SCACCO");
-                                System.out.println("Prima di re avversario non può essere salvato");
+ 
                                 //se il re avversario non può essere salvato
                                 if(gestoreMovimenti.getListaPezziChePrevengonoScacco(gestoreMovimenti.getSpazioReAvversario(turno).getX(), gestoreMovimenti.getSpazioReAvversario(turno).getY(), gestoreMovimenti.getMatrice(), turno).isEmpty()){
-                                    System.err.println("Scacco matto");
+            
                                     interfacciaGrafica.finePartita();
                                 }
                             }
@@ -408,19 +404,14 @@ public class GestoreTB{
                     
                     } else { // Se Non è Una Locazione Consentita Dal Pezzo
                     
-                        System.err.println( "DEBUG: Premuto In Una Posizione Non Consentita Dal Pezzo, Bisogna Farla Diventare Rossa" );
                         disattivaPosizione(); // Imposto Come Se Niente Fosse Stato Premuto
                     
                     }
                 
                 } else { // Se E Una Locazione Non Vuota
                     
-                    System.err.println( "DEBUG: Schiaccio Su Una Locazione Non Vuota" );
-                    System.err.println("Prima di chiamare spostabile in");
-                    
                     if( gestoreMovimenti.spostabileIn( gestoreMovimenti.getMatrice()[xAttivato][yAttivato], x, y ) ){ // Se E Una Locazione Consentita Dal Pezzo E Contiene Un Pezzo Di Colore Diverso
                         
-                        System.err.println( "Del Colore Diverso" ); // Se Non Provoca Scacco Del Proprio Colore -> Scacco Matto ( Faccio La Simulazione )
                         matriceSimulata=gestoreMovimenti.getMatrice().clone();
                         matriceSimulata2=gestoreMovimenti.coppiaMatrice(matriceSimulata);
                         gestoreMovimenti.spostaPezzo(gestoreMovimenti.getMatrice()[xAttivato][yAttivato], x, y,matriceSimulata);
@@ -428,24 +419,21 @@ public class GestoreTB{
                         if( (getTurno() instanceof Bianco && gestoreMovimenti.controlloScacco(new Bianco(),matriceSimulata)) || (getTurno() instanceof Nero && gestoreMovimenti.controlloScacco(new Nero(),matriceSimulata))){
                             
                             gestoreMovimenti.setMatrice(matriceSimulata);
-                            System.err.println("Dopo aver mangiato un pezzo:");
-                            disegnaMatriceSpaziOccupati();
+
                             interfacciaGrafica.aggiornaBottoni( gestoreMovimenti.getMatrice() ); // Aggiorna La Visuale
                             
                             //se il re è stato mangiato
                             if( gestoreMovimenti.scaccoMatto(turno) ){ // Verifico Scacco Matto
-                                System.err.println("Scacco matto");
-                                disegnaMatriceSpaziOccupati();
+                            
+                 
                                 interfacciaGrafica.finePartita();
                                 
                             }
                             if(!gestoreMovimenti.controlloScaccoReAvversario(turno,matriceSimulata)){
-                                System.err.println("Il re avversario adesso è sotto SCACCO");
-                                System.err.println("Prima del controllo se il re avversario può essere salvato");
                                 
                                 //se il re avversario non può essere salvato
                                 if(gestoreMovimenti.getListaPezziChePrevengonoScacco(gestoreMovimenti.getSpazioReAvversario(turno).getX(), gestoreMovimenti.getSpazioReAvversario(turno).getY(), gestoreMovimenti.getMatrice(), turno).isEmpty()){
-                                    System.err.println("Scacco matto");
+                                    
                                     interfacciaGrafica.finePartita();
                                 }
                             }
