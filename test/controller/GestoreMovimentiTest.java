@@ -33,13 +33,13 @@ public class GestoreMovimentiTest{
     @Test
     public void testGetRe() throws Exception{
         System.out.println("getRe");
-        Colore c = null;
+        Colore c = new Bianco();
         GestoreMovimenti instance = new GestoreMovimenti();
-        Re expResult = null;
+        
+        Re expResult = instance.getRe(new Bianco());
         Re result = instance.getRe(c);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -63,13 +63,12 @@ public class GestoreMovimentiTest{
     @Test
     public void testGetSpazioRe(){
         System.out.println("getSpazioRe");
-        Colore c = null;
+        Colore c = new Bianco();
         GestoreMovimenti instance = new GestoreMovimenti();
-        Spazio expResult = null;
+        Spazio expResult = instance.getSpazioRe(new Bianco());
         Spazio result = instance.getSpazioRe(c);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -151,15 +150,31 @@ public class GestoreMovimentiTest{
     @Test
     public void testControlloScacco_3args(){
         System.out.println("controlloScacco");
-        int x = 0;
+        int x = 4;
         int y = 0;
-        Spazio[][] matrix = null;
+        Spazio[][] m;
+        
+        m = new Spazio[8][8];
+        
+        for(int b = 0; y < 8; y++){
+            for(int a = 0; x < 8; x++){
+               
+                m[a][b] = new Spazio(x, y);
+                
+            }
+        }
+        
+        m[5][0].cambiaPezzo(new Re(new Bianco()));
+        m[3][2].cambiaPezzo(new Torre(new Nero()));
+        m[3][0].cambiaPezzo(new Torre(new Nero()));
+        
+        
         GestoreMovimenti instance = new GestoreMovimenti();
         boolean expResult = false;
-        boolean result = instance.controlloScacco(x, y, matrix);
+        boolean result = instance.controlloScacco(x, y, m);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -168,13 +183,14 @@ public class GestoreMovimentiTest{
     @Test
     public void testControlloScacco_Spazio(){
         System.out.println("controlloScacco");
-        Spazio s = null;
+        
         GestoreMovimenti instance = new GestoreMovimenti();
-        boolean expResult = false;
+        Spazio s = instance.getSpazioRe(new Bianco());
+        
+        boolean expResult = true;
         boolean result = instance.controlloScacco(s);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -184,8 +200,19 @@ public class GestoreMovimentiTest{
     @Test
     public void testControlloScacco_Colore_SpazioArrArr() throws Exception{
         System.out.println("controlloScacco");
-        Colore colore = null;
-        Spazio[][] matrice = null;
+        Colore colore = new Nero();
+        Spazio[][] matrice;
+        
+        matrice = new Spazio[8][8];
+        
+        for(int y = 0; y < 8; y++){
+            for(int x = 0; x < 8; x++){
+                
+                
+                
+            }
+        }
+        
         GestoreMovimenti instance = new GestoreMovimenti();
         boolean expResult = false;
         boolean result = instance.controlloScacco(colore, matrice);
@@ -379,13 +406,13 @@ public class GestoreMovimentiTest{
     @Test
     public void testScaccoMatto(){
         System.out.println("scaccoMatto");
-        Colore turnoCorrente = null;
+        Colore turnoCorrente = new Bianco();
         GestoreMovimenti instance = new GestoreMovimenti();
         boolean expResult = false;
         boolean result = instance.scaccoMatto(turnoCorrente);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
     /**
