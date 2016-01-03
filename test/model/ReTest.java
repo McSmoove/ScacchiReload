@@ -1,38 +1,78 @@
 package model;
 
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
 
 /**
- * Test di tutti i metodi della classe Re
+ * Test di tutti / alcuni i metodi della classe Re
  * @author Viktor, Michael, Gaetano
 */
 public class ReTest{
     
     /**
-     * Test del metodo mosso della classe Re
+     * Test del costruttore Re 
+     * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
     */
     @Test
-    public void testMosso(){
-        System.out.println("mosso");
-        Re instance = null;
-        boolean expResult = false;
-        boolean result = instance.mosso();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test del metodo impostaMosso della classe Re
-    */
-    @Test
-    public void testImpostaMosso(){
-        System.out.println("impostaMosso");
-        Re instance = null;
-        instance.impostaMosso();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testRe() throws Exception{
+        
+        Colore colore = new Bianco();
+        
+        Re risultato = new Re( colore );
+        
+        assertNotNull( risultato );
+        assertEquals( false, risultato.mosso() );
+        
     }
     
+    /**
+     * Test del metodo impostaMosso della classe Re
+     * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
+    */
+    @Test
+    public void testImpostaMosso() throws Exception{
+        
+        Re reBianco = new Re( new Bianco() );
+        
+        reBianco.impostaMosso();
+    
+    }
+    
+    /**
+     * Test del metodo mosso della classe Re
+     * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
+    */
+    @Test
+    public void testMosso() throws Exception{
+        
+        Re reBianco = new Re( new Bianco() );
+        
+        boolean risultato = reBianco.mosso();
+        
+        assertEquals( false, risultato );
+    
+    }
+    
+    /**
+     * Langio tutti i test della classe ReTest
+     * @param args - Argomenti da linea di commando
+    */
+    public static void main( String[] args ){
+        
+        Result risultato = JUnitCore.runClasses( ReTest.class );
+        
+        if( risultato.getFailureCount() != 0 ){
+            
+            System.out.println( "Numero Di Test Della Classe ReTest Che Non Sono Passati: " + risultato.getFailureCount() );
+        
+        } else {
+            
+            System.out.println( "Tutti I Test Della Classe ReTest Sono Passati !!!" );
+        
+        }
+    
+    }
+
 } // Fine Classe ReTest

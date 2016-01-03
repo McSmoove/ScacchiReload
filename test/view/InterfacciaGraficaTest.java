@@ -1,121 +1,138 @@
 package view;
 
-import controller.GestoreTB;
 import javax.swing.JButton;
 import model.*;
-import org.junit.Test;
+import org.junit.*;
+import controller.GestoreTB;
 import static org.junit.Assert.*;
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
 
 /**
- * Test di tutti i metodi della classe InterfacciaGrafica
+ * Test di tutti / alcuni i metodi della classe InterfacciaGrafica
  * @author Viktor, Michael, Gaetano
 */
 public class InterfacciaGraficaTest{
-
+    
     /**
-     * Test del metodo getGestoreTB della classe InterfacciaGrafica
+     * Test del metodo aggiungiPezzoMorto della classe InterfacciaGrafica
+     * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
     */
     @Test
-    public void testGetGestoreTB(){
-        System.out.println("getGestoreTB");
-        InterfacciaGrafica instance = new InterfacciaGrafica();
-        GestoreTB expResult = null;
-        GestoreTB result = instance.getGestoreTB();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testAggiungiPezzoMorto() throws Exception{
+        
+        InterfacciaGrafica interfaccia = new InterfacciaGrafica();
+        Pezzo pezzo = new Alfiere( new Bianco() );
+        
+        interfaccia.aggiungiPezzoMorto( pezzo );
+    
+    }
+    
+    /**
+     * Test del metodo finePartita della classe InterfacciaGrafica
+     * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
+    */
+    @Test
+    public void testFinePartita() throws Exception{
+        
+        InterfacciaGrafica interfaccia = new InterfacciaGrafica();
+        
+        interfaccia.finePartita();
+    
     }
 
     /**
-     * Test del metodo start della classe InterfacciaGrafica
+     * Test del metodo getGestoreTB della classe InterfacciaGrafica
+     * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
     */
     @Test
-    public void testStart(){
-        System.out.println("start");
-        InterfacciaGrafica instance = new InterfacciaGrafica();
-        instance.start();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testGetGestoreTB() throws Exception{
+        
+        InterfacciaGrafica interfaccia = new InterfacciaGrafica();
+        
+        GestoreTB risultato = interfaccia.getGestoreTB();
+        
+        assertNotNull( risultato );
+    
     }
 
     /**
      * Test del metodo getMatriceBottoni della classe InterfacciaGrafica
+     * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
     */
     @Test
-    public void testGetMatriceBottoni(){
-        System.out.println("getMatriceBottoni");
-        InterfacciaGrafica instance = new InterfacciaGrafica();
-        JButton[][] expResult = null;
-        JButton[][] result = instance.getMatriceBottoni();
-        assertArrayEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test del metodo finePartita della classe InterfacciaGrafica
-    */
-    @Test
-    public void testFinePartita(){
-        System.out.println("finePartita");
-        InterfacciaGrafica instance = new InterfacciaGrafica();
-        instance.finePartita();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test del metodo setMessaggio della classe InterfacciaGrafica
-    */
-    @Test
-    public void testSetMessaggio(){
-        System.out.println("setMessaggio");
-        String s = "";
-        InterfacciaGrafica instance = new InterfacciaGrafica();
-        instance.setMessaggio(s);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test del metodo aggiungiPezzoMorto della classe InterfacciaGrafica
-    */
-    @Test
-    public void testAggiungiPezzoMorto(){
-        System.out.println("aggiungiPezzoMorto");
-        Pezzo p = null;
-        InterfacciaGrafica instance = new InterfacciaGrafica();
-        instance.aggiungiPezzoMorto(p);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testGetMatriceBottoni() throws Exception{
+        
+        InterfacciaGrafica interfaccia = new InterfacciaGrafica();
+        
+        JButton[][] risultato = interfaccia.getMatriceBottoni();
+        
+        assertNotNull( risultato );
+    
     }
 
     /**
      * Test del metodo promozionePedone della classe InterfacciaGrafica
+     * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
     */
     @Test
-    public void testPromozionePedone(){
-        System.out.println("promozionePedone");
-        Spazio s = null;
-        Colore colore = null;
-        Spazio[][] matrice = null;
-        InterfacciaGrafica instance = new InterfacciaGrafica();
-        instance.promozionePedone(s, colore, matrice);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test del metodo aggiornaBottoni della classe InterfacciaGrafica
-    */
-    @Test
-    public void testAggiornaBottoni(){
-        System.out.println("aggiornaBottoni");
-        Spazio[][] matrice = null;
-        InterfacciaGrafica instance = new InterfacciaGrafica();
-        instance.aggiornaBottoni(matrice);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testPromozionePedone() throws Exception{
+        
+        InterfacciaGrafica interfaccia = new InterfacciaGrafica();
+        
+        Spazio spazio = new Spazio();
+        Colore colore = new Bianco();
+        Spazio[][] matrice = new Spazio[][]{};
+        
+        interfaccia.promozionePedone( spazio, colore, matrice );
+    
     }
     
+    /**
+     * Test del metodo setMessaggio della classe InterfacciaGrafica
+     * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
+    */
+    @Test
+    public void testSetMessaggio() throws Exception{
+        
+        InterfacciaGrafica interfaccia = new InterfacciaGrafica();
+        String stringa = "";
+        
+        interfaccia.setMessaggio( stringa );
+    
+    }
+    
+    /**
+     * Test del metodo start della classe InterfacciaGrafica
+     * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
+    */
+    @Test
+    public void testStart() throws Exception{
+        
+        InterfacciaGrafica interfaccia = new InterfacciaGrafica();
+        
+        interfaccia.start();
+    
+    }
+    
+    /**
+     * Langio tutti i test della classe GestoreMovimentiTest
+     * @param args - Argomenti da linea di commando
+    */
+    public static void main( String[] args ){
+        
+        Result risultato = JUnitCore.runClasses( InterfacciaGraficaTest.class );
+        
+        if( risultato.getFailureCount() != 0 ){
+            
+            System.out.println( "Numero Di Test Della Classe InterfacciaGraficaTest Che Non Sono Passati: " + risultato.getFailureCount() );
+        
+        } else {
+            
+            System.out.println( "Tutti I Test Della Classe InterfacciaGraficaTest Sono Passati !!!" );
+        
+        }
+    
+    }
+
 } // Fine Classe InterfacciaGraficaTest

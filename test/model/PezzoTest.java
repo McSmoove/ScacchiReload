@@ -1,60 +1,48 @@
 package model;
 
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
 
 /**
- * Test di tutti i metodi della classe Pezzo
+ * Test di tutti / alcuni i metodi della classe Pezzo
  * @author Viktor, Michael, Gaetano
 */
 public class PezzoTest{
     
     /**
      * Test del metodo getColore della classe Pezzo
+     * Passa perche 0 = Bianco
+     * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
     */
     @Test
-    public void testGetColore(){
-        System.out.println("getColore");
-        Pezzo instance = null;
-        Colore expResult = null;
-        Colore result = instance.getColore();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test del metodo setLock della classe Pezzo
-    */
-    @Test
-    public void testSetLock(){
-        System.out.println("setLock");
-        boolean lock = false;
-        Pezzo instance = null;
-        instance.setLock(lock);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test del metodo getLock della classe Pezzo
-    */
-    @Test
-    public void testGetLock(){
-        System.out.println("getLock");
-        Pezzo instance = null;
-        boolean expResult = false;
-        boolean result = instance.getLock();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    public class PezzoImpl extends Pezzo{
+    public void testGetColore() throws Exception{
         
-        public PezzoImpl(){
+        Pezzo alfiereBianco = new Alfiere( new Bianco() );
+        
+        Colore risultato = alfiereBianco.getColore();
+        
+        assertNotNull( risultato );
+        assertEquals( 0, risultato.getColore() );
+    
+    }
+    
+    /**
+     * Langio tutti i test della classe PedoneTest
+     * @param args - Argomenti da linea di commando
+    */
+    public static void main( String[] args ){
+        
+        Result result = JUnitCore.runClasses( PezzoTest.class );
+        
+        if( result.getFailureCount() != 0 ){
             
-            super( null );
+            System.out.println( "Numero Di Test Della Classe PezzoTest Che Non Sono Passati: " + result.getFailureCount() );
+        
+        } else {
+            
+            System.out.println( "Tutti I Test Della Classe PezzoTest Sono Passati !!!" );
         
         }
     

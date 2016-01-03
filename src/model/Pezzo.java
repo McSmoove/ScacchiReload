@@ -20,17 +20,5 @@ public abstract class Pezzo{
         return colore;
     
     }
-   
-    public void setLock( boolean lock ){
-        
-        locked = lock;
-    
-    }
-    
-    public boolean getLock(){
-        
-        return locked;
-    
-    }
 
 }
