@@ -3,8 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Tyrande/Documents/GitHub/ScacchiReload/src/model/Pezzo.java</file>
-            <file>file:/C:/Users/Tyrande/Documents/GitHub/ScacchiReload/test/view/InterfacciaGraficaTest.java</file>
+            <file>file:/C:/Users/Viktor/Documents/GitHub/ScacchiReload/src/view/ImageButton.java</file>
+            <file>file:/C:/Users/Viktor/Documents/GitHub/ScacchiReload/src/controller/GestoreTB.java</file>
+            <file>file:/C:/Users/Viktor/Documents/GitHub/ScacchiReload/src/model/Spazio.java</file>
+            <file>file:/C:/Users/Viktor/Documents/GitHub/ScacchiReload/src/view/MergeIcon.java</file>
+            <file>file:/C:/Users/Viktor/Documents/GitHub/ScacchiReload/test/controller/GestoreMovimentiTest.java</file>
+            <file>file:/C:/Users/Viktor/Documents/GitHub/ScacchiReload/src/controller/GestoreMovimenti.java</file>
+            <file>file:/C:/Users/Viktor/Documents/GitHub/ScacchiReload/src/view/InterfacciaGrafica.java</file>
+            <file>file:/C:/Users/Viktor/Documents/GitHub/ScacchiReload/src/Bug%20da%20risolvere</file>
         </group>
     </open-files>
 </project-private>

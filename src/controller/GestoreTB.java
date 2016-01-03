@@ -275,6 +275,7 @@ public class GestoreTB{
     public void setPedoneTrasformato( Spazio s ){
         
         Pezzo p = s.getOccupante();
+        
         xPedoneTrasformato = x;
         yPedoneTrasformato = y;
         gestoreMovimenti.getMatrice()[ s.getX() ][ s.getY() ].cambiaPezzo( p );
@@ -295,6 +296,7 @@ public class GestoreTB{
         JButton b;
         
         GestoreMovimenti gestoreTemporaneo;
+        Pezzo pezzoDaSpostare;
         turno = getTurno();
         JButton[][] matriceScacchiera = interfacciaGrafica.getMatriceBottoni();
         int indiciBottoni[][] = new int[ 8 ][ 8 ];
@@ -414,12 +416,13 @@ public class GestoreTB{
                         
                         matriceSimulata=gestoreMovimenti.getMatrice().clone();
                         matriceSimulata2=gestoreMovimenti.coppiaMatrice(matriceSimulata);
+                        pezzoDaSpostare=gestoreMovimenti.getMatrice()[x][y].getOccupante();
                         gestoreMovimenti.spostaPezzo(gestoreMovimenti.getMatrice()[xAttivato][yAttivato], x, y,matriceSimulata);
                         
                         if( (getTurno() instanceof Bianco && gestoreMovimenti.controlloScacco(new Bianco(),matriceSimulata)) || (getTurno() instanceof Nero && gestoreMovimenti.controlloScacco(new Nero(),matriceSimulata))){
                             
                             gestoreMovimenti.setMatrice(matriceSimulata);
-
+                            interfacciaGrafica.aggiungiPezzoMorto(pezzoDaSpostare);
                             interfacciaGrafica.aggiornaBottoni( gestoreMovimenti.getMatrice() ); // Aggiorna La Visuale
                             
                             //se il re è stato mangiato
