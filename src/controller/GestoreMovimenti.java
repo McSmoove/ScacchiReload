@@ -298,6 +298,10 @@ public class GestoreMovimenti{
     
     } // Fine movimentiPedone
     
+    /**
+     * Segna una matrice che rappresenta la scacchiera con le posizioni disponibili al movimento della torre
+     * @param s dove si trova la torre
+     * @return una matrce di interi con segnate le posizioni dove si può muovere la torre     */
     private int[][] movimentiTorre( Spazio s ){
         Torre torre;
         int[][] scacchiera = new int[ 8 ][ 8 ];
@@ -408,9 +412,9 @@ public class GestoreMovimenti{
     } // Fine movimentiTorre
     
     /**
-     * 
-     * @param s 
-     * @return 
+     * Segna una matrice che rappresenta la scacchiera con le posizioni disponibili al movimento dell'alfiere
+     * @param s dove si trova l'alfiere
+     * @return una matrce di interi con segnate le posizioni dove si può muovere 'alfiere
      */
     private int[][] movimentiAlfiere( Spazio s  ){
         Alfiere alfiere;
@@ -514,7 +518,11 @@ public class GestoreMovimenti{
         return scacchiera;
     
     } // Fine MovimentiAlfiere
-
+/**
+     * Segna una matrice che rappresenta la scacchiera con le posizioni disponibili al movimento del cavallo
+     * @param s dove si trova il cavallo
+     * @return una matrce di interi con segnate le posizioni dove si può muovere il cavallo
+     */
     private int[][] movimentiCavallo( Spazio s ){
         Cavallo cavallo;
         int[][] scacchiera = new int[ 8 ][ 8 ];
@@ -617,6 +625,11 @@ public class GestoreMovimenti{
     
     } // Fine movimentiCavallo
     
+    /**
+     * Segna una matrice che rappresenta la scacchiera con le posizioni disponibili al movimento della regina
+     * @param s dove si trova la regina
+     * @return una matrce di interi con segnate le posizioni dove si può muovere la regina
+     */
     private int[][] movimentiRegina( Spazio s ){
         
         Regina regina;
@@ -1471,6 +1484,13 @@ public class GestoreMovimenti{
     
     }
     
+    /**
+     * calcola se la torre si può muovere in una data posizione
+     * @param s posizione dela torre
+     * @param x l'ascissa della zona dove si vuole muovere la torre
+     * @param y l'ordinata della zona dove si vuole muovere la torre
+     * @return true se si può muovere in quella posizione
+    */
     private boolean percorsoTorre( Spazio s, int x, int y ){
         
         Pezzo p;
@@ -1537,11 +1557,11 @@ public class GestoreMovimenti{
     }
     
     /**
-     * percorso dell'alfiere
+     * calcola se l'alfiere si può muovere in una data posizione
      * @param s posizione alfiere
-     * @param x 
-     * @param y
-     * @return 
+     * @param x l'ascissa della zona dove si vuole muovere l'alfiere
+     * @param y l'ordinata della zona dove si vuole muovere l'alfiere
+     * @return true se si può muovere in quella posizione
     */
     private boolean percorsoAlfiere( Spazio s, int x, int y ){
         
@@ -1887,6 +1907,14 @@ public class GestoreMovimenti{
         }
         return false;
     }
+    /**
+     * calcola se il pedone si può muovere in una data posizione
+     * @param s posizione del pedone
+     * @param x l'ascissa della zona dove si vuole muovere il pedone
+     * @param y l'ordinata della zona dove si vuole muovere il pedone
+     * @param matrice matrice della scacchiera
+     * @return true se si può muovere in quella posizione
+    */
     
     private boolean percorsoPedone(Spazio s,int x,int y,Spazio[][]matrice){
         Pezzo p;
