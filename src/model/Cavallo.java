@@ -7,10 +7,14 @@ package model;
 */
 public class Cavallo extends Pezzo{
     
+    /**
+     * Classe che descrive il comportamento di un Cavallo
+     * @param colore - Il colore del cavallo
+    */
     public Cavallo( Colore colore ){
         
         super( colore );
     
     }
    
-}
+} // Fine Classe Cavallo

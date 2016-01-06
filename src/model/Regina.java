@@ -7,10 +7,14 @@ package model;
 */
 public class Regina extends Pezzo{
     
+    /**
+     * Classe che descrive il comportamento di una Regina
+     * @param colore - Il colore della regina
+    */
     public Regina( Colore colore ){
         
         super( colore );
     
     }
 
-}
+} // Fine Classe Regina

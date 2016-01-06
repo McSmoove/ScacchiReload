@@ -11,76 +11,139 @@ import model.*;
 import controller.*;
 
 /**
- * La classe InterfacciaGrafica gestisce tutti i pannelli e i bottoni che 
- * vengono usati duranti il gioco. L'interfaccia si compone di:
- * - 3 pannelli
- *  - uno per tutta l'interfaccia
- *  - uno per i pezzi bianchi e uno per quelli neri
- *  - un pannello per la schacchiera
- * - 3 Image
- *  - immagini dei pezzi (array da 12)
- *  - colori (array da 3)
- * - 2 jlabel per i pezzi mangiati
- * - 1 jlabel per visualzzare il messaggio: "tocca al bianco/nero"
+ * La classe InterfacciaGrafica gestisce tutti i pannelli e i bottoni che vengono usati duranti il gioco.
  * 
- */
+ * L'interfaccia e composta da:
+ *
+ * - 4 JPannel:
+ *  
+ *  - JPanel interfacciaGrafica -> Contiene tutti i JPanel sottostanti ed e il gestore del layout e posizionamento dei JPanel sottostanti:
+ *      
+ *      - JPanel pezziBianchiMangiati -> JPanel contenente i pezzi bianchi che sono stati mangiati
+ *      - JPanel scacchiera -> JPanel contenente la scacchiera del gioco     
+ *      - JPanel pezziNeriMangiati -> JPanel contenente i pezzi neri che sono stati mangiati
+ *  
+ * JButton personalizzati ImageButton quadratiScacchiera -> I quadrati 8 * 8 dei pulsanti della scacchiera
+ *
+ * 2 Image:
+ *  
+ *  - Image immagine[ 12 ] -> Array di Image contentente le 12 immagini dei pezzi dei scacchi
+ *  - Image colore [ 2 ] -> Array di Image contenente 2 immagini che indica il colore bianco / nero della scacchiera
+ *
+ * Classe personalizzata MergeIcon mergeIco[ 24 ] -> Unisce il colore della scacchiera con i pezzi degli scacchi
+ *
+ * 3 JLabel:
+ *  
+ *  - JLabel pezziMangiatiBianchi[ 16 ] -> Etichette dove vengono disegnati i pezzi bianchi mangiati con un contatore associato
+ *  - JLabel pezziMangiatiNeri[ 16 ] -> Etichette dove vengono disegnati i pezzi neri mangiati con un contatore assaciato
+ *  - JLabel messaggioInfo -> Visualzzare il messaggio del turno corrente " Tocca Al Bianco / Nero "
+ * 
+ * String colonne -> Stringa contenente le lettere delle colonne della scacchiera
+ *
+ * Border bordo -> Bordo di colore rosso per vedere i bordi di ogni panello
+ * 
+ * GestoreMovimenti gm -> Collegamento InterfacciaGrafica-GestoreMovimenti
+ * 
+ * GestoreTB gestoreTB -> Collegamento InterfacciaGrafica-GestoreTB
+*/
 public class InterfacciaGrafica{
     
-    private final int BIANCO = 0;
-    private final int NERO = 1;
-    
-    private final int PEDONE_BIANCO = 0;
-    private final int TORRE_BIANCA = 1;
-    private final int CAVALLO_BIANCO = 2;
-    private final int ALFIERE_BIANCO = 3;
-    private final int REGINA_BIANCA = 4;
-    private final int RE_BIANCO = 5;
-    private final int PEDONE_NERO = 6;
-    private final int TORRE_NERA = 7;
-    private final int CAVALLO_NERO = 8;
-    private final int ALFIERE_NERO = 9;
-    private final int REGINA_NERA = 10;
-    private final int RE_NERO = 11;
-        
+    /**
+    * JPanel contenente tutti i JPanel
+    */
     private JPanel interfacciaGrafica = new JPanel( new BorderLayout() );
-    private JPanel pezziBianchi = new JPanel( new GridLayout( 8, 2 ) );
-    private JPanel pezziNeri = new JPanel( new GridLayout( 8, 2 ) );
+    
+    /**
+     * JPanel contenente i pezzi bianchi che sono stati mangiati
+    */
+    private JPanel pezziBianchiMangiati = new JPanel( new GridLayout( 8, 2 ) );
+    
+    /**
+     * JPanel contenente i pezzi nero che sono stati mangiati
+    */
+    private JPanel pezziNeriMangiati = new JPanel( new GridLayout( 8, 2 ) );
+    
+    /**
+     * JPanel contenente la scacchiera del gioco
+    */
     private JPanel scacchiera;
     
+    /**
+     * Contenente i quadrati 8 * 8 dei pulsanti della scacchiera con icone personalizzate
+    */
     private ImageButton[][] quadratiScacchiera = new ImageButton[ 8 ][ 8 ];
     
+    /**
+     * Array di Image contentente le 12 immagini dei pezzi dei scacchi
+    */
     private final Image immagine[] = new Image[ 12 ];
+    
+    /**
+     * Array di Image contenente 2 immagini che indica il colore bianco / nero della scacchiera
+    */
     private final Image colore[] = new Image[ 2 ];
+    
+    /**
+     * Unisce il colore della scacchiera con i pezzi degli scacchi
+    */
     private MergeIcon[] mergeIco = new MergeIcon[ 24 ];
     
+    /**
+     * Visualzzare il messaggio del turno corrente " Tocca Al Bianco / Nero "
+    */
     private final JLabel messaggioInfo = new JLabel( "Tocca Al Bianco / Nero" );
     
+    /**
+     * Etichette dove vengono disegnati i pezzi bianchi mangiati
+    */
     private JLabel[] pezziMangiatiBianchi = new JLabel[ 16 ];
+    
+    /**
+     * Contatore associato ai pezzi bianchi mangiati 
+    */
     private int contaMortiBianchi = 0;
     
+    /**
+     * Etichette dove vengono disegnati i pezzi neri mangiati
+    */
     private JLabel[] pezziMangiatiNeri = new JLabel[ 16 ];
+    
+    /**
+     * Contatore associato ai pezzi neri mangiati
+    */
     private int contaMortiNeri = 0;
     
-    private static final String colonne = "ABCDEFGH";
+    /**
+     * Stringa contenente le lettere delle colonne della scacchiera
+    */
+    private String colonne = "ABCDEFGH";
     
+    /**
+     * Bordo di colore rosso per vedere i bordi di ogni panello
+    */
     private Border bordo = new CompoundBorder( new EmptyBorder( 5, 5, 5, 5 ), new LineBorder( Color.RED ) );
     
-    private GestoreMovimenti gm;
+    /**
+     * Collegamento InterfacciaGrafica-GestoreMovimenti
+    */
+    private GestoreMovimenti gestoreMovi;
+    
+    /**
+     * Collegamento InterfacciaGrafica-GestoreTB
+    */
     private GestoreTB gestoreTB;
     
     /**
-     * Costruttore che prende le immagini dal package "immagini" e le associa a
-     * una zona di memoria dell'array "immagine" di tipo Image. Da notare che 
-     * prima controlla che siano preseenti tutte le immagni necessarie e avvisa
-     * se c'è un errore.
-     * Dopodichè disegna un schacchiera VUOTA. Verrà ridisegnata e riempita con 
-     * le posizioni iniziali dei pezzi se verrà premuto il pulsante "nuova 
-     * partita" attraverso il metodo iniziaPartita
-     * Aggiunge anche una barra in alto con il bottone di "nuova partita" e un
-     * indicatore di chi è il turno.
-     * Infine diegna ai lati della scacchiera la tavola coi pezzi mangiati
-     */
-    InterfacciaGrafica(){ // Inizializza Interfaccia Grafica ( Costruttore )
+     * Costruttore che prende le immagini e controlla che siano preseenti tutte le immagni necessarie avvisando se c'è un errore.
+     * 
+     * Dopodichè disegna un schacchiera vuota. Verrà ridisegnata e riempita con le posizioni iniziali dei pezzi se
+     * verra premuto il pulsante " Nuova Partita " attraverso il metodo iniziaPartita().
+     * 
+     * Aggiunge anche una barra in alto con il bottone di " Nuova Partita " e un indicatore di chi è il turno.
+     * Infine diegna ai lati della scacchiera la tavola coi pezzi mangiati.
+     *
+    */
+    InterfacciaGrafica(){ // Inizializza L'Interfaccia Grafica ( Costruttore )
         
         try{
             
@@ -104,36 +167,35 @@ public class InterfacciaGrafica{
         
         } catch( IOException e ){}
         
-        mergeIco[0] = new MergeIcon( colore[0],immagine[PEDONE_BIANCO] );
-        mergeIco[1] = new MergeIcon( colore[1],immagine[PEDONE_BIANCO] );
-        mergeIco[2] = new MergeIcon( colore[0],immagine[PEDONE_NERO] );
-        mergeIco[3] = new MergeIcon( colore[1],immagine[PEDONE_NERO] );
-        mergeIco[4] = new MergeIcon( colore[0],immagine[TORRE_BIANCA] );
-        mergeIco[5] = new MergeIcon( colore[1],immagine[TORRE_BIANCA] );
-        mergeIco[6] = new MergeIcon( colore[0],immagine[TORRE_NERA] );
-        mergeIco[7] = new MergeIcon( colore[1],immagine[TORRE_NERA] );
-        mergeIco[8] = new MergeIcon( colore[0],immagine[CAVALLO_BIANCO] );
-        mergeIco[9] = new MergeIcon( colore[1],immagine[CAVALLO_BIANCO] );
-        mergeIco[10] = new MergeIcon( colore[0],immagine[CAVALLO_NERO] );
-        mergeIco[11] = new MergeIcon( colore[1],immagine[CAVALLO_NERO] );
-        mergeIco[12] = new MergeIcon( colore[0],immagine[ALFIERE_BIANCO] );
-        mergeIco[13] = new MergeIcon( colore[1],immagine[ALFIERE_BIANCO] );
-        mergeIco[14] = new MergeIcon( colore[0],immagine[ALFIERE_NERO] );
-        mergeIco[15] = new MergeIcon( colore[1],immagine[ALFIERE_NERO] );
-        mergeIco[16] = new MergeIcon( colore[0],immagine[REGINA_BIANCA] );
-        mergeIco[17] = new MergeIcon( colore[1],immagine[REGINA_BIANCA] );
-        mergeIco[18] = new MergeIcon( colore[0],immagine[REGINA_NERA] );
-        mergeIco[19] = new MergeIcon( colore[1],immagine[REGINA_NERA] );
-        mergeIco[20] = new MergeIcon( colore[0],immagine[RE_BIANCO] );
-        mergeIco[21] = new MergeIcon( colore[1],immagine[RE_BIANCO] );
-        mergeIco[22] = new MergeIcon( colore[0],immagine[RE_NERO] );
-        mergeIco[23] = new MergeIcon( colore[1],immagine[RE_NERO] );
+        mergeIco[ 0 ] = new MergeIcon( colore[ 0 ],immagine[ 0 ] ); // Pedone Bianco su sfondo Bianco
+        mergeIco[ 1 ] = new MergeIcon( colore[ 1 ],immagine[ 0 ] ); // Pedone Bianco su sfondo Nero
+        mergeIco[ 2 ] = new MergeIcon( colore[ 0 ],immagine[ 1 ] ); // Torre Bianca su sfondo Bianco
+        mergeIco[ 3 ] = new MergeIcon( colore[ 1 ],immagine[ 1 ] ); // Torre Bianca su sfondo Nero
+        mergeIco[ 4 ] = new MergeIcon( colore[ 0 ],immagine[ 2 ] ); // Cavallo Bianco su sfondo Bianco
+        mergeIco[ 5 ] = new MergeIcon( colore[ 1 ],immagine[ 2 ] ); // Cavallo Bianco su sfondo Nero
+        mergeIco[ 6 ] = new MergeIcon( colore[ 0 ],immagine[ 3 ] ); // Alfiere Bianco su sfondo Bianco
+        mergeIco[ 7 ] = new MergeIcon( colore[ 1 ],immagine[ 3 ] ); // Alfiere Bianco su sfondo Nero
+        mergeIco[ 8 ] = new MergeIcon( colore[ 0 ],immagine[ 4 ] ); // Regina Bianca su sfondo Bianco
+        mergeIco[ 9 ] = new MergeIcon( colore[ 1 ],immagine[ 4 ] ); // Regina Bianca su sfondo Nero
+        mergeIco[ 10 ] = new MergeIcon( colore[ 0 ],immagine[ 5 ] ); // Re Bianco su sfondo Bianco
+        mergeIco[ 11 ] = new MergeIcon( colore[ 1 ],immagine[ 5 ] ); // Re Bianco su sfondo Nero
+        mergeIco[ 12 ] = new MergeIcon( colore[ 0 ],immagine[ 6 ] ); // Pedone Nero su sfondo Bianco
+        mergeIco[ 13 ] = new MergeIcon( colore[ 1 ],immagine[ 6 ] ); // Pedone Nero su sfondo Nero
+        mergeIco[ 14 ] = new MergeIcon( colore[ 0 ],immagine[ 7 ] ); // Torre Ner su sfondo Bianco
+        mergeIco[ 15 ] = new MergeIcon( colore[ 1 ],immagine[ 7 ] ); // Torre Nera su sfondo Nero
+        mergeIco[ 16 ] = new MergeIcon( colore[ 0 ],immagine[ 8 ] ); // Cavallo Nero su sfondo Bianco
+        mergeIco[ 17 ] = new MergeIcon( colore[ 1 ],immagine[ 8 ] ); // Cavallo Nero su sfondo Nero
+        mergeIco[ 18 ] = new MergeIcon( colore[ 0 ],immagine[ 9 ] ); // Alfiere Nero su sfondo Bianco
+        mergeIco[ 19 ] = new MergeIcon( colore[ 1 ],immagine[ 9 ] ); // Alfiere Nero su sfondo Nero
+        mergeIco[ 20 ] = new MergeIcon( colore[ 0 ],immagine[ 10 ] ); // Regina Nera su sfondo Bianco
+        mergeIco[ 21 ] = new MergeIcon( colore[ 1 ],immagine[ 10 ] ); // Regina Nera su sfondo Nero
+        mergeIco[ 22 ] = new MergeIcon( colore[ 0 ],immagine[ 11 ] ); // Re Nero su sfondo Bianco
+        mergeIco[ 23 ] = new MergeIcon( colore[ 1 ],immagine[ 11 ] ); // Re Nero su sfondo Nero
         
-        // Scacchiera E I Bottoni Associati
-        scacchiera = new JPanel( new GridLayout( 10, 10 ) ){
+        
+        scacchiera = new JPanel( new GridLayout( 10, 10 ) ){ // Scacchiera E I Bottoni Associati
             
             Dimension pref = new Dimension();
-            Image back = null; // Per Lo Sfondo Se Decidiamo Implementarlo
             
             @Override
             public final Dimension getPreferredSize(){
@@ -164,7 +226,7 @@ public class InterfacciaGrafica{
                 pref.setSize( scelta, scelta );
                 return new Dimension( scelta, scelta );
             
-            } // Fine getPrefferedSize
+            }
         
         };
         
@@ -185,13 +247,13 @@ public class InterfacciaGrafica{
                 // Coloro Lo Sfondo Dei Quadrati Se Sono Pari O Dispari
                 if ( ( j % 2 == 1 && i % 2 == 1 ) || ( j % 2 == 0 && i % 2 == 0 ) ){
 
-                    bottone.setBackground( Color.WHITE ); // Utile A Controlli Futuri, Lo Sfondo Ce Ma Mascherato Dall'Immagine
-                    bottone.setImage( colore[ BIANCO ] );
+                    bottone.setBackground( Color.WHITE );
+                    bottone.setImage( colore[ 0 ] );
                 
                 } else {
 
-                    bottone.setBackground( Color.BLACK ); // Utile A Controlli Futuri, Lo Sfondo Ce Ma Mascherato Dall'Immagine
-                    bottone.setImage( colore[ NERO ] );
+                    bottone.setBackground( Color.BLACK );
+                    bottone.setImage( colore[ 1 ] );
                 
                 } // Fine If Else Con I Quadrati Colorati
                 
@@ -272,13 +334,13 @@ public class InterfacciaGrafica{
         for( int i = 0; i < 16; i++ ){
             
             pezziMangiatiBianchi[ i ] = new JLabel( new ImageIcon( new BufferedImage( 64, 64, BufferedImage.TYPE_INT_ARGB ) ) );
-            pezziBianchi.add( pezziMangiatiBianchi[ i ] );
+            pezziBianchiMangiati.add( pezziMangiatiBianchi[ i ] );
         
         }
         
         posizione.fill = GridBagConstraints.EAST;
-        pezziBianchi.setBorder( bordo );
-        pannelloMain.add( pezziBianchi, posizione );
+        pezziBianchiMangiati.setBorder( bordo );
+        pannelloMain.add(pezziBianchiMangiati, posizione );
         
         posizione.fill = GridBagConstraints.CENTER;
         scacchiera.setBorder( bordo );
@@ -287,85 +349,92 @@ public class InterfacciaGrafica{
         for( int i = 0; i < 16; i++ ){
             
             pezziMangiatiNeri[ i ] = new JLabel( new ImageIcon( new BufferedImage( 64, 64, BufferedImage.TYPE_INT_ARGB ) ) );
-            pezziNeri.add( pezziMangiatiNeri[ i ] );
+            pezziNeriMangiati.add( pezziMangiatiNeri[ i ] );
         
         }
         
         posizione.fill = GridBagConstraints.WEST;
-        pezziNeri.setBorder( bordo );
-        pannelloMain.add( pezziNeri, posizione );
+        pezziNeriMangiati.setBorder( bordo );
+        pannelloMain.add(pezziNeriMangiati, posizione );
         
         interfacciaGrafica.add( pannelloMain, BorderLayout.CENTER );
-        interfacciaGrafica.setBorder( bordo );
     
     } // Fine InterfacciaGrafica
 
     /**
      * Metodo privato che inizializza le immagini quando si inizia un nuova 
-     * parita. Si aggiunge un ActionListener per ogni casella della scacchiera.
-     */
+     * parita. Aggiunge ActionListener per ogni casella della scacchiera
+    */
     private void iniziaPartita(){
         
-        gm = new GestoreMovimenti( ); // Collegamento Interfaccia-Gestore
-        gm.setInterfacciaGrafica( this ); // Collegamento Gestore-Interfaccia
-        gestoreTB=new GestoreTB(gm, this);
+        gestoreMovi = new GestoreMovimenti( ); // Collegamento Interfaccia-Gestore
+        gestoreMovi.setInterfacciaGrafica( this ); // Collegamento Gestore-Interfaccia
+        gestoreTB=new GestoreTB( gestoreMovi, this );
         
-        // Da Modificare Il Testo In Base Al Turno
-        messaggioInfo.setText( "Fai Una Mossa !!!");
-
- 
-        // Qui Si Metteranno I Pezzi Collegandoli Alle Immagini
-        aggiornaBottoni(gm.getMatrice());
+        messaggioInfo.setText( "Fai Una Mossa !!!"); // Da Modificare Il Testo In Base Al Turno
         
+        aggiornaBottoni( gestoreMovi.getMatrice() );
         
-        //aggiungo i listener a tutti i bottoni
-        for (ImageButton[] quadratiScacchiera1 : quadratiScacchiera) {
-            for (int j = 0; j<quadratiScacchiera.length; j++) {
-                if(quadratiScacchiera1[j].getActionListeners().length<1){
-                quadratiScacchiera1[j].addActionListener((ActionEvent e) -> {
-                    try {
-                        gestoreTB.pressionePulsanteScacchiera( e );
-                    } catch (Exception ex) {}
-                });   
+        for( ImageButton[] quadratiScacchieraCiclo : quadratiScacchiera ) { // Aggiungo listener a tutti i bottoni
+            
+            for( int j = 0; j < quadratiScacchiera.length; j++ ){
+                
+                if( quadratiScacchieraCiclo[ j ].getActionListeners().length < 1 ){
+                    
+                    quadratiScacchieraCiclo[ j ].addActionListener( ( ActionEvent e ) -> {
+                        
+                        try{
+                            
+                            gestoreTB.pressionePulsanteScacchiera( e );
+                        
+                        } catch( Exception ex ){}
+                    
+                    });
+                
                 }
+            
             }
+        
         }
     
     } // Fine iniziaPartita
     
     /**
-     * ritorna l'oggetto di classe gestoreTB contenuta in questa classe
-     * @return Un oggetto di classe gestoreTB
-     */
+     * Metodo che ritorna l'oggetto di classe gestoreTB contenuta in questa classe
+     * @return L'oggetto di classe gestoreTB contenuta in questa classe
+    */
     public GestoreTB getGestoreTB(){
+        
         return gestoreTB;
+    
     }
     
     /**
-     * Inizio del programma
-     */
-    public void start() {
+     * Esecuzione thread del programma
+    */
+    public void start(){
         
         Runnable run = () -> {
-            JFrame frame = new JFrame( "Scacchi Beta !!!" );
+            
+            JFrame frame = new JFrame( "Scacchi Viktor, Michael, Gaetano !!!" );
             frame.add( interfacciaGrafica );
             
             frame.setLocationByPlatform( true );
-            System.out.println(""+ pezziNeri.getMinimumSize());
             frame.setMinimumSize( frame.getMinimumSize() );
             
             frame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
             frame.setVisible( true );
+        
         };
         
         SwingUtilities.invokeLater(run);
     
-    } // Fine main
+    }
     
     /**
      * Ritorna i bottoni della scacchiera organizzati su una matrice
-     * @return Una matrice quadrata di classe JButton
-     */
+     * @return I bottoni della scacchiera
+    */
     public JButton[][] getMatriceBottoni(){
         
         return quadratiScacchiera;
@@ -373,11 +442,12 @@ public class InterfacciaGrafica{
     }
 
     /**
-     * aggiorna l'interfaccia quando finisce la partita, segnando che è finita
-     */
+     * Metodo che, se chiamato, indica che ce stato un scacco matto
+     * Una volta chiamato il metodo, esso visualizza un messaggio di scelta
+    */
     public void finePartita(){
         
-        int scelta = JOptionPane.showOptionDialog( interfacciaGrafica, "La Partita è Finita\nIl Vincitore è Il Colore " + gestoreTB.getTurno(), "Fine Partita", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[]{"Inizia Nuova Partita", "Esci Dal Programma"},"");
+        int scelta = JOptionPane.showOptionDialog( interfacciaGrafica, "La Partita E Finita\nIl Vincitore E Il Colore " + gestoreTB.getTurno(), "Fine Partita", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[]{"Inizia Nuova Partita", "Esci Dal Programma"},"");
         
         if( scelta == 0 ){
             
@@ -392,205 +462,325 @@ public class InterfacciaGrafica{
     }
     
     /**
-     * aggiorna il messaggio contenuto sulla barra in alto (vicino al pulsante nuovaPartita)
-     * @param s il messaggio da scrivere
-     */
-    public void setMessaggio(String s){
-        messaggioInfo.setText(s);
+     * Aggiorno il messaggio contenente sulla JLabel messaggio
+     * @param s Il messaggio da scrivere
+    */
+    public void setMessaggio( String s ){
+        
+        messaggioInfo.setText( s );
+    
     }
     
     /**
-     * Ogni volta che viene mangiato un pezzo viene aggiunto ai box laterali
-     * tramite questa funzione. Analizza quale pezzo è stato mangiato e lo
-     * aggiunge al box.
-     * @param p 
-     */
+     * Quando viene mangiato un pezzo viene aggiunto ai JPanel laterali tramite questa funzione.
+     * In base al colore del pezzo e lo aggiunge al JPanel corrispondente
+     * @param p  - Il pezzo che e stato mangiato
+    */
     public void aggiungiPezzoMorto( Pezzo p ){
         
         int valore = 0;
         
         if( p.getColore() instanceof Bianco ){
-            if(p instanceof Pedone)
-                valore=PEDONE_BIANCO;
-            else if(p instanceof Torre)
-                    valore=TORRE_BIANCA;
-            else if(p instanceof Alfiere)
-                    valore=ALFIERE_BIANCO;
-            else if(p instanceof Cavallo)
-                    valore=CAVALLO_BIANCO;
-            else if(p instanceof Re)
-                    valore=RE_BIANCO;
-            else if(p instanceof Regina)
-                    valore=REGINA_BIANCA;
-                       pezziMangiatiBianchi[ contaMortiBianchi ].setIcon( new ImageIcon( immagine[valore].getScaledInstance( 64, 64, Image.SCALE_FAST ) ) );
-                       contaMortiBianchi++;
-        }
-        else{
-            if(p instanceof Pedone)
-                valore=PEDONE_NERO;
-            else if(p instanceof Torre)
-                    valore=TORRE_NERA;
-            else if(p instanceof Alfiere)
-                    valore=ALFIERE_NERO;
-            else if(p instanceof Cavallo)
-                    valore=CAVALLO_NERO;
-            else if(p instanceof Re)
-                    valore=RE_NERO;
-            else if(p instanceof Regina)
-                    valore=REGINA_NERA; 
+            
+            if( p instanceof Pedone ){
+                
+                valore = 0;
+            
+            } else if( p instanceof Torre ){
+                
+                valore = 1;
+            
+            } else if( p instanceof Cavallo ){
+                
+                valore = 2;
+            
+            } else if( p instanceof Alfiere ){
+                
+                valore = 3;
+            
+            } else if( p instanceof Regina ){
+                
+                valore = 4;
+            
+            } else if( p instanceof Re ){
+                
+                valore = 5;
+            
+            }
+            
+            pezziMangiatiBianchi[ contaMortiBianchi ].setIcon( new ImageIcon( immagine[ valore ].getScaledInstance( 64, 64, Image.SCALE_FAST ) ) );
+            contaMortiBianchi++;
+        
+        } else {
+            
+            if( p instanceof Pedone ){
+                
+                valore = 6;
+            
+            } else if( p instanceof Torre ){
+                
+                valore = 7;
+            
+            } else if( p instanceof Cavallo ){
+                
+                valore = 8;
+            
+            } else if( p instanceof Alfiere ){
+                
+                valore = 9;
+            
+            } else if( p instanceof Regina ){
+                
+                valore = 10;
+            
+            } else if( p instanceof Re ){
+                
+                valore = 11;
+            
+            }
+            
             pezziMangiatiNeri[ contaMortiNeri ].setIcon( new ImageIcon( immagine[valore].getScaledInstance( 64, 64, Image.SCALE_FAST ) ) );
             contaMortiNeri++;
         
         }
-             
+    
     }
     
     /**
-     * ridisegna il pedone (permete di scegliere quale scacco) quando viene promosso
-     * per facilitare 
-     * @param s lo spazio dove il pedone è stato promosso
-     * @param colore il colore del pedone promosso
-     * @param matrice la matrice della scacchiera
-     */
-    public void promozionePedone(Spazio s,Colore colore,Spazio[][] matrice){
+     * Questo metodo viene chiamato quando un pedone viene promosso
+     * Permette tramite un'interfaccia di scegliere in cosa promuoverlo.
+     * @param s - Lo spazio dove il pedone e arrivato per promuoverlo
+     * @param colore - Il colore del pedone da promuovere
+     * @param matrice - La matrice della scacchiera completa
+    */
+    public void promozionePedone( Spazio s, Colore colore, Spazio[][] matrice ){
         
-        int scelta = JOptionPane.showOptionDialog(null, "Scegli In Cosa Vuoi Promuovere Il Pedone", "Promozione Pedone", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[]{"Torre","Cavallo","Alfiere","Regina"},"");
-        switch(scelta){
-            case 0: s.cambiaPezzo(new Torre(colore));break;
-            case 1: s.cambiaPezzo(new Cavallo(colore));break;
-            case 2: s.cambiaPezzo(new Alfiere(colore));break;
-            case 3: s.cambiaPezzo(new Regina(colore));break;
+        int scelta = JOptionPane.showOptionDialog( null, "Scegli In Cosa Vuoi Promuovere Il Pedone", "Promozione Pedone", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[]{ "Torre", "Cavallo", "Alfiere", "Regina" }, "" );
+        
+        switch( scelta ){
+            
+            case 0: s.cambiaPezzo( new Torre( colore ) ); break;
+            case 1: s.cambiaPezzo( new Cavallo( colore ) ); break;
+            case 2: s.cambiaPezzo( new Alfiere( colore ) ); break;
+            case 3: s.cambiaPezzo( new Regina( colore ) ); break;
+        
         }
+    
     }
 
     /**
-     * Dato che ogni casella usa una texture bianca/nera ogni volta che si 
-     * sposta un pezzo si deve sostituire con una mergeIcon. Per inciso, 
-     * controlla tutte le posizioni, controlla quale pezzo è presente su quella 
-     * posizione e sostituisce il mergeIcon 
-     * del pezzo sulla texture della scacchiera. Deve anche 
-     * aggiornare le posizioni vuote per eliminare immagini obsolete.
-     * @param matrice 
-     */
-    public void aggiornaBottoni(Spazio[][] matrice) {
+     * Metodo che viene chiamato dopo ogni mossa.
+     * Verifica l'integrita della mossa e aggiorna la visuale.
+     * @param matrice - La matrice aggiornata contenente le posizioni per aggiornare la visuale
+    */
+    public void aggiornaBottoni( Spazio[][] matrice ){
         
         Pezzo p;
         
         for( int i = 0; i < 8; i++ ){
             
             for( int j = 0; j < 8; j++ ){
+                
                 if( matrice[ i ][ j ].eOccupato() ){
-                    p  = matrice[ i ][ j ].getOccupante();
-                    // Pensavo Di Utilizzare Uno Switch
-                    if( p instanceof Pedone ){       
-                        if( p.getColore() instanceof Bianco ){
-                            if( quadratiScacchiera[ i ][ j ].getBackground() == Color.WHITE ){
-                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[0] ) );
-                            } else {
-                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[1] ) );
-                            }
-                        } else {
-                            if( quadratiScacchiera[ i ][ j ].getBackground() == Color.WHITE ){
-                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[2] ) );
-                            } else {
-                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[3] ) );
-                            }
-                        }
-                    }
                     
-                    if( p instanceof Alfiere ){ 
+                    p  = matrice[ i ][ j ].getOccupante();
+                    
+                    if( p instanceof Pedone ){
+                        
                         if( p.getColore() instanceof Bianco ){
+                            
                             if( quadratiScacchiera[ i ][ j ].getBackground() == Color.WHITE ){
-                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[12] ) );
+                                
+                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[ 0 ] ) );
+                            
                             } else {
-                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[13] ) );
+                                
+                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[ 1 ] ) );
+                            
                             }
-                        } else {
+                        
+                        } else { // Il Colore E Nero
+                            
                             if( quadratiScacchiera[ i ][ j ].getBackground() == Color.WHITE ){
-                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[14] ) );
+                                
+                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[ 12 ] ) );
+                            
                             } else {
-                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[15] ) );
+                                
+                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[ 13 ] ) );
+                            
                             }
+                        
                         }
+                    
                     }
                     
                     if( p instanceof Torre ){
+                        
                         if( p.getColore() instanceof Bianco ){
+                            
                             if( quadratiScacchiera[ i ][ j ].getBackground() == Color.WHITE ){
-                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[4] ) );
+                                
+                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[ 2 ] ) );
+                            
                             } else {
-                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[5] ) );
+                                
+                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[ 3 ] ) );
+                            
                             }
-                        } else {
+                        
+                        } else { // Il Colore E Nero
+                            
                             if( quadratiScacchiera[ i ][ j ].getBackground() == Color.WHITE ){
-                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[6] ) );
+                                
+                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[ 14 ] ) );
+                            
                             } else {
-                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[7] ) );
+                                
+                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[ 15 ] ) );
+                            
                             }
+                        
                         }
+                    
                     }
                     
-                    if( p instanceof Cavallo ){                 
+                    if( p instanceof Cavallo ){
+                        
                         if( p.getColore() instanceof Bianco ){
+                            
                             if( quadratiScacchiera[ i ][ j ].getBackground() == Color.WHITE ){
-                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[8] ) );
+                                
+                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[ 4 ] ) );
+                            
                             } else {
-                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[9] ) );
+                                
+                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[ 5 ] ) );
+                            
                             }
-                        } else {
+                        
+                        } else { // Il colore e nero
+                            
                             if( quadratiScacchiera[ i ][ j ].getBackground() == Color.WHITE ){
-                                    quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[10] ) );
+                                
+                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[ 16 ] ) );
+                            
                             } else {
-                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[11] ) );
+                                
+                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[ 17 ] ) );
+                            
+                            }
+                        
+                        }
+                    
+                    }
+                    
+                    if( p instanceof Alfiere ){
+                        
+                        if( p.getColore() instanceof Bianco ){
+                            
+                            if( quadratiScacchiera[ i ][ j ].getBackground() == Color.WHITE ){
+                                
+                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[ 6 ] ) );
+                            
+                            } else {
+                                
+                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[ 7 ] ) );
+                            
+                            }
+                        
+                        } else { // Il Colore E Nero
+                            
+                            if( quadratiScacchiera[ i ][ j ].getBackground() == Color.WHITE ){
+                                
+                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[ 18 ] ) );
+                            
+                            } else {
+                                
+                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[ 19 ] ) );
+                            
                             }
                         }
                     }
                     
                     if( p instanceof Regina ){
+                        
                         if( p.getColore() instanceof Bianco ){
+                            
                             if( quadratiScacchiera[ i ][ j ].getBackground() == Color.WHITE ){
-                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[16] ) );
+                                
+                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[ 8 ] ) );
+                            
                             } else {
-                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[17] ) );
+                                
+                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[ 9 ] ) );
+                            
                             }
-                        } else {
+                        
+                        } else { // Il colore e nero
+                            
                             if( quadratiScacchiera[ i ][ j ].getBackground() == Color.WHITE ){
-                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[18] ) );
+                                
+                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[ 20 ] ) );
+                            
                             } else {
-                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[19] ) );
+                                
+                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[ 21 ] ) );
+                            
                             }
+                        
                         }
+                    
                     }
                     
                     if( p instanceof Re ){
-                        if( p.getColore() instanceof Bianco ){ 
+                        
+                        if( p.getColore() instanceof Bianco ){
+                            
                             if( quadratiScacchiera[ i ][ j ].getBackground() == Color.WHITE ){
-                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[20] ) );
+                                
+                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[ 10 ] ) );
+                            
                             } else {
-                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[21] ) );
+                                
+                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[ 11 ] ) );
+                            
                             }
-                        } else {
+                        
+                        } else { // Il colore e nero
+                            
                             if( quadratiScacchiera[ i ][ j ].getBackground() == Color.WHITE ){
-                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[22] ) );
+                                
+                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[ 22 ] ) );
+                            
                             } else {
-                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[23] ) );
+                                
+                                quadratiScacchiera[ i ][ j ].setImage( MergeIcon.iconToImage( mergeIco[ 23 ] ) );
+                            
                             }
+                        
                         }
+                    
                     }
-                }
-
-                // Posizione Vuota ( Bisogna Aggiornare Per Eliminare Texture Obsolete )
-                else{
+                
+                } else { // Posizione Non Occupata
+                    
                     if( quadratiScacchiera[ i ][ j ].getBackground() == Color.WHITE ){
-                                quadratiScacchiera[ i ][ j ].setImage( colore[0] );
-                            } else {
-                                quadratiScacchiera[ i ][ j ].setImage( colore[1] );
-                            }
+                        
+                        quadratiScacchiera[ i ][ j ].setImage( colore[ 0 ] );
+                    
+                    } else {
+                        
+                        quadratiScacchiera[ i ][ j ].setImage( colore[ 1 ] );
+                    
+                    }
+                
                 }
+            
             }
+        
         }
-        
-        
-    }
     
+    }
+
 } // Fine Classe InterfacciaGrafica

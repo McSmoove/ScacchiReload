@@ -1,18 +1,19 @@
 package view;
 
-import java.io.IOException;
-
+/**
+ * Classe contenente il main dove viene lanciata l'interfaccia grafica
+ * @author Viktor, Michael, Gaetano
+*/
 public class Main{
     
     /**
-     * Main Del Progetto Che Fa Inizializza L'Interfaccia Grafica E Fa Eseguire Il Thread
-     * @param args - I Parametri Aggiuntivi Alla Esecuzione Del Programma
-     * @throws IOException - Se Il Thread Si Blocca Genero Una Eccezione Di IO
+     * Main del progetto che inizializza l'interfaccia grafica e la esegue
+     * @param args - I parametri aggiuntivi alla esecuzione del programma
     */
-    public static void main( String args[] ) throws IOException{
+    public static void main( String args[] ){
         
-       InterfacciaGrafica interfaccia = new InterfacciaGrafica(); // Inizializzo L'Interfaccia Grafica
-       interfaccia.start(); // Inizio Un Thread Che Esegua L'Interfaccia Grafica
+       InterfacciaGrafica interfaccia = new InterfacciaGrafica(); // Inizializzo l'interfaccia grafica
+       interfaccia.start(); // Esegue quest'ultima
     
     } // Fine main
 

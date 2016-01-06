@@ -6,29 +6,67 @@ import model.*;
 import view.*;
 
 /**
- * Questa classe cambia i turni quando richiesto e blocca i pulsanti che non possono
- * essere premuti (per esempio, se non è il turno del bianco blocca tutti i pulsanti
- * con una pedina bianca sopra)
+ * Questa classe gestisce i Turni e i Buttoni.
+ * Esso, ad esempio, blocca i pulsanti affinche non possano essere premuti se tocca al colore opposto al turno corrente.
  * @author Viktor, Michael, Gaetano
 */
 public class GestoreTB{
     
+    /**
+     * Variabile contenente il turno corrente 
+    */
     private Colore turno;
+    
+    /**
+     * Indica se uno spazio e attivato ( Prima Pressione ovvero Sorgente ) 
+    */
     private boolean attivato;
+    
+    /**
+     * Coordinate contenente la X e la Y dello spazio attivato sorgente 
+    */
     private int xAttivato,yAttivato;
+    
+    /**
+     * Collegmaneto GestoreTurniEBottoni (GestoreTB) con il GestoreMovimenti 
+    */
     GestoreMovimenti gestoreMovimenti;
+    
+    /**
+     * Collegmaneto GestoreTurniEBottoni (GestoreTB) con l'InterfacciaGrafica 
+    */
     InterfacciaGrafica interfacciaGrafica;
+    
+    /**
+     * Matrice dei bottoni contenente la situazione della scacchiera
+    */
     JButton[][] matriceBottoni;
+    
+    /**
+     * Coordinate contenente la X e la Y del / dei pedoni trasformati 
+    */
     private int xPedoneTrasformato,yPedoneTrasformato;
+    
+    /**
+     * Coordinate contenente la X e la Y della sorgente 
+    */
     int x,y;
+    
+    /**
+     * Matrice simulata usata per simulare i casi di possibili salvataggi dallo scacco 
+    */
     Spazio[][] matriceSimulata = null;
+    
+    /**
+     * Matrice simulata alternativa usata per tornare ad una situazione precedente 
+    */
     Spazio[][] matriceSimulata2 = null;
     
     /**
      * Costruttore di base della classe
-     * @param gm gestoreMovimenti
-     * @param ig interfacciaGrafica
-     */
+     * @param gm -> Collegamento con il gestoreMovimenti
+     * @param ig interfacciaGrafica -> Collegamento con l'InterfacciaGrafica
+    */
     public GestoreTB( GestoreMovimenti gm, InterfacciaGrafica ig ){
         
         attivato = false;
@@ -40,8 +78,8 @@ public class GestoreTB{
     }
     
     /**
-     * 
-     * @return ritorna il colore del giocatore di cui è il turno 
+     * Metodo che ritorna il colore di collui che detiene il turno corrente della partita
+     * @return turno - Il colore del giocatore di cui e il turno 
     */
     public Colore getTurno(){
         
@@ -50,10 +88,10 @@ public class GestoreTB{
     }
     
     /**
-     * Inizializza il turno e aggiorna l'interfaccia segnado a quale colore corrisponde il turno
-     * @param t colore del turno corrente
+     * Imposta il turno e aggiorna l'interfaccia segnando a che colore corrisponde il turno
+     * @param t Il colore del turno da impostare
     */
-    public void setTurno(Colore t){
+    public void setTurno( Colore t ){
         
         turno = t;
         bloccoPezziIniziale();
@@ -62,8 +100,8 @@ public class GestoreTB{
     }
     
     /**
-     * Ritorna il parametro interfacciaGrafica (serve per aggiornare la posizione dei pezzi visualizzata dall'utente
-     * @return 
+     * Ritorna l'iInterfacciaGrafica affinche si possa aggiornare la posizione dei pezzi visualizzata dall'utente
+     * @return interfacciaGrafica - L'interfaccia da impostare 
     */
     private InterfacciaGrafica getInterfacciaGrafica(){
         
@@ -72,7 +110,7 @@ public class GestoreTB{
     }
     
     /**
-     * Cambia il colore del turno corrente
+     * Passo il turno al giocatore successivo dopo aver' fatto una mossa
     */
     public void passaTurno(){
         
@@ -89,14 +127,12 @@ public class GestoreTB{
         
         }
         
-      
         attivato = false;
     
     }
     
     /**
-     * Viktor
-     * Metodo di support per attivaPosizione
+     * Metodo che viene usato per attivare i bottoni per permettere una mossa
     */
     public void attiva(){
         
@@ -105,7 +141,7 @@ public class GestoreTB{
     }
     
     /**
-     * Metodo di supporto per disattivaPosizione
+     * Metodo che viene usato per disattivare i bottoni affinche una mossa non sia possibile
     */
     public void disattiva(){
         
@@ -114,8 +150,8 @@ public class GestoreTB{
     }
     
     /**
-     * Ritorna l'ascissa della coordinata della casella attiva
-     * @return 
+     * Ritorna la coordinata X dello spazio attivato
+     * @return xAttivato - La coordinata X dello spazio attivato
     */
     private int getXAttivato(){
         
@@ -124,8 +160,8 @@ public class GestoreTB{
     }
     
     /**
-     * Ritorna l'ordinata della coordinata della casella attiva
-     * @return 
+     * Ritorna la coordinata Y dello spazio attivato
+     * @return yAttivato - La coordinata Y dello spazio attivato
     */
     private int getYAttivato(){
         
@@ -134,8 +170,8 @@ public class GestoreTB{
     }
     
     /**
-     * memorizza l'ascissa della casella attivata
-     * @param x 
+     * Imposto la xAttivata dello spazio
+     * @param x - La coordinata X dello spazio da attivare
     */
     private void setXAttivato( int x ){
         
@@ -144,8 +180,8 @@ public class GestoreTB{
     }
     
     /**
-     * memorizza l'ordinata della casella attivata
-     * @param y 
+     * Imposto la yAttivata dello spazio
+     * @param y - La coordinata Y dello spazio da attivare
     */
     private void setYAttivato( int y ){
         
@@ -154,8 +190,8 @@ public class GestoreTB{
     }
     
     /**
-     * 
-     * @return ritorna se la casella è attivata oppure no 
+     * Metodo che verifica se una determinata casella e attivata o no
+     * @return attivato - True se la casella e attivata, false altrimenti 
     */
     public boolean isAttivato(){
         
@@ -164,12 +200,10 @@ public class GestoreTB{
     }
     
     /**
-     * Blocca Le Caselle Occupate Dalle Pedine Di Cui Non E Il Turno E Quelle Vuote.
-     * Viene Chiamato Ad Ogni Turno.
+     * Metodo che blocca le caselle occupate da pezzi del giocatore opposto al turno corrente
+     * Esso viene chiamato ad ogni turno
     */
     public void bloccoPezziIniziale(){
-        
-
         
         for( int j = 0; j < 8; j++ ){
             
@@ -179,9 +213,9 @@ public class GestoreTB{
                     
                     matriceBottoni[ i ][ j ].setEnabled( false );
                 
-                } else { // Con L'Else Sono Sicuro Che Esiste L'Occupante
+                } else { // Qui sono sicuro che esiste l'occupante
                     
-                    if( !( gestoreMovimenti.getMatrice()[i][j].getOccupante().getColore().equals( getTurno() ) ) ){ // Cerco Locazioni Del Colore Sbagliato
+                    if( !( gestoreMovimenti.getMatrice()[i][j].getOccupante().getColore().equals( getTurno() ) ) ){ // Cerco le locazioni del colore sbagliato
                         
                         matriceBottoni[ i ][ j ].setEnabled( false );
                     
@@ -196,11 +230,11 @@ public class GestoreTB{
     }
     
     /**
-     * Attiva la casella alla data coordinata 
-     * @param x ascissa della coordinata
-     * @param y rdinata della coordinata
+     * Metodo che attiva un determinato spazio una volta fornite le coordinate 
+     * @param x - La coordinata x dello spazio da attivare
+     * @param y - La coordinata y dello spazio da attivare
     */
-    private void attivaPosizione( int x,int y ){
+    private void attivaPosizione( int x, int y ){
         
         setXAttivato( x );
         setYAttivato( y );
@@ -209,9 +243,9 @@ public class GestoreTB{
     }
     
     /**
-     * Disattiva la casella alla data coordinata
-     * @param x ascissa della coordinata
-     * @param y ordinata della coordinata
+     * Metodo che disattiva un determinato spazio una volta fornite le coordinate 
+     * @param x - La coordinata x dello spazio da disattivare
+     * @param y - La coordinata y dello spazio da disattivare
     */
     private void disattivaPosizione( int x, int y ){
         
@@ -220,7 +254,7 @@ public class GestoreTB{
     }
     
     /**
-     * Metodo che chiama disattivaPosizione
+     * Metodo che disattiva un dato spazio
     */
     private void disattivaPosizione(){
         
@@ -229,8 +263,8 @@ public class GestoreTB{
     }
     
     /**
-     * memorizza l'ascissa della casella sulla quale si trova il pedone promosso
-     * @param x
+     * Imposto la X del pedone trasformato dello spazio
+     * @param x - La coordinata X del pedone trasformato
     */
     public void setXPedoneTrasformato( int x ){
         
@@ -239,8 +273,8 @@ public class GestoreTB{
     }
     
     /**
-     * Memorizza l'ordinata della casella sulla quale si trova il pedone promosso
-     * @param y 
+     * Imposto la Y del pedone trasformato dello spazio
+     * @param y - La coordinata Y del pedone trasformato
     */
     public void setYPedoneTrasformato( int y ){
         
@@ -249,8 +283,8 @@ public class GestoreTB{
     }
     
     /**
-     * Ritorna l'ascissa di dove è stato promosso  il pedone
-     * @return 
+     * Metodo che ritorna la coordinata X del pedone trasformato dello spazio
+     * @return xPedoneTrasformato - La coordinata X del pedone trasformato
     */
     public int getXPedoneTrasformato(){
         
@@ -259,8 +293,8 @@ public class GestoreTB{
     }
     
     /**
-     * Ritorna l'ordinata di dove è stato promosso  il pedone
-     * @return 
+     * Metodo che ritorna la coordinata Y del pedone trasformato dello spazio
+     * @return yPedoneTrasformato - La coordinata Y del pedone trasformato
     */
     public int getYPedoneTrasformato(){
         
@@ -269,8 +303,8 @@ public class GestoreTB{
     }
     
     /**
-     * Segna sulla scacchiera dove si trova il pedone promosso
-     * @param s lo spazio dove si trova il pedone promosso
+     * Metodo che segna sulla scacchiera dove si trova un determinato pedone trasformato
+     * @param s Lo spazio dove si trova un determinato pedone trasformato
     */
     public void setPedoneTrasformato( Spazio s ){
         
@@ -284,14 +318,14 @@ public class GestoreTB{
     }
     
     /**
-     * segna le coordinate di dove è stata premuta la scacchiera
-     * @param e pressione di un pulsante sulla schacchiera
-     * @throws Exception 
+     * Metodo che segna le coordinate dove e stato premuto sulla scacchiera
+     * @param e - La coordinata presa dal sistema che identifica il JButton sul quale e stato premuto sulla schacchiera
+     * @throws Exception Nel caso in cui l'evento non venga registrato
     */
     public void pressionePulsanteScacchiera( ActionEvent e ) throws Exception{
         
-        x = 0; // Identificatore X Della Matrice Del Bottone Dove Premo
-        y = 0;// Identificatore Y Della Matrice Del Bottone Dove Premo
+        x = 0; // Identificatore X della matrice dei bottoni dove si e premuto
+        y = 0;// Identificatore Y della matrice dei bottoni dove si e premuto
         
         JButton b;
         
@@ -303,10 +337,7 @@ public class GestoreTB{
         
         b = ( JButton ) e.getSource();
         
-       
-        
-        // Ricerca Inversa Della Posizione Del Bottone
-        for( int i = 0; i < 8; i++ ){
+        for( int i = 0; i < 8; i++ ){ // Ricerca Inversa Della Posizione Del Bottone
             
             for( int j = 0; j < 8; j++ ){
                 
@@ -321,8 +352,6 @@ public class GestoreTB{
             }
         
         }
-        
-        
         
         if( !isAttivato() ){ // Guardo Se Nello Stesso Turno Non è stato Abilitato Un Bottone
             
@@ -341,7 +370,6 @@ public class GestoreTB{
                             if( gestoreMovimenti.getMatricePezziChePrevengonoScacco( gestoreMovimenti.getSpazioReBianco().getX(), gestoreMovimenti.getSpazioReBianco().getY(), gestoreMovimenti.getMatrice(), new Bianco() )[ x ][ y ] == 1 ){
                                 
                                 attivaPosizione( x, y );
-                               
                             
                             }
                         
@@ -366,95 +394,91 @@ public class GestoreTB{
             } else { // Se Sono Qua Ho Premuto In Una Posizione Diversa
                 
                 if( !gestoreMovimenti.getMatrice()[ x ][ y ].eOccupato() ){ // Se E Una Locazione Vuota
-    
-                    // Se E Una Locazione Consentita Dal Pezzo
-                    if( gestoreMovimenti.spostabileIn( gestoreMovimenti.getMatrice()[ xAttivato ][ yAttivato ], x, y ) ){ 
+                    
+                    if( gestoreMovimenti.spostabileIn( gestoreMovimenti.getMatrice()[ xAttivato ][ yAttivato ], x, y ) ){ // Se E Una Locazione Consentita Dal Pezzo
                         
                         matriceSimulata=gestoreMovimenti.getMatrice().clone();
                         matriceSimulata2=gestoreMovimenti.coppiaMatrice(matriceSimulata);
-                        gestoreMovimenti.spostaPezzo( gestoreMovimenti.getMatrice()[xAttivato][yAttivato], x, y,matriceSimulata );
+                        gestoreMovimenti.spostaPezzo( gestoreMovimenti.getMatrice()[ xAttivato ][ yAttivato ], x, y, matriceSimulata );
 
-                        // Se il re non è sotto scacco (dentro la matrice simulata)
+                        // Se il re non e sotto scacco dentro la matrice simulata
                         if( (getTurno() instanceof Bianco && gestoreMovimenti.controlloScacco(new Bianco(),matriceSimulata)) || (getTurno() instanceof Nero && gestoreMovimenti.controlloScacco(new Nero(),matriceSimulata))){
                             
-                            // Sposto definitivamente il pezzo
-                            gestoreMovimenti.setMatrice(matriceSimulata);
-                            interfacciaGrafica.aggiornaBottoni( gestoreMovimenti.getMatrice() ); // Aggiorna La Visuale
-                   
+                            gestoreMovimenti.setMatrice(matriceSimulata); // Sposto definitivamente il pezzo
+                            interfacciaGrafica.aggiornaBottoni( gestoreMovimenti.getMatrice() ); // Aggiorno la visuale
                             
                             if( !gestoreMovimenti.controlloScaccoReAvversario( turno, matriceSimulata ) ){
  
-                                //se il re avversario non può essere salvato
-                                if(gestoreMovimenti.getListaPezziChePrevengonoScacco(gestoreMovimenti.getSpazioReAvversario(turno).getX(), gestoreMovimenti.getSpazioReAvversario(turno).getY(), gestoreMovimenti.getMatrice(), turno).isEmpty()){
+                                // Se il Re avversario non puo essere salvato
+                                if( gestoreMovimenti.getListaPezziChePrevengonoScacco( gestoreMovimenti.getSpazioReAvversario( turno ).getX(), gestoreMovimenti.getSpazioReAvversario( turno ).getY(), gestoreMovimenti.getMatrice(), turno ).isEmpty() ){
             
                                     interfacciaGrafica.finePartita();
+                                
                                 }
+                            
                             }
                             
-                            //e passo il turno
-                            disattivaPosizione(); 
-                            passaTurno();
-                            
+                            disattivaPosizione(); // Disattivo la posizione dove e stato premuto
+                            passaTurno(); // Passo il turno
                         
-                        } else { // Se Provoca Lo Scacco Matto
+                        } else { // Se Provoco Lo Scacco Matto
                             
-                            //torno indietro
-                            gestoreMovimenti.setMatrice(gestoreMovimenti.coppiaMatrice(matriceSimulata2));
-                            disattivaPosizione(); // Imposto Come Se Niente Fosse Stato Premuto
+                            gestoreMovimenti.setMatrice( gestoreMovimenti.coppiaMatrice( matriceSimulata2 ) ); // Torno alla situazione sicura di prima
+                            disattivaPosizione(); // Disattivo la posizione dove e stato premuto
                         
                         }
                     
-                    } else { // Se Non è Una Locazione Consentita Dal Pezzo
+                    } else { // Se Non E Una Locazione Consentita Dal Pezzo
                     
-                        disattivaPosizione(); // Imposto Come Se Niente Fosse Stato Premuto
+                        disattivaPosizione(); // Disattivo la posizione dove e stato premuto
                     
                     }
                 
                 } else { // Se E Una Locazione Non Vuota
                     
-                    if( gestoreMovimenti.spostabileIn( gestoreMovimenti.getMatrice()[xAttivato][yAttivato], x, y ) ){ // Se E Una Locazione Consentita Dal Pezzo E Contiene Un Pezzo Di Colore Diverso
+                    if( gestoreMovimenti.spostabileIn( gestoreMovimenti.getMatrice()[ xAttivato ][ yAttivato ], x, y ) ){ // Se E Una Locazione Consentita Dal Pezzo E Contiene Un Pezzo Di Colore Diverso
                         
                         matriceSimulata=gestoreMovimenti.getMatrice().clone();
-                        matriceSimulata2=gestoreMovimenti.coppiaMatrice(matriceSimulata);
-                        pezzoDaSpostare=gestoreMovimenti.getMatrice()[x][y].getOccupante();
-                        gestoreMovimenti.spostaPezzo(gestoreMovimenti.getMatrice()[xAttivato][yAttivato], x, y,matriceSimulata);
+                        matriceSimulata2=gestoreMovimenti.coppiaMatrice( matriceSimulata );
+                        pezzoDaSpostare=gestoreMovimenti.getMatrice()[ x ][ y ].getOccupante();
+                        gestoreMovimenti.spostaPezzo( gestoreMovimenti.getMatrice()[ xAttivato ][ yAttivato ], x, y, matriceSimulata );
                         
-                        if( (getTurno() instanceof Bianco && gestoreMovimenti.controlloScacco(new Bianco(),matriceSimulata)) || (getTurno() instanceof Nero && gestoreMovimenti.controlloScacco(new Nero(),matriceSimulata))){
+                        if( ( getTurno() instanceof Bianco && gestoreMovimenti.controlloScacco( new Bianco(), matriceSimulata ) ) || ( getTurno() instanceof Nero && gestoreMovimenti.controlloScacco( new Nero(), matriceSimulata ) ) ){
                             
-                            gestoreMovimenti.setMatrice(matriceSimulata);
-                            interfacciaGrafica.aggiungiPezzoMorto(pezzoDaSpostare);
-                            interfacciaGrafica.aggiornaBottoni( gestoreMovimenti.getMatrice() ); // Aggiorna La Visuale
+                            gestoreMovimenti.setMatrice( matriceSimulata );
+                            interfacciaGrafica.aggiungiPezzoMorto( pezzoDaSpostare );
+                            interfacciaGrafica.aggiornaBottoni( gestoreMovimenti.getMatrice() ); // Aggiorno La Visuale
                             
-                            //se il re è stato mangiato
-                            if( gestoreMovimenti.scaccoMatto(turno) ){ // Verifico Scacco Matto
-                            
-                 
+                            if( gestoreMovimenti.scaccoMatto(turno) ){ // Verifico Scacco Matto / Se il Re Verra Mangiato
+                                
                                 interfacciaGrafica.finePartita();
                                 
                             }
-                            if(!gestoreMovimenti.controlloScaccoReAvversario(turno,matriceSimulata)){
+                            
+                            if( !gestoreMovimenti.controlloScaccoReAvversario( turno, matriceSimulata ) ){
                                 
-                                //se il re avversario non può essere salvato
-                                if(gestoreMovimenti.getListaPezziChePrevengonoScacco(gestoreMovimenti.getSpazioReAvversario(turno).getX(), gestoreMovimenti.getSpazioReAvversario(turno).getY(), gestoreMovimenti.getMatrice(), turno).isEmpty()){
+                                // Se Il Re Avversario Non Puo Essere Salvato
+                                if( gestoreMovimenti.getListaPezziChePrevengonoScacco( gestoreMovimenti.getSpazioReAvversario( turno ).getX(), gestoreMovimenti.getSpazioReAvversario( turno ).getY(), gestoreMovimenti.getMatrice(), turno ).isEmpty() ){
                                     
                                     interfacciaGrafica.finePartita();
+                                
                                 }
+                            
                             }
                             
-                            disattivaPosizione();
-                            passaTurno();
-
+                            disattivaPosizione(); // Disattivo la posizione dove e stato premuto
+                            passaTurno(); // Passo il turno
                         
                         } else { // Se Provoco Lo Scacco
                             
-                            gestoreMovimenti.setMatrice(gestoreMovimenti.coppiaMatrice(matriceSimulata2));
+                            gestoreMovimenti.setMatrice( gestoreMovimenti.coppiaMatrice( matriceSimulata2 ) );
                             disattivaPosizione(); // Imposto Come Se Niente Fosse Stato Premuto
                         
                         }
                     
                     } else { // Se Contiene Un Pezzo Del Colore Corrente
                         
-                        disattivaPosizione(); // Imposto Come Se Niente Fosse Stato Premuto
+                        disattivaPosizione(); // Disattivo la posizione dove e stato premuto
                     
                     }
                 
@@ -467,41 +491,66 @@ public class GestoreTB{
     }
     
     /**
-     * Ricompila la matrice segnando quali spazi sono occupati da un pezzo
-     */
+     * Metodo usato durante il debug che disegna la matrice delle posizioni occupate da un pezzo e non
+    */
     public void disegnaMatriceSpaziOccupati(){
         
-        System.err.println("");
-        for(int i=0;i<8;i++){
-            for(int j=0;j<8;j++){
-                if(gestoreMovimenti.getMatrice()[j][i].eOccupato())
-                    System.err.print("x");
-                else
-                    System.err.print("_");
+        System.err.println( "" );
+        
+        for( int i = 0; i < 8; i++ ){
+            
+            for( int j = 0; j < 8; j++ ){
+                
+                if( gestoreMovimenti.getMatrice()[ j ][ i ].eOccupato() ){
+                    
+                    System.err.print( "x" );
+                
+                } else {
+                    
+                    System.err.print( "_" );
+                
+                }
+            
             }
-            System.err.println("");
+            
+            System.err.println( "" );
+        
         }
-        System.err.println("");
+        
+        System.err.println( "" );
+    
     }
     
     /**
-     * Segna sulla matrice passata come parametro quali spazi sono occupati da 
-     * un pezzo
-     * @param matrice la matrice da segnare
-     */
-     private void disegnaMatriceSpaziOccupati(Spazio[][] matrice){
+     * Metodo usato durante il debug che prendento una matrice ne disegna le posizioni occupate da un pezzo e non
+     * @param matrice - La matrice da disegnare le posizioni occupate e non
+    */
+    private void disegnaMatriceSpaziOccupati( Spazio[][] matrice ){
         
-        System.err.println("");
-        for(int i=0;i<8;i++){
-            for(int j=0;j<8;j++){
-                if(matrice[j][i].eOccupato())
-                    System.err.print("x");
-                else
-                    System.err.print("_");
+        System.err.println( "" );
+        
+        for( int i = 0; i < 8; i++ ){
+            
+            for( int j = 0; j < 8; j++ ){
+                
+                if( matrice[ j ][ i ].eOccupato() ){
+                    
+                    System.err.print( "x" );
+                
+                } else {
+                    
+                    System.err.print( "_" );
+                
+                }
+            
             }
-            System.err.println("");
+            
+            System.err.println( "" );
+        
         }
-        System.err.println("");
-    }
+        
+        System.err.println( "" );
     
+    }
+
 } // Fine Classe GestoreTB

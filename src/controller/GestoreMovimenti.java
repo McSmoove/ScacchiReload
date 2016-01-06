@@ -12,20 +12,35 @@ import view.*;
 */
 public class GestoreMovimenti{
     
+    /**
+     * Variabile contenente il colore di un pezzo 
+    */
     private final Colore turno;
+    
+    /**
+     * Matrice di spazi che descrive una scacchiera 
+    */
     private Spazio[][] m;
-    private final int MAXLENGTH = 7;
+    
+    /**
+     * Collegamento GestoreMovimenti-InterfacciaGrafica
+    */
     private InterfacciaGrafica ig;
+    
+    /**
+     * Variabili contenenti le posizioni dei due Re
+    */
     Spazio reBianco,reNero;
     
     /**
-     * costruttore di base che inizializza la scacchiera
+     * Costruttore di base senza parametri che inizializza la scacchiera
     */
     public GestoreMovimenti(){
         
-        // Creare Una Matrice Con Le Posizioni Di Default
-        m = new Spazio[ 8 ][ 8 ];
+        m = new Spazio[ 8 ][ 8 ]; // Creare Una Matrice Con Le Posizioni Di Default
+        
         turno = new Bianco();
+        
         m[ 0 ][ 0 ] = new Spazio( 0, 0, new Torre( new Nero() ) );
         m[ 7 ][ 0 ] = new Spazio( 7, 0, new Torre( new Nero() ) );
         m[ 1 ][ 0 ] = new Spazio( 1, 0, new Cavallo( new Nero() ) );
@@ -69,18 +84,18 @@ public class GestoreMovimenti{
     }
     
     /**
-     * costruttore che inizializza il primo turno
-     * @param matrice matrice della scacchiera
+     * Costruttore che, fornita una matrice di spazi, inizializza il primo turno e inizia il gioco
+     * @param matrice - La matrice dei spazi della scacchiera
     */
     public GestoreMovimenti( Spazio[][] matrice ){
         
-        turno=new Bianco();
+        turno = new Bianco();
     
     }
     
     /**
-     * ritorna il parametro di classe m che contiene la matrice rappresentante la scacchiera
-     * @return il parametro di questa classe (m)
+     * Metodo che ritorna la matrice m che rappresenta la scacchiera
+     * @return m - La matrice rapresentante la scacchiera
     */
     public Spazio[][] getMatrice(){
         
@@ -89,22 +104,29 @@ public class GestoreMovimenti{
     }
     
     /**
-     * cerca dove si trova il re e lo ritorna (non ritorna le coordinate ma un oggetto di classe Re)
-     * @param c turno corrente (colore)
-     * @return oggetto di classe Re di colore c
-     * @throws Exception 
+     * Metodo che cerca dove si trova l'oggetto di classe Re del colore specificato
+     * @param c - Il colore del Re da cercare
+     * @return Il Re del colore specificato
+     * @throws Exception nel caso in cui il Re del colore specificato non venga trovato
     */
-    public Re getRe(Colore c) throws Exception{
-        if(c instanceof Bianco)
+    public Re getRe( Colore c ) throws Exception{
+        
+        if( c instanceof Bianco ){
+            
             return getReBianco();
-        else
+        
+        } else {
+            
             return getReNero();
+        
+        }
+    
     }
     
     /**
-     * cerca dove si trova il re nero e lo ritorna
-     * @return oggetto di classe Re nero
-     * @throws Exception 
+     * Metodo che cerca dove si trova il Re Nero e lo ritorna
+     * @return L'oggetto contenente il Re Nero se viene trovato
+     * @throws Exception - Eccezzione nel caso in cui non venga trovato nessun Re Nero sulla scacchiera
     */
     public Re getReNero() throws Exception{
         
@@ -130,95 +152,158 @@ public class GestoreMovimenti{
         
         }
         
-        throw new Exception( "Re Nero Non Trovato");
+        throw new Exception( "Re Nero Non Trovato" );
     
     }
     
     /**
-     * cerca la casella dove si trova il re
-     * @param c turno corrente 
-     * @return un oggetto Spazio rappresentate la casella dove si trova il re
+     * Metodo che cerca lo spazio dove si trova il Re del Colore specificato
+     * @param c - Il colore del Re che si vuole cercare
+     * @return Lo spazio dove e collocato il Re del Colore specificato
     */
-    public Spazio getSpazioRe(Colore c){
-        if(c instanceof Bianco)
+    public Spazio getSpazioRe( Colore c ){
+        
+        if( c instanceof Bianco ){
+            
             return getSpazioReBianco();
-        else 
+        
+        } else {
+            
             return getSpazioReNero();
+        
+        }
+    
     }
     
     /**
-     * cerca la casella dove si trova il re (avversario)
-     * @param c turno corrente
-     * @return un oggetto Spazio rappresentate la casella dove si trova il re
+     * Metodo che cerca lo spazio dove si trova il Re del Colore opposto a quello specificato
+     * @param c - Il colore opposto del Re che si vuole cercare
+     * @return Lo spazio dove e collocato il Re del Colore opposto a quello specificato
     */
-    public Spazio getSpazioReAvversario(Colore c){
-        if(c instanceof Bianco)
+    public Spazio getSpazioReAvversario( Colore c ){
+        
+        if( c instanceof Bianco ){
+            
             return getSpazioReNero();
-        else 
+        
+        } else {
+            
             return getSpazioReBianco();
+        
+        }
+    
     }
 
     /**
-     * cerca la casella dove si trova il re (nero)
-     * usato in getSpazioRe e getSpazioReAvversario
-     * @return un oggetto Spazio rappresentate la casella dove si trova il re
+     * Metodo che cerca lo spazio dove si trova il Re Nero
+     * @return Lo spazio dove e collocato il Re Nero
     */
     public Spazio getSpazioReNero(){
-        for(int i=0;i<8;i++){
-            for(int j=0;j<8;j++){
-                if(m[i][j].eOccupato())
-                    if(m[i][j].getOccupante() instanceof Re)
-                       if(m[i][j].getOccupante().getColore() instanceof Nero)
-                           return  m[i][j];
-            }
-        }
-        Spazio s=new Spazio();
-        s.setOccupato(false);
-        return s;
         
+        for( int i = 0; i < 8; i++ ){
+            
+            for( int j = 0; j < 8; j++ ){
+                
+                if( m[ i ][ j ].eOccupato() ){
+                    
+                    if( m[ i ][ j ].getOccupante() instanceof Re ){
+                        
+                        if( m[ i ][ j ].getOccupante().getColore() instanceof Nero ){
+                            
+                            return  m[ i ][ j ];
+                        
+                        }
+                    
+                    }
+                
+                }
+            
+            }
+        
+        }
+        
+        Spazio s = new Spazio();
+        
+        s.setOccupato( false );
+        
+        return s;
+    
     }
     
     /**
-     * cerca la casella dove si trova il re (bianco)
-     * usato in getSpazioRe e getSpazioReAvversario
-     * @return un oggetto Spazio rappresentate la casella dove si trova il re
+     * Metodo che cerca lo spazio dove si trova il Re Bianco
+     * @return Lo spazio dove e collocato il Re Bianco
     */
     public Spazio getSpazioReBianco(){
-        for(int i=0;i<8;i++){
-            for(int j=0;j<8;j++){
-                if(m[i][j].eOccupato())
-                    if(m[i][j].getOccupante() instanceof Re)
-                       if(m[i][j].getOccupante().getColore() instanceof Bianco)
-                           return  m[i][j];
-            }
-        }
-        Spazio s=new Spazio();
-        s.setOccupato(false);
-        return s;
         
+        for( int i = 0; i < 8; i++ ){
+            
+            for( int j = 0; j < 8; j++ ){
+                
+                if( m[ i ][ j ].eOccupato() ){
+                    
+                    if( m[ i ][ j ].getOccupante() instanceof Re ){
+                        
+                        if( m[ i ][ j ].getOccupante().getColore() instanceof Bianco ){
+                            
+                            return  m[ i ][ j ];
+                        
+                        }
+                    
+                    }
+                
+                }
+            
+            }
+        
+        }
+        
+        Spazio s = new Spazio();
+        s.setOccupato( false );
+        
+        return s;
+    
     }
     
     /**
-     * cerca dove si trova il re bianco e lo ritorna
-     * @return oggetto di classe Re bianco
-     * @throws Exception 
+     * Metodo che cerca dove si trova il Re Bianco e lo ritorna
+     * @return L'oggetto contenente il Re Bianco se viene trovato
+     * @throws Exception - Eccezzione nel caso in cui non venga trovato nessun Re Bianco sulla scacchiera
     */
     public Re getReBianco() throws Exception{
-        for(int i=0;i<8;i++){
-            for(int j=0;j<8;j++){
-                if(m[i][j].eOccupato())
-                    if(m[i][j].getOccupante() instanceof Re)
-                       if(m[i][j].getOccupante().getColore() instanceof Bianco)
-                           return (Re) m[i][j].getOccupante();
+        
+        for( int i = 0; i < 8; i++ ){
+            
+            for( int j = 0; j < 8; j++ ){
+                
+                if( m[ i ][ j ].eOccupato() ){
+                    
+                    if( m[ i ][ j ].getOccupante() instanceof Re ){
+                        
+                        if( m[ i ][ j ].getOccupante().getColore() instanceof Bianco ){
+                            
+                            return ( Re ) m[ i ][ j ].getOccupante();
+                        
+                        }
+                    
+                    }
+                
+                }
+            
             }
+        
         }
-        throw new Exception("Re bianco non trovato");
+        
+        throw new Exception( "Re Bianco Non Trovato" );
+    
     }
     
+    // RIMASTO QUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    
     /**
-     * ritorna in quali posizioni della scacchiera può muoversi il pedone
-     * @param s casella dove si trova il pedone
-     * @return una matrice di interi che rappresenta i movimenti del pedone
+     * Metodo che verifica e stabilisce i percorsi possibili sulla scacchiera di un Pedone
+     * @param s - Lo spazio dove il pedone vuole muoversi
+     * @return na matrice di interi che rappresenta i movimenti del pedone
     */
     public int[][] movimentiPedone( Spazio s ){
         
@@ -252,7 +337,7 @@ public class GestoreMovimenti{
             }
 
             // In Alto A Destra
-            if( ( x + 1 ) <= MAXLENGTH ){ // Controllo Posizione Valida ( Probabilmente Ridondante )
+            if( ( x + 1 ) <= 7 ){ // Controllo Posizione Valida ( Probabilmente Ridondante )
                 
                 if( m[ x + 1 ][ y - 1 ].eOccupato()  ){
                     if(m[ x + 1 ][ y - 1 ].getOccupante().getColore() instanceof Nero)
@@ -282,7 +367,7 @@ public class GestoreMovimenti{
                 
                 }
             
-            if( ( x + 1 ) <= MAXLENGTH ){ // Controllo Posizione Valida ( Probabilmente Ridondante )
+            if( ( x + 1 ) <= 7 ){ // Controllo Posizione Valida ( Probabilmente Ridondante )
                 
                 if( m[ x + 1 ][ y + 1 ].eOccupato()  ){
                     if(m[ x + 1 ][ y + 1 ].getOccupante().getColore() instanceof Nero)
@@ -312,10 +397,10 @@ public class GestoreMovimenti{
         y = s.getY();
 
         // Direzione Verso Destra
-        if( x + 1 <= MAXLENGTH ){
+        if( x + 1 <= 7 ){
 
             // Spazi Liberi A Destra
-            for( temp = x + 1; temp <= MAXLENGTH && !( m[ temp ][ y ].eOccupato()); temp++ ){
+            for( temp = x + 1; temp <= 7 && !( m[ temp ][ y ].eOccupato()); temp++ ){
                 
                 scacchiera[ temp ][ y ] = 1;
             
@@ -324,7 +409,7 @@ public class GestoreMovimenti{
             // Primo Spazio Occupato A Destra
             temp++;
             
-            if( temp <= MAXLENGTH ){ // Controllo Per Non Andare Fuori Scachiera
+            if( temp <= 7 ){ // Controllo Per Non Andare Fuori Scachiera
 
                 // Se Lo Spazzio E Occupato E Contiene Un Pezzo Del Colore Opposto... Controllo isBusy() Obsoleto
                 if( m[ temp ][ y ].eOccupato()  ){
@@ -361,9 +446,9 @@ public class GestoreMovimenti{
         }
 
         // Direzione Verso L'Alto
-        if( y + 1 <= MAXLENGTH ){
+        if( y + 1 <= 7 ){
             
-            for( temp = y + 1; temp <= MAXLENGTH && ! ( m[ x ][ temp ].eOccupato()); temp++ ){
+            for( temp = y + 1; temp <= 7 && ! ( m[ x ][ temp ].eOccupato()); temp++ ){
                 
                 scacchiera[ x ][ temp ] = 1;
             
@@ -371,7 +456,7 @@ public class GestoreMovimenti{
             
             temp++;
             
-            if( temp <= MAXLENGTH ){ // Controllo Per Non Uscire Fuori Dalla Scachiera
+            if( temp <= 7 ){ // Controllo Per Non Uscire Fuori Dalla Scachiera
 
                 // Se Lo Spazzio E Occupato E Contiene Un Pezzo Del Colore Opposto
                 if( m[ x ][ temp ].eOccupato() ){
@@ -428,7 +513,7 @@ public class GestoreMovimenti{
         temp2 = y + 1; // Spostamento Sul Asse Y
         
         // Direzione Verso Alto A Destra, Spazi Verso Alto A Destra Liberi
-        while( temp1 <= MAXLENGTH && temp2 <= MAXLENGTH && !m[ temp1 ][ temp2 ].eOccupato() ){
+        while( temp1 <= 7 && temp2 <= 7 && !m[ temp1 ][ temp2 ].eOccupato() ){
             
             scacchiera[ temp1 ][ temp2 ] = 1;
             temp1++;
@@ -436,7 +521,7 @@ public class GestoreMovimenti{
         
         }
         
-        if( temp1 <=MAXLENGTH && temp2 <= MAXLENGTH ){
+        if( temp1 <=7 && temp2 <= 7 ){
 
                 // Se Lo Spazzio E Occupato E Contiene Un Pezzo Del Colore Opposto
                 if( m[ temp1 ][ temp2 ].eOccupato() ){
@@ -451,7 +536,7 @@ public class GestoreMovimenti{
         temp1 = x + 1;
         temp2 = y - 1;
         
-        while( temp1 <= MAXLENGTH && temp2 >= 0 && !m[ temp1 ][ temp2 ].eOccupato() ){
+        while( temp1 <= 7 && temp2 >= 0 && !m[ temp1 ][ temp2 ].eOccupato() ){
             
             scacchiera[ temp1 ][ temp2 ] = 1;
             temp1++;
@@ -459,7 +544,7 @@ public class GestoreMovimenti{
         
         }
         
-        if( temp1 <= MAXLENGTH && temp2 >= 0 ){
+        if( temp1 <= 7 && temp2 >= 0 ){
 
             // Se Lo Spazzio E Occupato E Contiene Un Pezzo Del Colore Opposto
             if( m[ temp1 ][ temp2 ].eOccupato() ){
@@ -473,7 +558,7 @@ public class GestoreMovimenti{
         temp1 = x - 1;
         temp2 = y + 1;
         
-        while( temp1 >= 0 && temp2 <= MAXLENGTH && !m[ temp1 ][ temp2 ].eOccupato() ){
+        while( temp1 >= 0 && temp2 <= 7 && !m[ temp1 ][ temp2 ].eOccupato() ){
             
             scacchiera[ temp1 ][ temp2 ] = 1;
             temp1--;
@@ -481,7 +566,7 @@ public class GestoreMovimenti{
         
         }
         
-        if( temp1 >= 0 && temp2 <= MAXLENGTH ){
+        if( temp1 >= 0 && temp2 <= 7 ){
 
             // Se Lo Spazzio E Occupato E Contiene Un Pezzo Del Colore Opposto
             if( m[ temp1 ][ temp2 ].eOccupato() ){
@@ -533,7 +618,7 @@ public class GestoreMovimenti{
         y = s.getY();
         
         // Alto Destra
-        if( x + 1 <= MAXLENGTH && y + 2 <= MAXLENGTH ){ // Libero O Del Avversario
+        if( x + 1 <= 7 && y + 2 <= 7 ){ // Libero O Del Avversario
             
             if( !m[ x + 1 ][ y + 2 ].eOccupato() || ( m[ x + 1 ][ y + 2 ].eOccupato() ) ){
                 if(!m[ x + 1 ][ y + 2 ].getOccupante().getColore().equals( cavallo.getColore() ))
@@ -544,7 +629,7 @@ public class GestoreMovimenti{
         }
         
         // Alto Sinistra
-        if( x - 1 >= 0 && y + 2 <= MAXLENGTH ){ // Libero O Del Avversario
+        if( x - 1 >= 0 && y + 2 <= 7 ){ // Libero O Del Avversario
             
             if( !m[ x - 1 ][ y + 2 ].eOccupato() || ( m[ x - 1 ][ y + 2 ].eOccupato()  ) ){
                 if(!m[ x - 1 ][ y + 2 ].getOccupante().getColore().equals( cavallo.getColore() ))
@@ -555,7 +640,7 @@ public class GestoreMovimenti{
         }
 
         // Destra Alto
-        if( x + 2 <= MAXLENGTH && y + 1 <= MAXLENGTH ){ // Libero O Del Avversario
+        if( x + 2 <= 7 && y + 1 <= 7 ){ // Libero O Del Avversario
             
             if( !m[ x + 2 ][ y + 1 ].eOccupato() || ( m[ x + 2 ][ y + 1 ].eOccupato() ) ){
                 if(!m[ x + 2 ][ y + 1 ].getOccupante().getColore().equals( cavallo.getColore() ))
@@ -566,7 +651,7 @@ public class GestoreMovimenti{
         }
 
         // Destra Basso
-        if( x + 2 <= MAXLENGTH && y - 1 >= 0 ){ // Libero O Del Avversario
+        if( x + 2 <= 7 && y - 1 >= 0 ){ // Libero O Del Avversario
             
             if( !m[ x + 2 ][ y - 1 ].eOccupato() || ( m[ x + 2 ][ y - 1 ].eOccupato()  ) ){
                 if(!m[ x + 2 ][ y - 1 ].getOccupante().getColore().equals( cavallo.getColore() ))
@@ -577,7 +662,7 @@ public class GestoreMovimenti{
         }
 
         // Sinistra Alto
-        if( x - 2 >= 0 && y + 1 <= MAXLENGTH ){ // Libero O Del Avversario
+        if( x - 2 >= 0 && y + 1 <= 7 ){ // Libero O Del Avversario
             
             if( !m[ x - 2 ][ y + 1 ].eOccupato() || ( m[ x - 2 ][ y + 1 ].eOccupato() ) ){
                 if(!m[ x - 2 ][ y + 1 ].getOccupante().getColore().equals( cavallo.getColore() ))
@@ -599,7 +684,7 @@ public class GestoreMovimenti{
         }
         
         // Basso Desra
-        if( x + 1 <= MAXLENGTH && y - 2 >= 0 ){ // Libero O Del Avversario
+        if( x + 1 <= 7 && y - 2 >= 0 ){ // Libero O Del Avversario
             
             if( !m[ x + 1 ][ y - 2 ].eOccupato() || ( m[ x + 1 ][ y - 2 ].eOccupato() ) ){
                 if(!m[ x + 1 ][ y - 2 ].getOccupante().getColore().equals( cavallo.getColore() ))
@@ -646,9 +731,9 @@ public class GestoreMovimenti{
         m2 = movimentiAlfiere( new Spazio(x, y, new Alfiere( regina.getColore() )) );
         
         // Combinazione Dei Risultati Della Torre E Alfiere
-        for( int i = 0; i < MAXLENGTH; i++ ){
+        for( int i = 0; i < 7; i++ ){
             
-            for( int j = 0; j < MAXLENGTH; j++ ){
+            for( int j = 0; j < 7; j++ ){
                 
                 if( m1[ i ][ j ] == 1 || m2[ i ][ j ] == 1 ){
                     
@@ -682,7 +767,7 @@ public class GestoreMovimenti{
         
         // Verso Destra
         boolean uscita = false;
-        for( int i = x+1; i <= MAXLENGTH && !uscita; i++ ){
+        for( int i = x+1; i <= 7 && !uscita; i++ ){
             if( mat[ i ][ y ].eOccupato() ){  
                 uscita = true; // Uscita Dal Ciclo Dopo Aver Controllato Il Primo Spazio Per Non Fare Controlli Inutili
                 if( !mat[ i ][ y ].getOccupante().getColore().equals( colore )){
@@ -710,7 +795,7 @@ public class GestoreMovimenti{
         // Verso il basso
         uscita = false;
         
-        for( int i = y+1; i <= MAXLENGTH && !uscita; i++ ){
+        for( int i = y+1; i <= 7 && !uscita; i++ ){
             if( mat[ x ][ i ].eOccupato() ){ 
                 uscita = true; // Uscita Dal Ciclo Dopo Aver Controllato Il Primo Spazio Per Non Fare Controlli Inutili
                 if( !mat[ x ][ i ].getOccupante().getColore().equals( colore ) ){  
@@ -749,12 +834,12 @@ public class GestoreMovimenti{
         temp1 = x + 1;
         temp2 = y + 1;
         
-        while( temp1 <= MAXLENGTH && temp2 <= MAXLENGTH && !mat[ temp1 ][ temp2 ].eOccupato() ){          
+        while( temp1 <= 7 && temp2 <= 7 && !mat[ temp1 ][ temp2 ].eOccupato() ){          
             temp1++;
             temp2++;
         }
         
-        if( temp1 <= MAXLENGTH && temp2 <= MAXLENGTH  ){
+        if( temp1 <= 7 && temp2 <= 7  ){
             if(!mat[ temp1 ][ temp2 ].getOccupante().getColore().equals( colore )){
                 if( mat[ temp1 ][ temp2 ].getOccupante() instanceof Alfiere || mat[ temp1 ][ temp2 ].getOccupante() instanceof Regina ){
                     return false;
@@ -767,12 +852,12 @@ public class GestoreMovimenti{
         temp1 = x - 1;
         temp2 = y + 1;
         
-        while( temp1 >= 0 && temp2 <= MAXLENGTH && !mat[ temp1 ][ temp2 ].eOccupato() ){        
+        while( temp1 >= 0 && temp2 <= 7 && !mat[ temp1 ][ temp2 ].eOccupato() ){        
             temp1--;
             temp2++;
         }
         
-        if( temp1 >= 0 && temp2 <= MAXLENGTH && !mat[ temp1 ][ temp2 ].getOccupante().getColore().equals( colore ) ){
+        if( temp1 >= 0 && temp2 <= 7 && !mat[ temp1 ][ temp2 ].getOccupante().getColore().equals( colore ) ){
             
             if( mat[ temp1 ][ temp2 ].getOccupante() instanceof Alfiere || mat[ temp1 ][ temp2 ].getOccupante() instanceof Regina ){
                 return false;
@@ -805,14 +890,14 @@ public class GestoreMovimenti{
         temp1 = x + 1;
         temp2 = y - 1;
         
-        while( temp1 <= MAXLENGTH && temp2 >= 0 && !mat[ temp1 ][ temp2 ].eOccupato() ){
+        while( temp1 <= 7 && temp2 >= 0 && !mat[ temp1 ][ temp2 ].eOccupato() ){
             
             temp1++;
             temp2--;
         
         }
         
-        if( temp1 <= MAXLENGTH && temp2 >= 0){
+        if( temp1 <= 7 && temp2 >= 0){
             if(!mat[ temp1 ][ temp2 ].getOccupante().getColore().equals( colore ) ){
                 if( mat[ temp1 ][ temp2 ].getOccupante() instanceof Alfiere || mat[ temp1 ][ temp2 ].getOccupante() instanceof Regina ){
                     return false;
@@ -825,7 +910,7 @@ public class GestoreMovimenti{
         
         if( colore instanceof Nero ){ // Inizio Controllo Pedoni Neri
             
-            if( x + 1 <= MAXLENGTH && y + 1 <= MAXLENGTH && mat[ x + 1 ][ y + 1 ].eOccupato() && mat[ x + 1 ][ y + 1 ].getOccupante() instanceof Pedone ){
+            if( x + 1 <= 7 && y + 1 <= 7 && mat[ x + 1 ][ y + 1 ].eOccupato() && mat[ x + 1 ][ y + 1 ].getOccupante() instanceof Pedone ){
                 
                 if( !mat[ x + 1 ][ y + 1 ].getOccupante().getColore().equals( colore ) ){
 
@@ -834,7 +919,7 @@ public class GestoreMovimenti{
                 }
             
             }
-            if(x - 1 >= 0 && y + 1 <= MAXLENGTH){
+            if(x - 1 >= 0 && y + 1 <= 7){
                 if(mat[ x - 1 ][ y + 1 ].eOccupato()){
                     if( mat[ x - 1 ][ y + 1 ].getOccupante() instanceof Pedone ){
                 
@@ -849,7 +934,7 @@ public class GestoreMovimenti{
         
         } else { // Inizio Controllo Pedoni Bianchi
             
-            if( x + 1 <= MAXLENGTH && y - 1 >= 0 && mat[ x + 1 ][ y - 1 ].eOccupato() && mat[ x + 1 ][ y - 1 ].getOccupante() instanceof Pedone ){
+            if( x + 1 <= 7 && y - 1 >= 0 && mat[ x + 1 ][ y - 1 ].eOccupato() && mat[ x + 1 ][ y - 1 ].getOccupante() instanceof Pedone ){
                 
                 if( !mat[ x + 1 ][ y - 1 ].getOccupante().getColore().equals( colore ) ){
                     
@@ -874,7 +959,7 @@ public class GestoreMovimenti{
         // Controlli Del Cavallo
 
         //In Alto A Destra
-        if( x + 1 <= MAXLENGTH && y + 2 <= MAXLENGTH && mat[ x + 1 ][ y + 2 ].eOccupato() ){
+        if( x + 1 <= 7 && y + 2 <= 7 && mat[ x + 1 ][ y + 2 ].eOccupato() ){
             
             if( !mat[ x + 1 ][ y + 2 ].getOccupante().getColore().equals( colore ) && mat[ x + 1 ][ y + 2 ].getOccupante() instanceof Cavallo ){
                 
@@ -885,7 +970,7 @@ public class GestoreMovimenti{
         }
 
         //In Alto A Sinistra
-        if( x - 1 >= 0 && y + 2 <= MAXLENGTH && mat[ x - 1 ][ y + 2 ].eOccupato() ){
+        if( x - 1 >= 0 && y + 2 <= 7 && mat[ x - 1 ][ y + 2 ].eOccupato() ){
             
             if( !mat[ x - 1 ][ y + 2 ].getOccupante().getColore().equals( colore ) && mat[ x - 1 ][ y + 2 ].getOccupante() instanceof Cavallo ){
                 
@@ -896,7 +981,7 @@ public class GestoreMovimenti{
         }
 
         // A Destra In Alto
-        if( x + 2 <= MAXLENGTH && y + 1 <= MAXLENGTH && mat[ x + 2 ][ y + 1 ].eOccupato() ){
+        if( x + 2 <= 7 && y + 1 <= 7 && mat[ x + 2 ][ y + 1 ].eOccupato() ){
             
             if( !mat[ x + 2 ][ y + 1 ].getOccupante().getColore().equals( colore ) && mat[ x + 2 ][ y + 1 ].getOccupante() instanceof Cavallo ){
                 
@@ -907,7 +992,7 @@ public class GestoreMovimenti{
         }
 
         // A Destra In Basso
-        if( x + 2 <= MAXLENGTH && y - 1 >= 0 && mat[ x + 2 ][ y - 1 ].eOccupato() ){       
+        if( x + 2 <= 7 && y - 1 >= 0 && mat[ x + 2 ][ y - 1 ].eOccupato() ){       
             if( !mat[ x + 2 ][ y - 1 ].getOccupante().getColore().equals( colore ) && mat[ x + 2 ][ y - 1 ].getOccupante() instanceof Cavallo ){      
                 
                 return false;
@@ -915,7 +1000,7 @@ public class GestoreMovimenti{
         }
 
         // A Sinistra In Alto
-        if( x - 2 >= 0 && y + 1 <= MAXLENGTH && mat[ x - 2 ][ y + 1 ].eOccupato() ){    
+        if( x - 2 >= 0 && y + 1 <= 7 && mat[ x - 2 ][ y + 1 ].eOccupato() ){    
             if( !mat[ x - 2 ][ y + 1 ].getOccupante().getColore().equals( colore ) && mat[ x - 2 ][ y + 1 ].getOccupante() instanceof Cavallo ){    
                 
                 return false;
@@ -934,7 +1019,7 @@ public class GestoreMovimenti{
         }
 
         // In Basso A Destra
-        if(x + 1 <= MAXLENGTH && y - 2 >= 0){
+        if(x + 1 <= 7 && y - 2 >= 0){
             if( mat[ x + 1 ][ y - 2 ].eOccupato() ){
             
                 if( !mat[ x + 1 ][ y - 2 ].getOccupante().getColore().equals( colore ) && mat[ x + 1 ][ y - 2 ].getOccupante() instanceof Cavallo ){
@@ -958,7 +1043,7 @@ public class GestoreMovimenti{
         // Controllo Re Adiacente
 
         // Destra
-        if( x + 1 <= MAXLENGTH && mat[ x + 1 ][ y ].eOccupato() ){
+        if( x + 1 <= 7 && mat[ x + 1 ][ y ].eOccupato() ){
             
             if( !mat[ x + 1 ][ y ].getOccupante().getColore().equals( colore ) && m[ x + 1 ][ y ].getOccupante() instanceof Re ){
             
@@ -979,7 +1064,7 @@ public class GestoreMovimenti{
         }
 
         // Alto
-        if( y + 1 <= MAXLENGTH ){ 
+        if( y + 1 <= 7 ){ 
             if(mat[ x ][ y + 1 ].eOccupato()){
                 if( !mat[ x ][ y + 1 ].getOccupante().getColore().equals( colore )){  
                     if(mat[ x ][ y + 1 ].getOccupante() instanceof Re ){
@@ -1001,7 +1086,7 @@ public class GestoreMovimenti{
         }
 
         // In Alto A Destra
-        if( x + 1 <= MAXLENGTH && y + 1 <= MAXLENGTH ){
+        if( x + 1 <= 7 && y + 1 <= 7 ){
             if(mat[ x + 1 ][ y + 1 ].eOccupato()){
                 if( !mat[ x + 1 ][ y + 1 ].getOccupante().getColore().equals( colore ) && mat[ x + 1 ][ y + 1 ].getOccupante() instanceof Re ){ 
                  
@@ -1011,7 +1096,7 @@ public class GestoreMovimenti{
         }
 
         // In Alto A Sinistra
-        if( x - 1 >= 0 && y + 1 <= MAXLENGTH && mat[ x - 1 ][ y + 1 ].eOccupato() ){
+        if( x - 1 >= 0 && y + 1 <= 7 && mat[ x - 1 ][ y + 1 ].eOccupato() ){
             if( !mat[ x - 1 ][ y + 1 ].getOccupante().getColore().equals( colore ) && mat[ x - 1 ][ y + 1 ].getOccupante() instanceof Re ){ 
             
                 return false;
@@ -1019,7 +1104,7 @@ public class GestoreMovimenti{
         }
 
         // In Basso A Destra
-        if( x + 1 <= MAXLENGTH && y - 1 >= 0 && mat[ x + 1 ][ y - 1 ].eOccupato() ){
+        if( x + 1 <= 7 && y - 1 >= 0 && mat[ x + 1 ][ y - 1 ].eOccupato() ){
             if( !mat[ x + 1 ][ y - 1 ].getOccupante().getColore().equals( colore ) && mat[ x + 1 ][ y - 1 ].getOccupante() instanceof Re ){      
        
                 return false;
@@ -1133,7 +1218,7 @@ public class GestoreMovimenti{
 
         // Verso Destra
         boolean uscita = false;
-        for( int i = x; i <= MAXLENGTH && !uscita; i++ ){
+        for( int i = x; i <= 7 && !uscita; i++ ){
             if( mat[ i ][ y ].eOccupato() ){  
                 uscita = true; // Uscita Dal Ciclo Dopo Aver Controllato Il Primo Spazio Per Non Fare Controlli Inutili
                 if( !mat[ i ][ y ].getOccupante().getColore().equals( colore )){
@@ -1161,7 +1246,7 @@ public class GestoreMovimenti{
         // Verso L'Alto
         uscita = false;
         
-        for( int i = y; i <= MAXLENGTH && !uscita; i++ ){
+        for( int i = y; i <= 7 && !uscita; i++ ){
             if( mat[ x ][ i ].eOccupato() ){ 
                 uscita = true; // Uscita Dal Ciclo Dopo Aver Controllato Il Primo Spazio Per Non Fare Controlli Inutili
                 if( !mat[ x ][ i ].getOccupante().getColore().equals( colore ) ){  
@@ -1201,14 +1286,14 @@ public class GestoreMovimenti{
         temp1 = x + 1;
         temp2 = y + 1;
         
-        while( temp1 <= MAXLENGTH && temp2 <= MAXLENGTH && !mat[ temp1 ][ temp2 ].eOccupato() ){
+        while( temp1 <= 7 && temp2 <= 7 && !mat[ temp1 ][ temp2 ].eOccupato() ){
             
             temp1++;
             temp2++;
         
         }
         
-        if( temp1 <= MAXLENGTH && temp2 <= MAXLENGTH && !mat[ temp1 ][ temp2 ].getOccupante().getColore().equals( colore ) ){
+        if( temp1 <= 7 && temp2 <= 7 && !mat[ temp1 ][ temp2 ].getOccupante().getColore().equals( colore ) ){
             
             if( mat[ temp1 ][ temp2 ].getOccupante() instanceof Alfiere || mat[ temp1 ][ temp2 ].getOccupante() instanceof Regina ){
                 
@@ -1222,14 +1307,14 @@ public class GestoreMovimenti{
         temp1 = x - 1;
         temp2 = y + 1;
         
-        while( temp1 >= 0 && temp2 <= MAXLENGTH && !mat[ temp1 ][ temp2 ].eOccupato() ){
+        while( temp1 >= 0 && temp2 <= 7 && !mat[ temp1 ][ temp2 ].eOccupato() ){
             
             temp1--;
             temp2++;
         
         }
         
-        if( temp1 >= 0 && temp2 <= MAXLENGTH && !mat[ temp1 ][ temp2 ].getOccupante().getColore().equals( colore ) ){
+        if( temp1 >= 0 && temp2 <= 7 && !mat[ temp1 ][ temp2 ].getOccupante().getColore().equals( colore ) ){
             
             if( mat[ temp1 ][ temp2 ].getOccupante() instanceof Alfiere || mat[ temp1 ][ temp2 ].getOccupante() instanceof Regina ){
                 
@@ -1264,14 +1349,14 @@ public class GestoreMovimenti{
         temp1 = x + 1;
         temp2 = y - 1;
         
-        while( temp1 <= MAXLENGTH && temp2 >= 0 && !mat[ temp1 ][ temp2 ].eOccupato() ){
+        while( temp1 <= 7 && temp2 >= 0 && !mat[ temp1 ][ temp2 ].eOccupato() ){
             
             temp1++;
             temp2--;
         
         }
         
-        if( temp1 <= MAXLENGTH && temp2 >= 0 && !mat[ temp1 ][ temp2 ].getOccupante().getColore().equals( colore ) ){
+        if( temp1 <= 7 && temp2 >= 0 && !mat[ temp1 ][ temp2 ].getOccupante().getColore().equals( colore ) ){
             
             if( mat[ temp1 ][ temp2 ].getOccupante() instanceof Alfiere || mat[ temp1 ][ temp2 ].getOccupante() instanceof Regina ){
                 
@@ -1285,7 +1370,7 @@ public class GestoreMovimenti{
         
         if( colore instanceof Nero ){ // Inizio Controllo Pedoni Neri
             
-            if( x + 1 <= MAXLENGTH && y + 1 <= MAXLENGTH && mat[ x + 1 ][ y + 1 ].eOccupato() && mat[ x + 1 ][ y + 1 ].getOccupante() instanceof Pedone ){
+            if( x + 1 <= 7 && y + 1 <= 7 && mat[ x + 1 ][ y + 1 ].eOccupato() && mat[ x + 1 ][ y + 1 ].getOccupante() instanceof Pedone ){
                 
                 if( !mat[ x + 1 ][ y + 1 ].getOccupante().getColore().equals( colore ) ){
                     
@@ -1295,7 +1380,7 @@ public class GestoreMovimenti{
             
             }
             
-            if( x - 1 >= 0 && y + 1 <= MAXLENGTH && mat[ x - 1 ][ y + 1 ].eOccupato() && mat[ x + 1 ][ y - 1 ].getOccupante() instanceof Pedone ){
+            if( x - 1 >= 0 && y + 1 <= 7 && mat[ x - 1 ][ y + 1 ].eOccupato() && mat[ x + 1 ][ y - 1 ].getOccupante() instanceof Pedone ){
                 
                 if( !mat[ x - 1 ][ y + 1 ].getOccupante().getColore().equals( colore ) ){
                     
@@ -1307,7 +1392,7 @@ public class GestoreMovimenti{
         
         } else { // Inizio Controllo Pedoni Bianchi
             
-            if( x + 1 <= MAXLENGTH && y - 1 >= 0 && mat[ x + 1 ][ y - 1 ].eOccupato() && mat[ x + 1 ][ y - 1 ].getOccupante() instanceof Pedone ){
+            if( x + 1 <= 7 && y - 1 >= 0 && mat[ x + 1 ][ y - 1 ].eOccupato() && mat[ x + 1 ][ y - 1 ].getOccupante() instanceof Pedone ){
                 
                 if( !mat[ x + 1 ][ y - 1 ].getOccupante().getColore().equals( colore ) ){
                     
@@ -1331,7 +1416,7 @@ public class GestoreMovimenti{
         // Controlli Del Cavallo
 
         //In Alto A Destra
-        if( x + 1 <= MAXLENGTH && y + 2 <= MAXLENGTH && mat[ x + 1 ][ y + 2 ].eOccupato() ){
+        if( x + 1 <= 7 && y + 2 <= 7 && mat[ x + 1 ][ y + 2 ].eOccupato() ){
             
             if( !mat[ x + 1 ][ y + 2 ].getOccupante().getColore().equals( colore ) && mat[ x + 1 ][ y + 2 ].getOccupante() instanceof Cavallo ){
                 
@@ -1342,7 +1427,7 @@ public class GestoreMovimenti{
         }
 
         //In Alto A Sinistra
-        if( x - 1 >= 0 && y + 2 <= MAXLENGTH && mat[ x - 1 ][ y + 2 ].eOccupato() ){
+        if( x - 1 >= 0 && y + 2 <= 7 && mat[ x - 1 ][ y + 2 ].eOccupato() ){
             
             if( !mat[ x - 1 ][ y + 2 ].getOccupante().getColore().equals( colore ) && mat[ x - 1 ][ y + 2 ].getOccupante() instanceof Cavallo ){
                 
@@ -1353,7 +1438,7 @@ public class GestoreMovimenti{
         }
 
         // A Destra In Alto
-        if( x + 2 <= MAXLENGTH && y + 1 <= MAXLENGTH && mat[ x + 2 ][ y + 1 ].eOccupato() ){
+        if( x + 2 <= 7 && y + 1 <= 7 && mat[ x + 2 ][ y + 1 ].eOccupato() ){
             
             if( !mat[ x + 2 ][ y + 1 ].getOccupante().getColore().equals( colore ) && mat[ x + 2 ][ y + 1 ].getOccupante() instanceof Cavallo ){
                 
@@ -1364,7 +1449,7 @@ public class GestoreMovimenti{
         }
 
         // A Destra In Basso
-        if( x + 2 <= MAXLENGTH && y - 1 >= 0 && mat[ x + 2 ][ y - 1 ].eOccupato() ){
+        if( x + 2 <= 7 && y - 1 >= 0 && mat[ x + 2 ][ y - 1 ].eOccupato() ){
             
             if( !mat[ x + 2 ][ y - 1 ].getOccupante().getColore().equals( colore ) && mat[ x + 2 ][ y + 1 ].getOccupante() instanceof Cavallo ){
                 
@@ -1375,7 +1460,7 @@ public class GestoreMovimenti{
         }
 
         // A Sinistra In Alto
-        if( x - 2 >= 0 && y + 1 <= MAXLENGTH && mat[ x - 2 ][ y + 1 ].eOccupato() ){
+        if( x - 2 >= 0 && y + 1 <= 7 && mat[ x - 2 ][ y + 1 ].eOccupato() ){
             
             if( !mat[ x - 2 ][ y + 1 ].getOccupante().getColore().equals( colore ) && mat[ x - 2 ][ y + 1 ].getOccupante() instanceof Cavallo ){
                 
@@ -1397,7 +1482,7 @@ public class GestoreMovimenti{
         }
 
         // In Basso A Destra
-        if( x + 1 <= MAXLENGTH && y - 2 <= MAXLENGTH && mat[ x + 1 ][ y - 2 ].eOccupato() ){
+        if( x + 1 <= 7 && y - 2 <= 7 && mat[ x + 1 ][ y - 2 ].eOccupato() ){
             
             if( !mat[ x + 1 ][ y - 2 ].getOccupante().getColore().equals( colore ) && mat[ x + 1 ][ y - 2 ].getOccupante() instanceof Cavallo ){
                 
@@ -1421,7 +1506,7 @@ public class GestoreMovimenti{
         // Controllo Re Adiacente
 
         // Destra
-        if( x + 1 <= MAXLENGTH && mat[ x + 1 ][ y ].eOccupato() ){
+        if( x + 1 <= 7 && mat[ x + 1 ][ y ].eOccupato() ){
             
             if( !mat[ x + 1 ][ y ].getOccupante().getColore().equals( colore ) && m[ x + 1 ][ y ].getOccupante() instanceof Re ){
                 
@@ -1439,7 +1524,7 @@ public class GestoreMovimenti{
         }
 
         // Alto
-        if( y + 1 <= MAXLENGTH && m[ x ][ y + 1 ].eOccupato() ){ 
+        if( y + 1 <= 7 && m[ x ][ y + 1 ].eOccupato() ){ 
             if( !mat[ x ][ y + 1 ].getOccupante().getColore().equals( colore ) && mat[ x ][ y + 1 ].getOccupante() instanceof Re ){             
                 lista.add(mat[x][y+1].getOccupante());
             }
@@ -1453,21 +1538,21 @@ public class GestoreMovimenti{
         }
 
         // In Alto A Destra
-        if( x + 1 <= MAXLENGTH && y + 1 <= MAXLENGTH && mat[ x + 1 ][ y + 1 ].eOccupato() ){
+        if( x + 1 <= 7 && y + 1 <= 7 && mat[ x + 1 ][ y + 1 ].eOccupato() ){
             if( !mat[ x + 1 ][ y + 1 ].getOccupante().getColore().equals( colore ) && mat[ x + 1 ][ y + 1 ].getOccupante() instanceof Re ){ 
                 lista.add(mat[x+1][y+1].getOccupante());
             }
         }
 
         // In Alto A Sinistra
-        if( x - 1 >= 0 && y + 1 <= MAXLENGTH && mat[ x - 1 ][ y + 1 ].eOccupato() ){
+        if( x - 1 >= 0 && y + 1 <= 7 && mat[ x - 1 ][ y + 1 ].eOccupato() ){
             if( !mat[ x - 1 ][ y + 1 ].getOccupante().getColore().equals( colore ) && mat[ x - 1 ][ y + 1 ].getOccupante() instanceof Re ){ 
                 lista.add(mat[x-1][y+1].getOccupante());
             }
         }
 
         // In Basso A Destra
-        if( x + 1 <= MAXLENGTH && y - 1 >= 0 && mat[ x + 1 ][ y - 1 ].eOccupato() ){
+        if( x + 1 <= 7 && y - 1 >= 0 && mat[ x + 1 ][ y - 1 ].eOccupato() ){
             if( !mat[ x + 1 ][ y - 1 ].getOccupante().getColore().equals( colore ) && mat[ x + 1 ][ y - 1 ].getOccupante() instanceof Re ){      
                 lista.add(mat[x+1][y-1].getOccupante());
             }

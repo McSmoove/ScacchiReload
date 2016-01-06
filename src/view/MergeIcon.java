@@ -11,13 +11,24 @@ import java.awt.image.BufferedImage;
  * @author Viktor, Michael, Gaetano
 */
 public class MergeIcon implements Icon{
-
-    private final int larghezza; // La larghezza della immagine unita
-    private final int altezza; // L'altezza dell'immagine unita
-    private final BufferedImage buffer; // Qui verra collocata l'immagine unita
+    
+    /**
+     * La larghezza del'immagine unita
+    */
+    private final int larghezza;
+    
+    /**
+     * L'altezza dell'immagine unita
+    */
+    private final int altezza;
+    
+    /**
+     * Buffer dell'immagine unita
+    */
+    private final BufferedImage buffer;
 
     /**
-     * Unisce due immagini in una sola
+     * Metodo che unisce due immagini in una sola
      * @param sfondo - L'immagine in backgroud
      * @param icona - L'immagine in foreground
     */
@@ -25,13 +36,13 @@ public class MergeIcon implements Icon{
         
         larghezza = sfondo.getWidth( null ); // Prendo la larghezza dell'immagine in background
         altezza = sfondo.getHeight( null ); // Prendo l'altezza dell'immagine in background
-        buffer = new BufferedImage( larghezza, altezza, BufferedImage.TYPE_INT_ARGB );
+        buffer = new BufferedImage( larghezza, altezza, BufferedImage.TYPE_INT_ARGB ); // Inizializzo un buffer delle dimensioni prese
         
         Graphics2D g = ( Graphics2D ) buffer.getGraphics(); // Creo il backgroud
         
         g.drawImage( sfondo, 0, 0, null ); // Disegno il backgroud
         
-        if (icona != null) { // Se E Stata Fornita Anche Un'Icona
+        if (icona != null) { // Se e stata fornita un'icona
             
             g.drawImage( icona, 0, 0, null ); // Disegno l'icona sopra il buffer che ha gia il backgroud disegnato
         
@@ -41,7 +52,7 @@ public class MergeIcon implements Icon{
     
     /**
      * Metodo che ritorna la larghezza in pixel dell'icona unita
-     * @return larghezza - La Larghezza In Pixel Dell'Icona Unita
+     * @return larghezza - La Larghezza in pixel dell'icona unita
     */
     @Override
     public int getIconWidth(){
@@ -52,7 +63,7 @@ public class MergeIcon implements Icon{
 
     /**
      * Metodo che ritorna l'altezza in pixel dell'icona unita
-     * @return altezza - L'Altezza In Pixel Dell'Icona Unita
+     * @return altezza - L'altezza in pixel dell'icona unita
     */
     @Override
     public int getIconHeight(){ 
@@ -77,7 +88,7 @@ public class MergeIcon implements Icon{
     
     /**
      * Metodo che prende una icona e la bufferizza
-     * @param icon - L'icona da Bufferizzare
+     * @param icon - L'icona da bufferizzare
      * @return L'icona bufferizzata
     */
     public static BufferedImage iconToBufferedImage( Icon icon ){
@@ -96,8 +107,8 @@ public class MergeIcon implements Icon{
 
     /**
      * Fornita un'icona ritorno l'immagine di essa
-     * @param icon - L'Icona Fornita
-     * @return L'Immagine Dell'Icona Fornita
+     * @param icon - L'Icona fornita
+     * @return L'Immagine dell'icona fornita
     */
     public static Image iconToImage( Icon icon ) {
         
@@ -109,7 +120,7 @@ public class MergeIcon implements Icon{
         
         if( icon instanceof ImageIcon ){ // Se e una istanza di ImageIcon
             
-            return ( (ImageIcon) icon ).getImage(); // Forzo A ImageIcon l'icona
+            return ( (ImageIcon) icon ).getImage(); // Forzo a ImageIcon l'icona
         
         }
         

@@ -7,11 +7,15 @@ package model;
  * @author Viktor, Michael, Gaetano
 */
 public class Alfiere extends Pezzo{
-    
+
+    /**
+     * Classe che descrive il comportamento di un Alfiere
+     * @param colore - Il colore del alfiere
+    */
     public Alfiere( Colore colore ){
         
         super( colore );
     
     }
 
-}
+} // Fine Classe Alfiere

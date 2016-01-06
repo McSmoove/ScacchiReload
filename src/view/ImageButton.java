@@ -4,17 +4,24 @@ import java.awt.*;
 import javax.swing.*;
 
 /**
- * Ridefinizione della classe Button affinche i bottoni abbiano
- * delle icone personalizzate create dalla Classe MergeIcon.
+ * Ridefinizione della classe JButton affinche i bottoni abbiano
+ * delle icone personalizzate create dalla Classe MergeIcon
  * @author Viktor, Michael, Gaetano
 */
 public class ImageButton extends JButton{
     
-    private Image immagine; // Immagine O Icona Tipicamente Dalla Classe MergeIcon
-    private final Rectangle area = new Rectangle(); // Rettangolo dove verra messa la dimensione del bottone da disegnare
+    /**
+     * Immagine o icona, tipicamente della classe MergeIcon
+    */
+    private Image immagine;
     
     /**
-     * Stampa l'icona specificata sul bottone e lo disegna in runtime
+     * Rettangolo dove verra messa la dimensione del bottone da disengare
+    */
+    private final Rectangle area = new Rectangle();
+    
+    /**
+     * Stampa l'icona specificata sul bottone e la disegna in runtime
      * @param immagine - Il background da stampare
     */
     public void setImage( Image immagine ){
@@ -26,7 +33,7 @@ public class ImageButton extends JButton{
     
     /**
      * Metodo che disegna la grafica passata sull'bottone
-     * @param g - La Grafica Da Disegnare
+     * @param g - La grafica da disegnare
     */
     @Override
     protected void paintComponent( Graphics g ){
@@ -40,6 +47,6 @@ public class ImageButton extends JButton{
         
         }
     
-    } // Fine paintComponent
+    }
     
 } // Fine Classe ImageButton
