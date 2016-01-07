@@ -2418,8 +2418,6 @@ public class GestoreMovimenti{
     
     }
     
-    // DA CONTROLLARE QUESTO METODO SE FUNZIONA FORSE HO AGGIUNTO PARENTESI DI TROPPO??????????????????????????????????????????
-    
     /**
      * Questo metodo controlla quali e quanti pezzi sono spostabili su un determinato Spazio s
      * @param mat - La matrice delle posizioni sulla scacchiera
@@ -2429,30 +2427,28 @@ public class GestoreMovimenti{
     */
     public LinkedList< Spazio > getPezziSpostabiliQui( Spazio[][] mat, Spazio s, Colore c ){
         
-        LinkedList< Spazio > lista = new LinkedList<>();
-        Spazio[][] matrice = mat;
+        LinkedList<Spazio> lista = new LinkedList<>();
+        Spazio[][] matrix = mat;
         Spazio spazio = s;
         Colore colore = c;
         int x = spazio.getX();
         int y = spazio.getY();
         
-        for( int j = 0; j < 8; j++ ){
+        for( int j = 0; j < 8; j++ ){ // Scorro La Matrice
             
             for( int i = 0; i < 8; i++ ){
                 
-                if( matrice[ i ][ j ].eOccupato() ){
+                if( matrix[ i ][ j ].eOccupato() ){
                     
-                    if( matrice[ i ][ j ].getOccupante().getColore().equals( colore ) ){
+                    if( matrix[ i ][ j ].getOccupante().getColore().equals( colore ) ){
                         
-                        if( spostabileIn( matrice[ i ][ j ], x, y, matrice ) ){
-                            
-                            lista.add( matrice[ i ][ j ] );
-                        
-                        }
+                        if( spostabileIn( matrix[ i ][ j ], x, y, matrix ) );
                     
                     }
                 
                 }
+                
+                lista.add( matrix[ i ][ j ] );
             
             }
         
@@ -2462,8 +2458,6 @@ public class GestoreMovimenti{
     
     }
     
-    // DA CONTROLLARE QUESTO METODO SE FUNZIONA FORSE HO AGGIUNTO PARENTESI DI TROPPO??????????????????????????????????????????
-    
     /**
      * Questo metodo controlla quali e quanti pezzi sono spostabili su un determinato Spazio s
      * @param s - La casella su cui si vuole spostare
@@ -2472,13 +2466,13 @@ public class GestoreMovimenti{
     */
     public LinkedList< Spazio > getPezziSpostabiliQui( Spazio s, Colore c ){
         
-        LinkedList<Spazio> lista = new LinkedList<>();
+        LinkedList< Spazio > lista = new LinkedList<>();
         Spazio spazio = s;
         Colore colore = c;
         int x = spazio.getX();
         int y = spazio.getY();
         
-        for( int j = 0; j < 8; j++ ){
+        for( int j = 0; j < 8; j++ ){ // Scorro La Matrice
             
             for( int i = 0; i < 8; i++ ){
                 
@@ -2486,15 +2480,13 @@ public class GestoreMovimenti{
                     
                     if( m[ i ][ j ].getOccupante().getColore().equals( colore ) ){
                         
-                        if( spostabileIn( m[ i ][ j ], x, y ) ){
-                            
-                            lista.add( m[ i ][ j ] );
-                        
-                        }
+                        if( spostabileIn( m[ i ][ j ], x, y ) );
                     
                     }
                 
                 }
+                
+                lista.add( m[ i ][ j ] );
             
             }
         
