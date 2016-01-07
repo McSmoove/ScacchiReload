@@ -27,7 +27,7 @@ public abstract class Colore{
     
     /**
      * Override del metodo equals della classe Object
-     * Dato un colore verifica se e uguale ad un'altro oggetto di classe Colore
+     * Dato un colore verifica se è uguale ad un altro oggetto di classe Colore
      * @param o - L'oggetto con il quale confrontare
      * @return True se sono uguali, false altrimenti
     */

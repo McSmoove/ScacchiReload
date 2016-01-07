@@ -126,7 +126,7 @@ public class GestoreMovimenti{
     /**
      * Metodo che cerca dove si trova il Re Nero e lo ritorna
      * @return L'oggetto contenente il Re Nero se viene trovato
-     * @throws Exception - Eccezzione nel caso in cui non venga trovato nessun Re Nero sulla scacchiera
+     * @throws Exception - Eccezione nel caso in cui non venga trovato nessun Re Nero sulla scacchiera
     */
     public Re getReNero() throws Exception{
         
@@ -159,7 +159,7 @@ public class GestoreMovimenti{
     /**
      * Metodo che cerca lo spazio dove si trova il Re del Colore specificato
      * @param c - Il colore del Re che si vuole cercare
-     * @return Lo spazio dove e collocato il Re del Colore specificato
+     * @return Lo spazio dove è collocato il Re del Colore specificato
     */
     public Spazio getSpazioRe( Colore c ){
         
@@ -178,7 +178,7 @@ public class GestoreMovimenti{
     /**
      * Metodo che cerca lo spazio dove si trova il Re del Colore opposto a quello specificato
      * @param c - Il colore opposto del Re che si vuole cercare
-     * @return Lo spazio dove e collocato il Re del Colore opposto a quello specificato
+     * @return Lo spazio dove é collocato il Re del Colore opposto a quello specificato
     */
     public Spazio getSpazioReAvversario( Colore c ){
         
@@ -196,7 +196,7 @@ public class GestoreMovimenti{
 
     /**
      * Metodo che cerca lo spazio dove si trova il Re Nero
-     * @return Lo spazio dove e collocato il Re Nero
+     * @return Lo spazio dove è collocato il Re Nero
     */
     public Spazio getSpazioReNero(){
         
@@ -232,7 +232,7 @@ public class GestoreMovimenti{
     
     /**
      * Metodo che cerca lo spazio dove si trova il Re Bianco
-     * @return Lo spazio dove e collocato il Re Bianco
+     * @return Lo spazio dove è collocato il Re Bianco
     */
     public Spazio getSpazioReBianco(){
         
@@ -265,10 +265,12 @@ public class GestoreMovimenti{
     
     }
     
+    //ecceZZione
+    
     /**
      * Metodo che cerca dove si trova il Re Bianco e lo ritorna
      * @return L'oggetto contenente il Re Bianco se viene trovato
-     * @throws Exception - Eccezzione nel caso in cui non venga trovato nessun Re Bianco sulla scacchiera
+     * @throws Exception - Eccezione nel caso in cui non venga trovato nessun Re Bianco sulla scacchiera
     */
     public Re getReBianco() throws Exception{
         
@@ -809,8 +811,8 @@ public class GestoreMovimenti{
      * Questo metodo verifica la presenza o meno di uno scacco al Re tramite tre parametri
      * @param x - La coordinata X dove si trova il Re
      * @param y - La coordinata Y dove si trova il Re
-     * @param matrice - La matrice delle posizioni sulla scacchieras
-     * @return True se il Re si trova sotto scacco, false altrimenti
+     * @param matrice - La matrice delle posizioni sulla scacchiera
+     * @return True se il Re si trova sotto scacco, altrimenti false
     */
     public boolean controlloScacco( int x, int y, Spazio[][] matrice ){
         
@@ -1256,7 +1258,7 @@ public class GestoreMovimenti{
      * Questo metodo verifica la presenza o meno di uno scacco al Re passato tramite parametro
      * Usando la matrice del gestore
      * @param s - Lo spazio dove si trova il Re
-     * @return True se il Re si trova sotto scacco, false altrimenti
+     * @return True se il Re si trova sotto scacco,altrimenti false 
     */
     public boolean controlloScacco( Spazio s ){
         
@@ -1268,7 +1270,7 @@ public class GestoreMovimenti{
      * Questo metodo verifica la presenza o meno di uno scacco al Re tramite due parametri
      * @param colore - Il colore del turno corrente
      * @param matrice - La matrice delle posizioni sulla scacchiera
-     * @return True se il Re si trova sotto scacco, false altrimenti
+     * @return True se il Re si trova sotto scacco, altrimenti false
     */
     public boolean controlloScacco( Colore colore, Spazio[][] matrice ){
         
@@ -1291,7 +1293,7 @@ public class GestoreMovimenti{
     /**
      * Questo metodo verifica la presenza o meno di uno scacco al Re avversario del turno passato come parametro
      * @param colore - Il colore del turno corrente
-     * @return True se il Re avversario si trova sotto scacco, false altrimenti
+     * @return True se il Re avversario si trova sotto scacco, altrimenti false
     */
     public boolean controlloScaccoReAvversario( Colore colore ){
         
@@ -1315,8 +1317,8 @@ public class GestoreMovimenti{
      * Questo metodo verifica la presenza o meno di uno scacco al Re avversario
      * Passando come parametro il turno corrente e la matrice della scacchiera
      * @param colore - Il colore del turno corrente
-     * @param matrice - La matrice delle posizioni sullascaccheria
-     * @return True se il Re avversario si trova sotto scacco, false altrimenti
+     * @param matrice - La matrice delle posizioni sulla scaccheria
+     * @return True se il Re avversario si trova sotto scacco, altrimenti false
     */
     public boolean controlloScaccoReAvversario( Colore colore, Spazio[][] matrice ){
         
@@ -2504,7 +2506,7 @@ public class GestoreMovimenti{
     
     /**
      * Questo metodo controlla quali sono i possibili Pezzi che possono essere mossi
-     * affinche si tolga lo stato di scacco
+     * per prevenire lo stato di scacco
      * @param xRe - La coordinata X del Re sotto scacco
      * @param yRe - La coordinata Y del Re sotto scacco
      * @param matrice - La matrice delle posizioni sulla scacchiera
@@ -2646,12 +2648,12 @@ public class GestoreMovimenti{
     
     /**
      * Questo metodo controlla quali sono i possibili Pezzi che possono essere mossi
-     * affinche si tolga lo stato di scacco
+     * per prevenire lo stato di scacco
      * @param xRe - La coordinata X del Re sotto scacco
      * @param yRe - La coordinata Y del Re sotto scacco
      * @param matrice - La matrice delle posizioni sulla scacchiera
      * @param turno - Il turno corrente
-     * @return matriceRisultato - La matrice dei pezzi dei pezzi che possono proteggere il Re dallo scacco
+     * @return matriceRisultato - La matrice dei pezzi che possono proteggere il Re dallo scacco
     */
     public int[][] getMatricePezziChePrevengonoScacco( int xRe, int yRe, Spazio[][] matrice, Colore turno ){
         
@@ -3103,9 +3105,9 @@ public class GestoreMovimenti{
     // ???????????????????????????????????????????????????????????????????????????????????????????????
     
     /**
-     * Questo metodo segna il percorso che un'attacante puo fare
+     * Questo metodo segna il percorso che un'attacante può fare
      * @param att - Lo Spazio dove si trova l'attaccante
-     * @param r - Gli Spazi dove si puo muovere l'attaccante
+     * @param r - Spazio dove si trova il re
      * @return matriceRisultato - La matrice che rappresenta il percorso dell'attaccante
     */
     private int[][] getPercorsoAttaccante( Spazio att, Spazio r ){
@@ -3389,7 +3391,7 @@ public class GestoreMovimenti{
     /**
      * Questo metodo prende una matrice di spazi e la copia senza mantenere le referenze
      * @param matrice - La matrice da copiare
-     * @return mat - La coppia della matrice originale senza referenze ad essa
+     * @return mat - La copia della matrice originale senza referenze ad essa
     */
     public Spazio[][] coppiaMatrice( Spazio[][] matrice ){
         
@@ -3419,6 +3421,7 @@ public class GestoreMovimenti{
     
     /**
      * Questo metodo disegna la matrice tramite System.Out.Print
+     * Serve per il Debug
     */
     public void disegnaMatriceSpaziOccupati(){
         
@@ -3448,6 +3451,7 @@ public class GestoreMovimenti{
     
     /**
      * Questo metodo prende una matrice di Spazi e la rappresenta tramite le System.Out.Print
+     * Serve per il debug
      * @param matrice - La matrice da rappresentare tramite System.Out.Print
     */
     public void disegnaMatriceSpaziOccupati( Spazio[][] matrice ){

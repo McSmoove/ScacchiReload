@@ -110,7 +110,7 @@ public class GestoreTB{
     }
     
     /**
-     * Passo il turno al giocatore successivo dopo aver' fatto una mossa
+     * Passo il turno al giocatore successivo dopo aver fatto una mossa
     */
     public void passaTurno(){
         
@@ -190,7 +190,7 @@ public class GestoreTB{
     }
     
     /**
-     * Metodo che verifica se una determinata casella e attivata o no
+     * Metodo che verifica se una determinata casella è attivata o no
      * @return attivato - True se la casella e attivata, false altrimenti 
     */
     public boolean isAttivato(){
@@ -318,7 +318,7 @@ public class GestoreTB{
     }
     
     /**
-     * Metodo che segna le coordinate dove e stato premuto sulla scacchiera
+     * Metodo che segna le coordinate del pulsante che stato premuto sulla scacchiera
      * @param e - La coordinata presa dal sistema che identifica il JButton sul quale e stato premuto sulla schacchiera
      * @throws Exception Nel caso in cui l'evento non venga registrato
     */
@@ -491,7 +491,8 @@ public class GestoreTB{
     }
     
     /**
-     * Metodo usato durante il debug che disegna la matrice delle posizioni occupate da un pezzo e non
+     * Metodo usato durante il debug che disegna la matrice delle posizioni occupate da un pezzo
+     * Usato per il debug
     */
     public void disegnaMatriceSpaziOccupati(){
         

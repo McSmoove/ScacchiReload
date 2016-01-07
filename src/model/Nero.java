@@ -26,7 +26,7 @@ public class Nero extends Colore{
     
     /**
      * Override del metodo equals della classe Object
-     * Confronta se un dato ogetto e un'istanza di Nero
+     * Confronta se un dato ogetto e un istanza di Nero
      * @param o - L'oggetto con il quale confrontare
      * @return True se sono uguali, false altrimenti
     */
@@ -39,7 +39,7 @@ public class Nero extends Colore{
     
     /**
      * Override del metodo hashCode della classe Object
-     * Dato un'oggetto di istanza Nero, ritorna il hashCode univoco di esso
+     * Dato un oggetto di istanza Nero, ritorna il hashCode univoco di esso
      * @return Il hashCode del oggetto di istanza Nero
     */
     @Override

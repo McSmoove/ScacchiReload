@@ -1,6 +1,6 @@
 package model;
 
-// VIKTOR CERCA TU TI MIGLIORARE IL JAVADOC DI STA CLASSE
+// VIKTOR CERCA TU dI MIGLIORARE IL JAVADOC DI STA CLASSE
 // NON CI CAPISCO NULLA SU COME GESTIAMO STI COLORI
 
 /**
@@ -16,7 +16,7 @@ public class Bianco extends Colore{
     private final int colore;
     
     /**
-     * Classe che descrive il colore Bianco
+     * Costruttore di base. Definisce quale colore prende l'oggetto colore.
     */
     public Bianco(){
         
