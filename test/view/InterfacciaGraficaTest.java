@@ -3,10 +3,8 @@ package view;
 import javax.swing.JButton;
 import model.*;
 import org.junit.*;
-import controller.GestoreTB;
 import static org.junit.Assert.*;
-import org.junit.runner.JUnitCore;
-import org.junit.runner.Result;
+
 
 /**
  * Test di tutti / alcuni i metodi della classe InterfacciaGrafica

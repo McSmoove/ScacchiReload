@@ -5,8 +5,6 @@ import org.junit.*;
 import model.*;
 import view.InterfacciaGrafica;
 import static org.junit.Assert.*;
-import org.junit.runner.JUnitCore;
-import org.junit.runner.Result;
 
 /**
  * Test di tutti / alcuni i metodi della classe GestoreMovimenti
