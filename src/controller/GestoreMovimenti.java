@@ -7,8 +7,8 @@ import view.*;
 
 /**
  * La classe contiene i metodi che calcolano le posizioni e i movimenti delle 
- * varie pedine sulla scacchiera. Contiene anche il calcolo dello scacco matto.
- * @author Viktor, Michael, Gaetano
+ * varie pedine sulla scacchiera. Contiene anche il calcolo dello scacco matto
+ * @author Viktor Teren VR379996, Michael Andronic VR370063, Gaetano Cavaler VR379845
 */
 public class GestoreMovimenti{
     

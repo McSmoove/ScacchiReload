@@ -1,11 +1,9 @@
 package model;
 
-// VIKTOR CERCA TU TI MIGLIORARE IL JAVADOC DI STA CLASSE
-// NON CI CAPISCO NULLA SU COME GESTIAMO STI COLORI
-
 /**
- * Classe astratta del colore. Contiene alcuni metodi di base comuni in entrambi i colori
- * @author Viktor, Michael, Gaetano
+ * Classe astratta del Colore. Contiene alcuni metodi di base comuni in entrambi i colori
+ * Tutte le classi dei colori definiscono oggetti che vengono presi in esame durante i controlli svolti dal package Contoller
+ * @author Viktor Teren VR379996, Michael Andronic VR370063, Gaetano Cavaler VR379845
 */
 public abstract class Colore{
     
@@ -56,7 +54,7 @@ public abstract class Colore{
     @Override
     public int hashCode(){ // La Equals Vuole La hashCode()
         
-        return this.colore ^ this.colore;
+        return this.colore;
     
     }
     

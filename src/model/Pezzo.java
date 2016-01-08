@@ -1,8 +1,9 @@
 package model;
 
 /**
- * Classe astratta che definisce alcune funzioni comuni a tutti i pezzi della schacchiera
- * @author Viktor, Michael, Gaetano
+ * Classe astratta che definisce alcune funzioni comuni a tutti i Pezzi della schacchiera
+ * Tutte le classi dei colori definiscono oggetti che vengono presi in esame durante i controlli svolti dal package Contoller
+ * @author Viktor Teren VR379996, Michael Andronic VR370063, Gaetano Cavaler VR379845
 */
 public abstract class Pezzo{
     

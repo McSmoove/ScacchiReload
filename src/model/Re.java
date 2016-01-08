@@ -1,9 +1,9 @@
 package model;
 
 /**
- * Classe del re. Tutte le classi dei pezzi definiscono oggetti che vengono 
- * presi in esame durante i controlli nelle classi del package Contoller
- * @author Viktor, Michael, Gaetano
+ * Classe del Re
+ * Tutte le classi dei colori definiscono oggetti che vengono presi in esame durante i controlli svolti dal package Contoller
+ * @author Viktor Teren VR379996, Michael Andronic VR370063, Gaetano Cavaler VR379845
 */
 public class Re extends Pezzo{
     
@@ -33,7 +33,7 @@ public class Re extends Pezzo{
     }
     
     /**
-     * Metodo che, se chiamato, imposta che il re si e mosso 
+     * Metodo che, se chiamato, imposta che il re e stato mosso 
     */
     public void impostaMosso(){
         

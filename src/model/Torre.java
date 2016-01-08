@@ -1,9 +1,9 @@
 package model;
 
 /** 
- * Classe della torre. Tutte le classi dei pezzi definiscono oggetti che 
- * vengono presi in esame durante i controlli nelle classi del package Contoller
- * @author Viktor, Michael, Gaetano
+ * Classe della Torre
+ * Tutte le classi dei pezzi definiscono gli oggetti che vengono presi in esame durante i controlli svolti dal package Contoller
+ * @author Viktor Teren VR379996, Michael Andronic VR370063, Gaetano Cavaler VR379845
 */
 public class Torre extends Pezzo{
     
@@ -33,7 +33,7 @@ public class Torre extends Pezzo{
     }
     
     /**
-     * Metodo che, se chiamato, imposta che la torre si e mossa 
+     * Metodo che, se chiamato, imposta che la torre e stata mossa 
     */
     public void impostaMosso(){
         

@@ -11,7 +11,7 @@ import model.*;
 import controller.*;
 
 /**
- * La classe InterfacciaGrafica gestisce tutti i pannelli e i bottoni che vengono usati duranti il gioco.
+ * La classe InterfacciaGrafica gestisce tutti i pannelli e i bottoni che vengono usati duranti il gioco
  * 
  * L'interfaccia e composta da:
  *
@@ -45,6 +45,8 @@ import controller.*;
  * GestoreMovimenti gm - Collegamento InterfacciaGrafica-GestoreMovimenti
  * 
  * GestoreTB gestoreTB - Collegamento InterfacciaGrafica-GestoreTB
+
+* @author Viktor Teren VR379996, Michael Andronic VR370063, Gaetano Cavaler VR379845
 */
 public class InterfacciaGrafica{
     
@@ -91,7 +93,7 @@ public class InterfacciaGrafica{
     /**
      * Visualzzare il messaggio del turno corrente " Tocca Al Bianco / Nero "
     */
-    private final JLabel messaggioInfo = new JLabel( "Tocca Al Bianco / Nero" );
+    private final JLabel messaggioInfo = new JLabel( " Premi Nuova Partita Per Iniziare !!!" );
     
     /**
      * Etichette dove vengono disegnati i pezzi bianchi mangiati
@@ -320,7 +322,8 @@ public class InterfacciaGrafica{
             public void actionPerformed( ActionEvent e ){ 
                 
                 iniziaPartita();
-                setMessaggio( "Tocca Al Bianco" );
+                setMessaggio( "Tocca Al Bianco !!!" );
+            
             }
         
         };
@@ -365,18 +368,17 @@ public class InterfacciaGrafica{
     } // Fine InterfacciaGrafica
 
     /**
-     * Metodo privato che inizializza le immagini quando si inizia un nuova 
-     * parita. Aggiunge ActionListener per ogni casella della scacchiera
+     * Metodo privato che inizializza le immagini e gli Action Listener per ogni bottone quando si inizia un nuova parita
     */
     private void iniziaPartita(){
         
-        gestoreMovi = new GestoreMovimenti( ); // Collegamento Interfaccia-Gestore
-        gestoreMovi.setInterfacciaGrafica( this ); // Collegamento Gestore-Interfaccia
-        gestoreTB=new GestoreTB( gestoreMovi, this );
+        gestoreMovi = new GestoreMovimenti( );
+        gestoreMovi.setInterfacciaGrafica( this ); // Collegamento InterfacciaGrafica-GestoreMovimenti
+        gestoreTB = new GestoreTB( gestoreMovi, this ); // Collegamento InterfacciaGrafica-Gestore Turni E Bottoni
         
         aggiornaBottoni( gestoreMovi.getMatrice() );
         
-        for( ImageButton[] quadratiScacchieraCiclo : quadratiScacchiera ) { // Aggiungo listener a tutti i bottoni
+        for( ImageButton[] quadratiScacchieraCiclo : quadratiScacchiera ) { // Aggiungo gli Acion Listener a tutti i bottoni
             
             for( int j = 0; j < quadratiScacchiera.length; j++ ){
                 
@@ -398,7 +400,7 @@ public class InterfacciaGrafica{
         
         }
         
-        pezziBianchiMangiati.removeAll();
+        pezziBianchiMangiati.removeAll(); // Azzerro il pannello dei pezzi bianchi mangiati dalla partita precedente
         
         contaMortiBianchi = 0;
         
@@ -409,7 +411,7 @@ public class InterfacciaGrafica{
         
         }
         
-        pezziNeriMangiati.removeAll();
+        pezziNeriMangiati.removeAll(); // Azzerro il pannello dei pezzi neri mangiati dalla partita precedente
         
         contaMortiNeri = 0;
         
@@ -419,7 +421,8 @@ public class InterfacciaGrafica{
             pezziNeriMangiati.add( pezziMangiatiNeri[ i ] );
         
         }
-        setMessaggio( "Tocca Al Bianco" );
+        
+        setMessaggio( "Tocca Al Bianco !!!" );
         
     } // Fine iniziaPartita
     
@@ -434,24 +437,24 @@ public class InterfacciaGrafica{
     }
     
     /**
-     * Esecuzione thread del programma
+     * Creazione, esecuzione e visualizzazione del JFrame principale del programma
     */
     public void start(){
         
         Runnable run = () -> {
             
-            JFrame frame = new JFrame( "Scacchi Viktor, Michael, Gaetano !!!" );
+            JFrame frame = new JFrame( "Progetto Scacchi Di Viktor Teren VR379996, Michael Andronic VR370063 E Gaetano Cavaler VR379845 " );
             frame.add( interfacciaGrafica );
             
-            frame.setLocationByPlatform( true );
-            frame.setMinimumSize( frame.getMinimumSize() );
+            frame.setLocationByPlatform( true ); // Imposta il JFrame al centro dello schermo
+            frame.setMinimumSize( frame.getMinimumSize() ); // Il JFrame non verra rimpiciolito dispetto ai suoi componenti
             
-            frame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
+            frame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE ); // Se il JFrame viene chiuso, chiudo il programma
             frame.setVisible( true );
         
         };
         
-        SwingUtilities.invokeLater(run);
+        SwingUtilities.invokeLater( run );
     
     }
     
@@ -476,7 +479,7 @@ public class InterfacciaGrafica{
         if( scelta == 0 ){
             
             iniziaPartita();
-            setMessaggio( "Tocca Al Bianco" );
+            setMessaggio( "Tocca Al Bianco !!!" );
         
         } else {
             

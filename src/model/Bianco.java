@@ -1,12 +1,9 @@
 package model;
 
-// VIKTOR CERCA TU dI MIGLIORARE IL JAVADOC DI STA CLASSE
-// NON CI CAPISCO NULLA SU COME GESTIAMO STI COLORI
-
 /**
- * Classe del colore bianco. Tutte le classi dei colori definiscono oggetti che 
- * vengono presi in esame durante i controlli nelle classi del package Contoller
- * @author Viktor, Michael, Gaetano
+ * Classe del colore Bianco
+ * Tutte le classi dei colori definiscono oggetti che vengono presi in esame durante i controlli svolti dal package Contoller
+ * @author Viktor Teren VR379996, Michael Andronic VR370063, Gaetano Cavaler VR379845
 */
 public class Bianco extends Colore{
     

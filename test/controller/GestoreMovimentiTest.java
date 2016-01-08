@@ -7,14 +7,14 @@ import view.InterfacciaGrafica;
 import static org.junit.Assert.*;
 
 /**
- * Test di tutti / alcuni i metodi della classe GestoreMovimenti
- * @author Viktor, Michael, Gaetano
+ * Test di alcuni metodi della classe GestoreMovimenti
+ * @author Viktor Teren VR379996, Michael Andronic VR370063, Gaetano Cavaler VR379845
 */
 public class GestoreMovimentiTest{
     
     /**
-     * Test del costruttore GestoreMovimenti 
-     * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
+     * Test del costruttore GestoreMovimenti senza parametri 
+     * @throws Exception - Eccezione lanciata nel caso in cui non si riesce a generare il GestoreMovimenti
     */
     @Test
     public void testGestoreMovimenti() throws Exception{
@@ -26,8 +26,8 @@ public class GestoreMovimentiTest{
     }
     
     /**
-     * Test del costruttore GestoreMovimenti con Parametro Spazio[][]
-     * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
+     * Test del costruttore GestoreMovimenti con parametro la matrice di spazi
+     * @throws Exception - Eccezione lanciata nel caso in cui non si riesce a generare il GestoreMovimenti con la matrice specificata
     */
     @Test
     public void testGestoreMovimentiSpazio() throws Exception{
@@ -40,8 +40,8 @@ public class GestoreMovimentiTest{
     }
     
     /**
-     * Test del metodo controlloScacco con parametro Spazio della classe GestoreMovimenti
-     * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
+     * Test del metodo controlloScacco con parametro Spazio
+     * @throws Exception - Eccezione lanciata nel caso in cui non si riesca a verificare se ce lo scacco in una determinata posizione
     */
     @Test
     public void testControlloScaccoSpazio() throws Exception{
@@ -57,8 +57,8 @@ public class GestoreMovimentiTest{
     }
     
     /**
-     * Test del metodo controlloScaccoReAvversario con parametro Colore della classe GestoreMovimenti
-     * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
+     * Test del metodo controlloScaccoReAvversario con parametro Colore
+     * @throws Exception - Eccezione lanciata nel caso in cui non si riesca a verificare se il re avversario e sotto scacco
     */
     @Test
     public void testControlloScaccoReAvversarioColore() throws Exception{
@@ -75,7 +75,8 @@ public class GestoreMovimentiTest{
     
     /**
      * Test del metodo controlloScacco della classe GestoreMovimenti
-     * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
+     * In questo test abbiamo simulato una partita e scritto le mosse per eseguire uno scacco matto il piu velocemente possibile
+     * @throws Exception - Eccezione lanciata nel caso in cui non si inizializzi qualche oggetto
     */
     @Test
     public void testControlloScaccoImplementato() throws Exception{
@@ -107,11 +108,9 @@ public class GestoreMovimentiTest{
     
     }
     
-    
-    
     /**
      * Test del metodo getMatrice della classe GestoreMovimenti
-     * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
+     * @throws Exception - Eccezione lanciata nel caso in cui non si riesce a reperire la matrice della scacchiera
     */
     @Test
     public void testGetMatrice() throws Exception{
@@ -125,8 +124,8 @@ public class GestoreMovimentiTest{
     }
     
     /**
-     * Test del metodo getPezziSpostabiliQui con parametro Spazio e Colore della classe GestoreMovimenti
-     * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
+     * Test del metodo getPezziSpostabiliQui con parametro Spazio e Colore
+     * @throws Exception - Eccezione lanciata nel caso in cui non si riesca a reperire la lista dei pezzi spostabili nella posizione specificata
     */
     @Test
     public void testGetPezziSpostabiliQuiSpazioColore() throws Exception{
@@ -144,8 +143,8 @@ public class GestoreMovimentiTest{
     }
     
     /**
-     * Test del metodo getSpazioRe della classe GestoreMovimenti
-     * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
+     * Test del metodo getSpazioRe
+     * @throws Exception - Eccezione lanciata nel caso in cui non si riesca a reperire la posizione del Re del turno corrente
     */
     @Test
     public void testGetSpazioRe() throws Exception{
@@ -164,8 +163,8 @@ public class GestoreMovimentiTest{
     }
     
     /**
-     * Test del metodo getSpazioReAvversario della classe GestoreMovimenti
-     * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
+     * Test del metodo getSpazioReAvversario
+     * @throws Exception - Eccezione lanciata nel caso in cui non si riesca a reperire la posizione del Re Bianco avversario
     */
     @Test
     public void testGetSpazioReAvversario() throws Exception{
@@ -184,8 +183,8 @@ public class GestoreMovimentiTest{
     }
     
     /**
-     * Test del metodo getSpazioReBianco della classe GestoreMovimenti
-     * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
+     * Test del metodo getSpazioReBianco
+     * @throws Exception - Eccezione lanciata nel caso in cui non si riesca a reperire la posizione del Re Bianco
     */
     @Test
     public void testGetSpazioReBianco() throws Exception{
@@ -202,8 +201,8 @@ public class GestoreMovimentiTest{
     }
     
     /**
-     * Test del metodo getSpazioReNero della classe GestoreMovimenti
-     * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
+     * Test del metodo getSpazioReNero
+     * @throws Exception - Eccezione lanciata nel caso in cui non si riesca a reperire la posizione del Re Nero
     */
     @Test
     public void testGetSpazioReNero() throws Exception {
@@ -220,8 +219,8 @@ public class GestoreMovimentiTest{
     }
     
     /**
-     * Test del metodo scaccoMatto della classe GestoreMovimenti
-     * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
+     * Test del metodo scaccoMatto
+     * @throws Exception - Eccezione lanciata nel caso in cui non si riesca ad eseguire uno scacco matto
     */
     @Test
     public void testScaccoMatto() throws Exception{
@@ -237,8 +236,8 @@ public class GestoreMovimentiTest{
     }
     
     /**
-     * Test del metodo setInterfacciaGrafica della classe GestoreMovimenti
-     * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
+     * Test del metodo setInterfacciaGrafica
+     * @throws Exception - Eccezione lanciata nel caso in cui non si riesca ad impostare l'InterfacciaGrafica
     */
     @Test
     public void testSetInterfacciaGrafica() throws Exception{
@@ -252,8 +251,8 @@ public class GestoreMovimentiTest{
     }
     
     /**
-     * Test del metodo spostaPezzo con parametri Spazio, Int e Int della classe GestoreMovimenti
-     * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
+     * Test del metodo spostaPezzo con parametri Spazio, Int e Int
+     * @throws Exception - Eccezione lanciata nel caso in cui non si riesca ad spostare il pezzo
     */
     @Test
     public void testSpostaPezzoSpazioIntInt() throws Exception{

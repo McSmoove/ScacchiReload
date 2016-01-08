@@ -6,7 +6,7 @@ import javax.swing.*;
 /**
  * Ridefinizione della classe JButton affinche i bottoni abbiano
  * delle icone personalizzate create dalla Classe MergeIcon
- * @author Viktor, Michael, Gaetano
+ * @author Viktor Teren VR379996, Michael Andronic VR370063, Gaetano Cavaler VR379845
 */
 public class ImageButton extends JButton{
     
@@ -27,7 +27,7 @@ public class ImageButton extends JButton{
     public void setImage( Image immagine ){
         
         this.immagine = immagine; // L'icona specificata
-        repaint(); // Repaint in runtime
+        repaint();
     
     }
     

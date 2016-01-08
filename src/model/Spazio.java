@@ -1,12 +1,9 @@
 package model;
 
-// VIKTOR CERCA TU TI MIGLIORARE IL JAVADOC DI STA CLASSE
-// NON SO PERCHE ABBIAMO 3 COSTRUTTORI DIVERSI E POI IN SEGUITO ABBIAMO INIZIALIZZA CHE FA LA STESSA COSA DEI COSTRUTTORI
-
 /**
- * La classe spazio  essenziale per sapere quale pezzo sta occupando una 
- * casella di gioco o se la casella e libera
- * @author Viktor, Michael, Gaetano
+ * La classe Spazio e essenziale per sapere quale pezzo sta occupando una casella di gioco o se la casella e libera
+ * Tutte le classi dei colori definiscono oggetti che vengono presi in esame durante i controlli svolti dal package Contoller
+ * @author Viktor Teren VR379996, Michael Andronic VR370063, Gaetano Cavaler VR379845
 */
 public class Spazio{
     
@@ -21,7 +18,7 @@ public class Spazio{
     private Pezzo occupante;
     
     /**
-     * Coordinate dello spazio in esame
+     * Coordinate X e Y dello spazio in esame
     */
     private int x, y;
     
@@ -29,7 +26,7 @@ public class Spazio{
      * Costruttore senza parametri di uno spazio usato per inizializzare
      * Coordinate identificate tramite X e Y della scacchiera
      * Identificano la presenza o non di un certo pezzo sulla scacchiera
-     * -1, -1 Identificano uno spazio fuori dalla casella di gioco usato per i pezzi distrutti
+     * -1, -1 Identificano uno spazio fuori dalla casella di gioco, quindi non visibile
     */
     public Spazio(){
         
@@ -69,8 +66,8 @@ public class Spazio{
     }
     
     /**
-     * Costruttore con parametro spazio che clona se stesso ???
-     * @param s - Lo spazio da clonare ???
+     * Costruttore con parametro Spazio che crea uno Spazio con le stesse proprieta dello spazio passato come parametro 
+     * @param s - Un nuovo Spazio che ha le stesse proprieta di quello passato come parametro
     */
     public Spazio( Spazio s ){
         
@@ -163,7 +160,7 @@ public class Spazio{
     }
     
     /**
-     * Metodo che inizializza un certo spazio X, Y
+     * Metodo che inizializza un certo spazio con coordinate X, Y
      * @param x - La coordinata X dello spazio da inizializzare
      * @param y - La coordinata Y dello spazio da inizializzare
     */
@@ -176,7 +173,7 @@ public class Spazio{
     }
     
     /**
-     * Metodo che inizializza un certo spazio X, Y con un pezzo P
+     * Metodo che inizializza un certo spazio con coordinate X, Y con un pezzo P
      * @param p - Il pezzo con il quale si vuole inizializzare lo spazio
      * @param x - La coordinata X dello spazio da inizializzare
      * @param y - La coordinata Y dello spazio da inizializzare

@@ -6,9 +6,9 @@ import model.*;
 import view.*;
 
 /**
- * Questa classe gestisce i Turni e i Buttoni.
- * Esso, ad esempio, blocca i pulsanti affinche non possano essere premuti se tocca al colore opposto al turno corrente.
- * @author Viktor, Michael, Gaetano
+ * Questa classe gestisce i Turni e i Buttoni
+ * Ad esempio, blocca i pulsanti affinche non possano essere premuti se tocca al colore opposto al turno corrente
+ * @author Viktor Teren VR379996, Michael Andronic VR370063, Gaetano Cavaler VR379845
 */
 public class GestoreTB{
     
@@ -93,7 +93,7 @@ public class GestoreTB{
         
         turno = t;
         bloccoPezziIniziale();
-        getInterfacciaGrafica().setMessaggio( "Tocca Al " + t.toString() );
+        getInterfacciaGrafica().setMessaggio( "Tocca Al " + t.toString() + " !!!" );
     
     }
     
@@ -116,12 +116,12 @@ public class GestoreTB{
         if( turno instanceof Bianco ){
             
             turno = new Nero();
-            getInterfacciaGrafica().setMessaggio( "Tocca Al Nero" );
+            getInterfacciaGrafica().setMessaggio( "Tocca Al Nero !!!" );
         
         } else {
             
             turno = new Bianco();
-            getInterfacciaGrafica().setMessaggio( "Tocca Al Bianco" );
+            getInterfacciaGrafica().setMessaggio( "Tocca Al Bianco !!!" );
         
         }
         
@@ -411,8 +411,13 @@ public class GestoreTB{
                                 if( gestoreMovimenti.getListaPezziChePrevengonoScacco( gestoreMovimenti.getSpazioReAvversario( turno ).getX(), gestoreMovimenti.getSpazioReAvversario( turno ).getY(), gestoreMovimenti.getMatrice(), turno ).isEmpty() ){
             
                                     interfacciaGrafica.finePartita();
-                                    if(turno instanceof Bianco)
+                                    
+                                    if( turno instanceof Bianco ){
+                                        
                                         passaTurno();
+                                    
+                                    }
+                                
                                 }
                             
                             }
@@ -461,15 +466,20 @@ public class GestoreTB{
                                 if( gestoreMovimenti.getListaPezziChePrevengonoScacco( gestoreMovimenti.getSpazioReAvversario( turno ).getX(), gestoreMovimenti.getSpazioReAvversario( turno ).getY(), gestoreMovimenti.getMatrice(), turno ).isEmpty() ){
                                     
                                     interfacciaGrafica.finePartita();
-                                    if(turno instanceof Bianco)
+                                    
+                                    if( turno instanceof Bianco ){
+                                        
                                         passaTurno();
+                                    
+                                    }
+                                
                                 }
                             
                             }
                             
                             disattivaPosizione(); // Disattivo la posizione dove e stato premuto
                             passaTurno(); // Passo il turno
-                            getInterfacciaGrafica().setMessaggio( "Tocca Al Bianco" );
+                            getInterfacciaGrafica().setMessaggio( "Tocca Al Bianco !!!" );
                         
                         } else { // Se Provoco Lo Scacco
                             

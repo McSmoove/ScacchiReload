@@ -7,14 +7,14 @@ import static org.junit.Assert.*;
 
 
 /**
- * Test di tutti / alcuni i metodi della classe InterfacciaGrafica
- * @author Viktor, Michael, Gaetano
+ * Test di alcuni metodi della classe InterfacciaGrafica
+ * @author Viktor Teren VR379996, Michael Andronic VR370063, Gaetano Cavaler VR379845
 */
 public class InterfacciaGraficaTest{
     
     /**
-     * Test del metodo aggiungiPezzoMorto della classe InterfacciaGrafica
-     * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
+     * Test del metodo aggiungiPezzoMorto
+     * @throws Exception - Eccezione lanciata nel caso di impossibilita di aggiunta di un pezzo morto
     */
     @Test
     public void testAggiungiPezzoMorto() throws Exception{
@@ -26,10 +26,9 @@ public class InterfacciaGraficaTest{
     
     }
     
-
     /**
-     * Test del metodo getMatriceBottoni della classe InterfacciaGrafica
-     * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
+     * Test del metodo getMatriceBottoni
+     * @throws Exception - Eccezione lanciata nel casoo in cui non riesco a reperire la matrice dei bottoni
     */
     @Test
     public void testGetMatriceBottoni() throws Exception{
@@ -43,8 +42,8 @@ public class InterfacciaGraficaTest{
     }
 
     /**
-     * Test del metodo promozionePedone della classe InterfacciaGrafica
-     * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
+     * Test del metodo promozionePedone
+     * @throws Exception - Eccezione lanciata nel caso di fallita promozione del pedone
     */
     @Test
     public void testPromozionePedone() throws Exception{
@@ -60,22 +59,22 @@ public class InterfacciaGraficaTest{
     }
     
     /**
-     * Test del metodo setMessaggio della classe InterfacciaGrafica
-     * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
+     * Test del metodo setMessaggio
+     * @throws Exception - Eccezione lanciata nel caso di impossibilita di scrivere il messaggio specificato
     */
     @Test
     public void testSetMessaggio() throws Exception{
         
         InterfacciaGrafica interfaccia = new InterfacciaGrafica();
-        String stringa = "";
+        String stringa = "Scacco Matto !!!";
         
         interfaccia.setMessaggio( stringa );
     
     }
     
     /**
-     * Test del metodo start della classe InterfacciaGrafica
-     * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
+     * Test del metodo start
+     * @throws Exception - Eccezione lanciata nel caso in cui l'interfaccia non puo essere lanciata
     */
     @Test
     public void testStart() throws Exception{

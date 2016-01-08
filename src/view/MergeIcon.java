@@ -5,10 +5,9 @@ import javax.swing.*;
 import java.awt.image.BufferedImage;
 
 /**
- * Ridefinizione della classe Icon affinche sia possibile di sovraporre 
- * due immagini creando un'icona per i bottoni della scacchiera
- * contenente le due immagini sovrapposte.
- * @author Viktor, Michael, Gaetano
+ * Ridefinizione della classe Icon affinche sia possibile di sovraporre due immagini
+ * creando un'icona per i bottoni della scacchiera contenente le due immagini sovrapposte.
+ * @author Viktor Teren VR379996, Michael Andronic VR370063, Gaetano Cavaler VR379845
 */
 public class MergeIcon implements Icon{
     

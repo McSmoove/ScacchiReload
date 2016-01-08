@@ -1,9 +1,9 @@
 package model;
 
 /**
- * Classe del pedone. Tutte le classi dei pezzi definiscono oggetti che 
- * vengono presi in esame durante i controlli nelle classi del package Contoller
- * @author Viktor, Michael, Gaetano
+ * Classe del Pedone
+ * Tutte le classi dei colori definiscono oggetti che vengono presi in esame durante i controlli svolti dal package Contoller
+ * @author Viktor Teren VR379996, Michael Andronic VR370063, Gaetano Cavaler VR379845
 */
 public class Pedone extends Pezzo{
     
@@ -33,7 +33,7 @@ public class Pedone extends Pezzo{
     }
     
     /**
-     * Metodo che, se chiamato, imposta che il pedone si e mosso 
+     * Metodo che, se chiamato, imposta che il pedone e stato mosso 
     */
     public void impostaMosso(){
         

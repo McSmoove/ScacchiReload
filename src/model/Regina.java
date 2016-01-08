@@ -1,9 +1,9 @@
 package model;
 
 /**
- * Classe della regina. Tutte le classi dei pezzi definiscono oggetti che 
- * vengono presi in esame durante i controlli nelle classi del package Contoller
- * @author Viktor, Michael, Gaetano
+ * Classe della Regina
+ * Tutte le classi dei colori definiscono oggetti che vengono presi in esame durante i controlli svolti dal package Contoller
+ * @author Viktor Teren VR379996, Michael Andronic VR370063, Gaetano Cavaler VR379845
 */
 public class Regina extends Pezzo{
     
