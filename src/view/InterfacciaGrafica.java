@@ -17,34 +17,34 @@ import controller.*;
  *
  * - 4 JPannel:
  *  
- *  - JPanel interfacciaGrafica -> Contiene tutti i JPanel sottostanti ed e il gestore del layout e posizionamento dei JPanel sottostanti:
+ *  - JPanel interfacciaGrafica - Contiene tutti i JPanel sottostanti ed e il gestore del layout e posizionamento dei JPanel sottostanti:
  *      
- *      - JPanel pezziBianchiMangiati -> JPanel contenente i pezzi bianchi che sono stati mangiati
- *      - JPanel scacchiera -> JPanel contenente la scacchiera del gioco     
- *      - JPanel pezziNeriMangiati -> JPanel contenente i pezzi neri che sono stati mangiati
+ *      - JPanel pezziBianchiMangiati - JPanel contenente i pezzi bianchi che sono stati mangiati
+ *      - JPanel scacchiera - JPanel contenente la scacchiera del gioco     
+ *      - JPanel pezziNeriMangiati - JPanel contenente i pezzi neri che sono stati mangiati
  *  
- * JButton personalizzati ImageButton quadratiScacchiera -> I quadrati 8 * 8 dei pulsanti della scacchiera
+ * JButton personalizzati ImageButton quadratiScacchiera - I quadrati 8 * 8 dei pulsanti della scacchiera
  *
  * 2 Image:
  *  
- *  - Image immagine[ 12 ] -> Array di Image contentente le 12 immagini dei pezzi dei scacchi
- *  - Image colore [ 2 ] -> Array di Image contenente 2 immagini che indica il colore bianco / nero della scacchiera
+ *  - Image immagine[ 12 ] - Array di Image contentente le 12 immagini dei pezzi dei scacchi
+ *  - Image colore [ 2 ] - Array di Image contenente 2 immagini che indica il colore bianco / nero della scacchiera
  *
- * Classe personalizzata MergeIcon mergeIco[ 24 ] -> Unisce il colore della scacchiera con i pezzi degli scacchi
+ * Classe personalizzata MergeIcon mergeIco[ 24 ] - Unisce il colore della scacchiera con i pezzi degli scacchi
  *
  * 3 JLabel:
  *  
- *  - JLabel pezziMangiatiBianchi[ 16 ] -> Etichette dove vengono disegnati i pezzi bianchi mangiati con un contatore associato
- *  - JLabel pezziMangiatiNeri[ 16 ] -> Etichette dove vengono disegnati i pezzi neri mangiati con un contatore assaciato
- *  - JLabel messaggioInfo -> Visualzzare il messaggio del turno corrente " Tocca Al Bianco / Nero "
+ *  - JLabel pezziMangiatiBianchi[ 16 ] - Etichette dove vengono disegnati i pezzi bianchi mangiati con un contatore associato
+ *  - JLabel pezziMangiatiNeri[ 16 ] - Etichette dove vengono disegnati i pezzi neri mangiati con un contatore assaciato
+ *  - JLabel messaggioInfo - Visualzzare il messaggio del turno corrente " Tocca Al Bianco / Nero "
  * 
- * String colonne -> Stringa contenente le lettere delle colonne della scacchiera
+ * String colonne - Stringa contenente le lettere delle colonne della scacchiera
  *
- * Border bordo -> Bordo di colore rosso per vedere i bordi di ogni panello
+ * Border bordo - Bordo di colore rosso per vedere i bordi di ogni panello
  * 
- * GestoreMovimenti gm -> Collegamento InterfacciaGrafica-GestoreMovimenti
+ * GestoreMovimenti gm - Collegamento InterfacciaGrafica-GestoreMovimenti
  * 
- * GestoreTB gestoreTB -> Collegamento InterfacciaGrafica-GestoreTB
+ * GestoreTB gestoreTB - Collegamento InterfacciaGrafica-GestoreTB
 */
 public class InterfacciaGrafica{
     
@@ -569,15 +569,6 @@ public class InterfacciaGrafica{
         
         }
     
-    }
-    
-    private void azzeraPezziMorti(){
-        contaMortiNeri=0;
-        contaMortiBianchi=0;
-        pezziMangiatiNeri=new JLabel[ 16 ];
-        pezziMangiatiBianchi=new JLabel[ 16 ];
-        
-        
     }
     
     /**

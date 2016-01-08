@@ -97,15 +97,11 @@ public class GestoreMovimentiTest{
         }
         
         GestoreMovimenti gestore = new GestoreMovimenti();
-        
-        gestore.disegnaMatriceSpaziOccupati( gestore.getMatrice() );
-        
+            
         gestore.spostaPezzo( gestore.getMatrice()[ 5 ][ 6 ], 5, 4, gestore.getMatrice() );
         gestore.spostaPezzo( gestore.getMatrice()[ 4 ][ 1 ], 4, 3, gestore.getMatrice() );
         gestore.spostaPezzo( gestore.getMatrice()[ 6 ][ 6 ], 6, 4, gestore.getMatrice() );
         gestore.spostaPezzo( gestore.getMatrice()[ 3 ][ 0 ], 7, 4, gestore.getMatrice() );
-        
-        gestore.disegnaMatriceSpaziOccupati( gestore.getMatrice() );
         
         boolean risultato = gestore.controlloScacco( 4, 7, gestore.getMatrice() );
         
@@ -113,18 +109,7 @@ public class GestoreMovimentiTest{
     
     }
     
-    /**
-     * Test del metodo disegnaMatriceSpaziOccupati senza parametri della classe GestoreMovimenti
-     * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
-    */
-    @Test
-    public void testDisegnaMatriceSpaziOccupatiSenzaParametri() throws Exception{
-        
-        GestoreMovimenti gestore = new GestoreMovimenti();
-        
-        gestore.disegnaMatriceSpaziOccupati();
     
-    }
     
     /**
      * Test del metodo getMatrice della classe GestoreMovimenti
@@ -286,186 +271,10 @@ public class GestoreMovimentiTest{
     
     }
     
-    /**
-     * Test del metodo spostaPezzo con parametri Spazio, Int, Int e Spazio della classe GestoreMovimenti
-     * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
-    */
-    /*
-    @Test
-    public void testSpostaPezzoSpazioIntIntSpazio() throws Exception{
-        
-        GestoreMovimenti gestore = new GestoreMovimenti();
-
-        Spazio spazio = new Spazio( 1, 1, new Alfiere( new Bianco() ) );
-        
-        int x = 1;
-        int y = 1;
-        Spazio[][] scacchiera = new Spazio[][]{ null };
-        
-        gestore.spostaPezzo( spazio, x, y, scacchiera );
     
-    }
-    */
     
     /**
-     * Test del metodo controlloScacco con parametri Colore e Spazio della classe GestoreMovimenti
-     * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
-    */
-    /*
-    @Test
-    public void testControlloScaccoColoreSpazio() throws Exception{
-        
-        GestoreMovimenti gestore = new GestoreMovimenti();
-        
-        Colore colore = new Bianco();
-        Spazio[][] matrice = new Spazio[][]{};
-        
-        boolean risultato = gestore.controlloScacco( colore, matrice );
-        
-        assertTrue( risultato );
-    
-    }
-    */
-    
-    /**
-     * Test del metodo controlloScaccoReAvversario con parametro Colore e Spazio della classe GestoreMovimenti
-     * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
-    */
-    /*
-    @Test
-    public void testControlloScaccoReAvversarioColoreSpazio() throws Exception{
-        
-        GestoreMovimenti gestore = new GestoreMovimenti();
-        
-        Colore colore = new Bianco();
-        Spazio[][] matrice = new Spazio[][]{};
-        
-        boolean risultato = gestore.controlloScaccoReAvversario( colore, matrice );
-        
-        assertTrue( risultato );
-    
-    }
-    */
-    
-    /**
-     * Test del metodo coppiaMatrice della classe GestoreMovimenti
-     * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
-    */
-    /*
-    @Test
-    public void testCoppiaMatrice() throws Exception{
-        
-        GestoreMovimenti gestore = new GestoreMovimenti();
-
-        Spazio[][] matrice = new Spazio[][]{};
-        
-        Spazio[][] risultato = gestore.coppiaMatrice(matrice);
-        
-        assertNotNull( risultato );
-    
-    }
-    */
-    
-    /**
-     * Test del metodo disegnaMatriceSpaziOccupati con parametro Spazio della classe GestoreMovimenti
-     * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
-     */
-    /*
-    @Test
-    public void testDisegnaMatriceSpaziOccupatiSpazio() throws Exception{
-        
-        GestoreMovimenti gestore = new GestoreMovimenti();
-
-        Spazio[][] matrice = new Spazio[][]{};
-        
-        gestore.disegnaMatriceSpaziOccupati( matrice );
-    
-    }
-    */
-    
-    /**
-     * Test del metodo getMatricePezziChePrevengonoScacco della classe GestoreMovimenti
-     * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
-    */
-    /*
-    @Test
-    public void testGetMatricePezziChePrevengonoScacco() throws Exception{
-        
-        GestoreMovimenti gestore = new GestoreMovimenti();
-        
-        int xRe = 1;
-        int yRe = 1;
-        
-        Spazio[][] matrice = new Spazio[][]{};
-        Colore turno = new Bianco();
-        
-        int[][] risultato = gestore.getMatricePezziChePrevengonoScacco( xRe, yRe, matrice, turno );
-        
-        assertNotNull( risultato );
-    
-    }
-    */
-    
-    /**
-     * Test del metodo getPezziSpostabiliQui con parametro Spazio, Spazio e Colore della classe GestoreMovimenti
-     * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
-    */
-    /*
-    @Test
-    public void testGetPezziSpostabiliQuiSpazioSpazioColore() throws Exception{
-        
-        GestoreMovimenti gestore = new GestoreMovimenti();
-
-        Spazio[][] matrice = new Spazio[][]{};
-        
-        Spazio spazio = new Spazio( 1, 1, new Alfiere( new Bianco() ) );
-        Colore colore = new Bianco();
-        
-        LinkedList< Spazio > risultato = gestore.getPezziSpostabiliQui( matrice, spazio, colore );
-        
-        assertNotNull( risultato );
-    
-    }
-    */
-    
-    /**
-     * Test del metodo movimentiPedone della classe GestoreMovimenti
-     * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
-    */
-    /*
-    @Test
-    public void testMovimentiPedone() throws Exception{
-        
-        GestoreMovimenti gestore = new GestoreMovimenti();
-
-        Spazio spazio = new Spazio( 1, 1, new Pedone( new Bianco() ) );
-        
-        int[][] risultato = gestore.movimentiPedone( spazio );
-        
-        assertNotNull( risultato );
-    
-    }
-    */
-    
-    /**
-     * Test del metodo setMatrice della classe GestoreMovimenti
-     * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
-    */
-    /*
-    @Test
-    public void testSetMatrice() throws Exception{
-        
-        GestoreMovimenti gestore = new GestoreMovimenti();
-        
-        Spazio[][] matrice = new Spazio[][]{};
-        
-        gestore.setMatrice( matrice );
-    
-    }
-    */
-    
-    /**
-     * Langio tutti i test della classe GestoreMovimentiTest
+     * Lancio tutti i test della classe GestoreMovimentiTest
      * @param args - Argomenti da linea di commando
     */
     public static void main( String[] args ){

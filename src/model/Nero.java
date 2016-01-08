@@ -44,9 +44,7 @@ public class Nero extends Colore{
     */
     @Override
     public int hashCode(){
-        
-        return colore ^ colore;
-    
+        return colore;
     }
     
     /**

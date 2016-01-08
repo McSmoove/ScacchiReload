@@ -1,20 +1,14 @@
 package view;
 
-/**
- * Classe contenente il main dove viene lanciata l'interfaccia grafica
- * @author Viktor, Michael, Gaetano
-*/
+import java.io.IOException;
+
 public class Main{
     
-    /**
-     * Main del progetto che inizializza l'interfaccia grafica e la esegue
-     * @param args - I parametri aggiuntivi alla esecuzione del programma
-    */
-    public static void main( String args[] ){
+    public static void main( String args[] ) throws IOException{
         
-       InterfacciaGrafica interfaccia = new InterfacciaGrafica(); // Inizializzo l'interfaccia grafica
-       interfaccia.start(); // Esegue quest'ultima
+       InterfacciaGrafica interfaccia = new InterfacciaGrafica();
+       interfaccia.start();
     
-    } // Fine main
+    }
 
-} // Fine Classe Main
+}

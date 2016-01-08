@@ -64,8 +64,8 @@ public class GestoreTB{
     
     /**
      * Costruttore di base della classe
-     * @param gm -> Collegamento con il gestoreMovimenti
-     * @param ig interfacciaGrafica -> Collegamento con l'InterfacciaGrafica
+     * @param gm - Collegamento con il gestoreMovimenti
+     * @param ig interfacciaGrafica - Collegamento con l'InterfacciaGrafica
     */
     public GestoreTB( GestoreMovimenti gm, InterfacciaGrafica ig ){
         
