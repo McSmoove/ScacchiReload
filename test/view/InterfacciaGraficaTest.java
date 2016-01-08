@@ -28,33 +28,6 @@ public class InterfacciaGraficaTest{
     
     }
     
-    /**
-     * Test del metodo finePartita della classe InterfacciaGrafica
-     * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
-    */
-    @Test
-    public void testFinePartita() throws Exception{
-        
-        InterfacciaGrafica interfaccia = new InterfacciaGrafica();
-        
-        interfaccia.finePartita();
-    
-    }
-
-    /**
-     * Test del metodo getGestoreTB della classe InterfacciaGrafica
-     * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
-    */
-    @Test
-    public void testGetGestoreTB() throws Exception{
-        
-        InterfacciaGrafica interfaccia = new InterfacciaGrafica();
-        
-        GestoreTB risultato = interfaccia.getGestoreTB();
-        
-        assertNotNull( risultato );
-    
-    }
 
     /**
      * Test del metodo getMatriceBottoni della classe InterfacciaGrafica
@@ -115,24 +88,5 @@ public class InterfacciaGraficaTest{
     
     }
     
-    /**
-     * Langio tutti i test della classe GestoreMovimentiTest
-     * @param args - Argomenti da linea di commando
-    */
-    public static void main( String[] args ){
-        
-        Result risultato = JUnitCore.runClasses( InterfacciaGraficaTest.class );
-        
-        if( risultato.getFailureCount() != 0 ){
-            
-            System.out.println( "Numero Di Test Della Classe InterfacciaGraficaTest Che Non Sono Passati: " + risultato.getFailureCount() );
-        
-        } else {
-            
-            System.out.println( "Tutti I Test Della Classe InterfacciaGraficaTest Sono Passati !!!" );
-        
-        }
     
-    }
-
 } // Fine Classe InterfacciaGraficaTest

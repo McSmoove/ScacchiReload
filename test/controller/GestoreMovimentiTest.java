@@ -271,26 +271,4 @@ public class GestoreMovimentiTest{
     
     }
     
-    
-    
-    /**
-     * Lancio tutti i test della classe GestoreMovimentiTest
-     * @param args - Argomenti da linea di commando
-    */
-    public static void main( String[] args ){
-        
-        Result risultato = JUnitCore.runClasses( GestoreMovimentiTest.class );
-        
-        if( risultato.getFailureCount() != 0 ){
-            
-            System.out.println( "Numero Di Test Della Classe GestoreMovimentiTest Che Non Sono Passati: " + risultato.getFailureCount() );
-        
-        } else {
-            
-            System.out.println( "Tutti I Test Della Classe GestoreMovimentiTest Sono Passati !!!" );
-        
-        }
-    
-    }
-
 } // Fine Classe GestoreMovimentiTest
