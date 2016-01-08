@@ -479,7 +479,6 @@ public class GestoreTB{
                             
                             disattivaPosizione(); // Disattivo la posizione dove e stato premuto
                             passaTurno(); // Passo il turno
-                            getInterfacciaGrafica().setMessaggio( "Tocca Al Bianco !!!" );
                         
                         } else { // Se Provoco Lo Scacco
                             
