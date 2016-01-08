@@ -320,7 +320,7 @@ public class InterfacciaGrafica{
             public void actionPerformed( ActionEvent e ){ 
                 
                 iniziaPartita();
-            
+                setMessaggio( "Tocca Al Bianco" );
             }
         
         };
@@ -374,8 +374,6 @@ public class InterfacciaGrafica{
         gestoreMovi.setInterfacciaGrafica( this ); // Collegamento Gestore-Interfaccia
         gestoreTB=new GestoreTB( gestoreMovi, this );
         
-        messaggioInfo.setText( "Fai Una Mossa !!!"); // Da Modificare Il Testo In Base Al Turno
-        
         aggiornaBottoni( gestoreMovi.getMatrice() );
         
         for( ImageButton[] quadratiScacchieraCiclo : quadratiScacchiera ) { // Aggiungo listener a tutti i bottoni
@@ -421,6 +419,7 @@ public class InterfacciaGrafica{
             pezziNeriMangiati.add( pezziMangiatiNeri[ i ] );
         
         }
+        setMessaggio( "Tocca Al Bianco" );
         
     } // Fine iniziaPartita
     
@@ -477,6 +476,7 @@ public class InterfacciaGrafica{
         if( scelta == 0 ){
             
             iniziaPartita();
+            setMessaggio( "Tocca Al Bianco" );
         
         } else {
             

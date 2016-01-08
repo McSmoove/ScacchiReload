@@ -82,9 +82,7 @@ public class GestoreTB{
      * @return turno - Il colore del giocatore di cui e il turno 
     */
     public Colore getTurno(){
-        
         return turno;
-    
     }
     
     /**
@@ -413,13 +411,14 @@ public class GestoreTB{
                                 if( gestoreMovimenti.getListaPezziChePrevengonoScacco( gestoreMovimenti.getSpazioReAvversario( turno ).getX(), gestoreMovimenti.getSpazioReAvversario( turno ).getY(), gestoreMovimenti.getMatrice(), turno ).isEmpty() ){
             
                                     interfacciaGrafica.finePartita();
-                                
+                                    
                                 }
                             
                             }
                             
                             disattivaPosizione(); // Disattivo la posizione dove e stato premuto
                             passaTurno(); // Passo il turno
+                            
                         
                         } else { // Se Provoco Lo Scacco Matto
                             
@@ -468,6 +467,7 @@ public class GestoreTB{
                             
                             disattivaPosizione(); // Disattivo la posizione dove e stato premuto
                             passaTurno(); // Passo il turno
+                            getInterfacciaGrafica().setMessaggio( "Tocca Al Bianco" );
                         
                         } else { // Se Provoco Lo Scacco
                             
