@@ -411,7 +411,8 @@ public class GestoreTB{
                                 if( gestoreMovimenti.getListaPezziChePrevengonoScacco( gestoreMovimenti.getSpazioReAvversario( turno ).getX(), gestoreMovimenti.getSpazioReAvversario( turno ).getY(), gestoreMovimenti.getMatrice(), turno ).isEmpty() ){
             
                                     interfacciaGrafica.finePartita();
-                                    
+                                    if(turno instanceof Bianco)
+                                        passaTurno();
                                 }
                             
                             }
@@ -460,7 +461,8 @@ public class GestoreTB{
                                 if( gestoreMovimenti.getListaPezziChePrevengonoScacco( gestoreMovimenti.getSpazioReAvversario( turno ).getX(), gestoreMovimenti.getSpazioReAvversario( turno ).getY(), gestoreMovimenti.getMatrice(), turno ).isEmpty() ){
                                     
                                     interfacciaGrafica.finePartita();
-                                
+                                    if(turno instanceof Bianco)
+                                        passaTurno();
                                 }
                             
                             }
