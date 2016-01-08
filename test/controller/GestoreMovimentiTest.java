@@ -161,56 +161,6 @@ public class GestoreMovimentiTest{
     }
     
     /**
-     * Test del metodo getRe della classe GestoreMovimenti
-     * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
-    */
-    @Test
-    public void testGetRe() throws Exception{
-        
-        GestoreMovimenti gestore = new GestoreMovimenti();
-        
-        Colore colore = new Bianco();
-        
-        Re risultato = gestore.getRe( colore );
-        
-        assertNotNull( risultato );
-        assertEquals( false, risultato.mosso() );
-    
-    }
-    
-    /**
-     * Test del metodo getReBianco della classe GestoreMovimenti
-     * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
-    */
-    @Test
-    public void testGetReBianco() throws Exception{
-        
-        GestoreMovimenti gestore = new GestoreMovimenti();
-        
-        Re risultato = gestore.getReBianco();
-        
-        assertNotNull( risultato );
-        assertEquals( false, risultato.mosso() );
-    
-    }
-    
-    /**
-     * Test del metodo getReNero della classe GestoreMovimenti
-     * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
-    */
-    @Test
-    public void testGetReNero() throws Exception{
-        
-        GestoreMovimenti gestore = new GestoreMovimenti();
-        
-        Re risultato = gestore.getReNero();
-        
-        assertNotNull( risultato );
-        assertEquals( false, risultato.mosso() );
-    
-    }
-    
-    /**
      * Test del metodo getSpazioRe della classe GestoreMovimenti
      * @throws Exception - Eccezzione in caso di fallita creazione dell'oggetto
     */

@@ -133,6 +133,9 @@ public class InterfacciaGrafica{
     */
     private GestoreTB gestoreTB;
     
+    private JPanel pannelloMain;
+    private GridBagConstraints posizione;
+    
     /**
      * Costruttore che prende le immagini e controlla che siano preseenti tutte le immagni necessarie avvisando se c'è un errore.
      * 
@@ -328,8 +331,8 @@ public class InterfacciaGrafica{
         interfacciaGrafica.add( menu, BorderLayout.PAGE_START );
         
         // Aggiungo I Componenti Al Pannello Main
-        JPanel pannelloMain = new JPanel( new GridBagLayout() );
-        GridBagConstraints posizione = new GridBagConstraints();
+        pannelloMain = new JPanel( new GridBagLayout() );
+        posizione = new GridBagConstraints();
         
         for( int i = 0; i < 16; i++ ){
             
@@ -396,7 +399,38 @@ public class InterfacciaGrafica{
             }
         
         }
-    
+        
+        //azzeramento degli spazi laterali per i pezzi mangiati per il caso di una nuova partita
+        
+        // da sistemare la parte sucessiva????????????
+        pezziBianchiMangiati = new JPanel( new GridLayout( 8, 2 ) );
+        for( int i = 0; i < 16; i++ ){
+            
+            pezziMangiatiBianchi[ i ] = new JLabel( new ImageIcon( new BufferedImage( 64, 64, BufferedImage.TYPE_INT_ARGB ) ) );
+            pezziBianchiMangiati.add( pezziMangiatiBianchi[ i ] );
+        
+        }
+        
+        posizione.fill = GridBagConstraints.EAST;
+        pezziBianchiMangiati.setBorder( bordo );
+        pannelloMain.add(pezziBianchiMangiati, posizione );
+        
+        posizione.fill = GridBagConstraints.CENTER;
+        scacchiera.setBorder( bordo );
+        pannelloMain.add( scacchiera, posizione );
+        pezziNeriMangiati =  new JPanel( new GridLayout( 8, 2 ) );
+        for( int i = 0; i < 16; i++ ){
+            
+            pezziMangiatiNeri[ i ] = new JLabel( new ImageIcon( new BufferedImage( 64, 64, BufferedImage.TYPE_INT_ARGB ) ) );
+            pezziNeriMangiati.add( pezziMangiatiNeri[ i ] );
+        
+        }
+        
+        posizione.fill = GridBagConstraints.WEST;
+        pezziNeriMangiati.setBorder( bordo );
+        pannelloMain.add(pezziNeriMangiati, posizione );
+        //qui andrebbe l'azzeramento dei bordi laterali per i pezzi mangiati ???????????????????????????
+        
     } // Fine iniziaPartita
     
     /**
@@ -544,6 +578,15 @@ public class InterfacciaGrafica{
         
         }
     
+    }
+    
+    private void azzeraPezziMorti(){
+        contaMortiNeri=0;
+        contaMortiBianchi=0;
+        pezziMangiatiNeri=new JLabel[ 16 ];
+        pezziMangiatiBianchi=new JLabel[ 16 ];
+        
+        
     }
     
     /**
