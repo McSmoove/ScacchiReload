@@ -152,23 +152,23 @@ public class InterfacciaGrafica{
         
         try{
             
-            immagine[ 0 ] = ImageIO.read( getClass().getResource( "../immagini/pedoneBianco.png" ) );
-            immagine[ 1 ] = ImageIO.read( getClass().getResource( "../immagini/torreBianca.png" ) );
-            immagine[ 2 ] = ImageIO.read( getClass().getResource( "../immagini/cavalloBianco.png" ) );
-            immagine[ 3 ] = ImageIO.read( getClass().getResource( "../immagini/alfiereBianco.png" ) );
-            immagine[ 4 ] = ImageIO.read( getClass().getResource( "../immagini/reginaBianca.png" ) );
-            immagine[ 5 ] = ImageIO.read( getClass().getResource( "../immagini/reBianco.png" ) );
+            immagine[ 0 ] = ImageIO.read( this.getClass().getResource( "/immagini/pedoneBianco.png" ) );
+            immagine[ 1 ] = ImageIO.read( this.getClass().getResource( "/immagini/torreBianca.png" ) );
+            immagine[ 2 ] = ImageIO.read( this.getClass().getResource( "/immagini/cavalloBianco.png" ) );
+            immagine[ 3 ] = ImageIO.read( this.getClass().getResource( "/immagini/alfiereBianco.png" ) );
+            immagine[ 4 ] = ImageIO.read( this.getClass().getResource( "/immagini/reginaBianca.png" ) );
+            immagine[ 5 ] = ImageIO.read( this.getClass().getResource( "/immagini/reBianco.png" ) );
 
             // Recupero le immagini pezzi neri
-            immagine[ 6 ] = ImageIO.read( getClass().getResource( "../immagini/pedoneNero.png" ) );
-            immagine[ 7 ] = ImageIO.read( getClass().getResource( "../immagini/torreNera.png" ) );
-            immagine[ 8 ] = ImageIO.read( getClass().getResource( "../immagini/cavalloNero.png" ) );
-            immagine[ 9 ] = ImageIO.read( getClass().getResource( "../immagini/alfiereNero.png" ) );
-            immagine[ 10 ] = ImageIO.read( getClass().getResource( "../immagini/reginaNera.png" ) );
-            immagine[ 11 ] = ImageIO.read( getClass().getResource( "../immagini/reNero.png" ) );
+            immagine[ 6 ] = ImageIO.read( this.getClass().getResource( "/immagini/pedoneNero.png" ) );
+            immagine[ 7 ] = ImageIO.read( this.getClass().getResource( "/immagini/torreNera.png" ) );
+            immagine[ 8 ] = ImageIO.read( this.getClass().getResource( "/immagini/cavalloNero.png" ) );
+            immagine[ 9 ] = ImageIO.read( this.getClass().getResource( "/immagini/alfiereNero.png" ) );
+            immagine[ 10 ] = ImageIO.read( this.getClass().getResource( "/immagini/reginaNera.png" ) );
+            immagine[ 11 ] = ImageIO.read( this.getClass().getResource( "/immagini/reNero.png" ) );
             
-            colore[0] = ImageIO.read( getClass().getResource( "../immagini/bianco.png" ) );
-            colore[1] = ImageIO.read( getClass().getResource( "../immagini/nero.png" ) );
+            colore[0] = ImageIO.read( this.getClass().getResource( "/immagini/bianco.png" ) );
+            colore[1] = ImageIO.read( this.getClass().getResource( "/immagini/nero.png" ) );
         
         } catch( IOException e ){}
         
